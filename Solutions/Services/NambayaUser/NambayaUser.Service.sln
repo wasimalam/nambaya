@@ -1,0 +1,122 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B87F5DF5-526E-41BB-A183-565DC7FBA57A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.BusinessObjects", "..\..\..\Services\Common\BusinessObjects\Common.BusinessObjects.csproj", "{C29CE11E-7695-474D-B52A-3BA28E049270}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.DataAccess", "..\..\..\Services\Common\DataAccess\Common.DataAccess.csproj", "{45A5425A-9769-4EA7-9582-0332D398AEE6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NambayaUser.API", "..\..\..\Services\NambayaUser\API\NambayaUser.API.csproj", "{C4C2B0E7-623E-40EA-9EE7-00B656621B5F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NambayaUser.Repository", "..\..\..\Services\NambayaUser\Repository\NambayaUser.Repository.csproj", "{2EDC1DFC-F280-43CC-85EA-4FAF3C78A895}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NambayaUser.Contracts", "..\..\..\Services\NambayaUser\Contracts\NambayaUser.Contracts.csproj", "{EB92F6E9-8DBA-443C-BD93-C48B563313CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NambayaUser.Service", "..\..\..\Services\NambayaUser\Service\NambayaUser.Service.csproj", "{DD8AC24A-DA10-4CA7-AFEF-AA56323B39DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "..\..\..\Services\Common\Infrastructure\Common.Infrastructure.csproj", "{C06527A7-A43E-409E-BC0D-764CC3BF2713}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Services", "..\..\..\Services\Common\Services\Common.Services.csproj", "{C60F077E-DDB5-4D80-BA9A-199EEB9F217E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{4B8D4449-E249-4CEF-86C9-A3268E72C34B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Contracts", "..\..\..\Services\UserManagement\Contracts\UserManagement.Contracts.csproj", "{F3A788E0-D379-4A09-97C0-C6EC1C5A8711}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C29CE11E-7695-474D-B52A-3BA28E049270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C29CE11E-7695-474D-B52A-3BA28E049270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C29CE11E-7695-474D-B52A-3BA28E049270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C29CE11E-7695-474D-B52A-3BA28E049270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45A5425A-9769-4EA7-9582-0332D398AEE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45A5425A-9769-4EA7-9582-0332D398AEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45A5425A-9769-4EA7-9582-0332D398AEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45A5425A-9769-4EA7-9582-0332D398AEE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4C2B0E7-623E-40EA-9EE7-00B656621B5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4C2B0E7-623E-40EA-9EE7-00B656621B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4C2B0E7-623E-40EA-9EE7-00B656621B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4C2B0E7-623E-40EA-9EE7-00B656621B5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EDC1DFC-F280-43CC-85EA-4FAF3C78A895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EDC1DFC-F280-43CC-85EA-4FAF3C78A895}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EDC1DFC-F280-43CC-85EA-4FAF3C78A895}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EDC1DFC-F280-43CC-85EA-4FAF3C78A895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB92F6E9-8DBA-443C-BD93-C48B563313CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB92F6E9-8DBA-443C-BD93-C48B563313CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB92F6E9-8DBA-443C-BD93-C48B563313CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB92F6E9-8DBA-443C-BD93-C48B563313CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD8AC24A-DA10-4CA7-AFEF-AA56323B39DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD8AC24A-DA10-4CA7-AFEF-AA56323B39DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD8AC24A-DA10-4CA7-AFEF-AA56323B39DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD8AC24A-DA10-4CA7-AFEF-AA56323B39DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C06527A7-A43E-409E-BC0D-764CC3BF2713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C06527A7-A43E-409E-BC0D-764CC3BF2713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C06527A7-A43E-409E-BC0D-764CC3BF2713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C06527A7-A43E-409E-BC0D-764CC3BF2713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C60F077E-DDB5-4D80-BA9A-199EEB9F217E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C60F077E-DDB5-4D80-BA9A-199EEB9F217E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C60F077E-DDB5-4D80-BA9A-199EEB9F217E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C60F077E-DDB5-4D80-BA9A-199EEB9F217E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A788E0-D379-4A09-97C0-C6EC1C5A8711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A788E0-D379-4A09-97C0-C6EC1C5A8711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A788E0-D379-4A09-97C0-C6EC1C5A8711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A788E0-D379-4A09-97C0-C6EC1C5A8711}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C29CE11E-7695-474D-B52A-3BA28E049270} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{45A5425A-9769-4EA7-9582-0332D398AEE6} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{C06527A7-A43E-409E-BC0D-764CC3BF2713} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{C60F077E-DDB5-4D80-BA9A-199EEB9F217E} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{F3A788E0-D379-4A09-97C0-C6EC1C5A8711} = {4B8D4449-E249-4CEF-86C9-A3268E72C34B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99FC034E-D1AA-4761-80C7-08B5C93A7968}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\..\\Services\\Common\\BusinessObjects\\Common.BusinessObjects.csproj
+		SccProjectTopLevelParentUniqueName1 = NambayaUser.Service.sln
+		SccProjectName1 = ../../../Services/Common/BusinessObjects
+		SccLocalPath1 = ..\\..\\..\\Services\\Common\\BusinessObjects
+		SccProjectUniqueName2 = ..\\..\\..\\Services\\Common\\DataAccess\\Common.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName2 = NambayaUser.Service.sln
+		SccProjectName2 = ../../../Services/Common/DataAccess
+		SccLocalPath2 = ..\\..\\..\\Services\\Common\\DataAccess
+		SccProjectUniqueName3 = ..\\..\\..\\Services\\NambayaUser\\API\\NambayaUser.API.csproj
+		SccProjectName3 = ../../../Services/NambayaUser/API
+		SccLocalPath3 = ..\\..\\..\\Services\\NambayaUser\\API
+		SccProjectUniqueName4 = ..\\..\\..\\Services\\NambayaUser\\Contracts\\NambayaUser.Contracts.csproj
+		SccProjectName4 = ../../../Services/NambayaUser/Contracts
+		SccLocalPath4 = ..\\..\\..\\Services\\NambayaUser\\Contracts
+		SccProjectUniqueName5 = ..\\..\\..\\Services\\NambayaUser\\Repository\\NambayaUser.Repository.csproj
+		SccProjectName5 = ../../../Services/NambayaUser/Repository
+		SccLocalPath5 = ..\\..\\..\\Services\\NambayaUser\\Repository
+		SccProjectUniqueName6 = ..\\..\\..\\Services\\NambayaUser\\Service\\NambayaUser.Service.csproj
+		SccProjectName6 = ../../../Services/NambayaUser/Service
+		SccLocalPath6 = ..\\..\\..\\Services\\NambayaUser\\Service
+		SccProjectUniqueName7 = ..\\..\\..\\Services\\Common\\Infrastructure\\Common.Infrastructure.csproj
+		SccProjectTopLevelParentUniqueName7 = NambayaUser.Service.sln
+		SccProjectName7 = ../../../Services/Common/Infrastructure
+		SccLocalPath7 = ..\\..\\..\\Services\\Common\\Infrastructure
+		SccProjectUniqueName8 = ..\\..\\..\\Services\\Common\\Services\\Common.Services.csproj
+		SccProjectTopLevelParentUniqueName8 = NambayaUser.Service.sln
+		SccProjectName8 = ../../../Services/Common/Services
+		SccLocalPath8 = ..\\..\\..\\Services\\Common\\Services
+		SccProjectUniqueName9 = ..\\..\\..\\Services\\UserManagement\\Contracts\\UserManagement.Contracts.csproj
+		SccProjectTopLevelParentUniqueName9 = NambayaUser.Service.sln
+		SccProjectName9 = ../../../Services/UserManagement/Contracts
+		SccLocalPath9 = ..\\..\\..\\Services\\UserManagement\\Contracts
+	EndGlobalSection
+EndGlobal

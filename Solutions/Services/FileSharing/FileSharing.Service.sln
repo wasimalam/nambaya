@@ -1,0 +1,98 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSharing.Service", "..\..\..\Services\FileSharing\Service\FileSharing.Service.csproj", "{01A4459F-D772-441A-B5B7-59969DFF2810}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSharing.API", "..\..\..\Services\FileSharing\API\FileSharing.API.csproj", "{CE39642A-6763-4616-A03D-08DE90959751}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{ECD332BE-6818-4EBD-B4FC-CBFDFFC7701E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.DataAccess", "..\..\..\Services\Common\DataAccess\Common.DataAccess.csproj", "{E0BBAE1F-52AC-421A-BFA0-7A695DA910CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.BusinessObjects", "..\..\..\Services\Common\BusinessObjects\Common.BusinessObjects.csproj", "{17795E9C-615D-4225-8C29-EF144C9F755E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSharing.Contracts", "..\..\..\Services\FileSharing\Contracts\FileSharing.Contracts.csproj", "{1CBF77B6-DF73-46E5-AE21-343CEDDE90D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrapper", "Wrapper", "{62414481-A643-4A07-A2FA-C55373013DD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSharing.Wrapper.IDgard", "..\..\..\Services\FileSharing\Wrapper\IDgard\FileSharing.Wrapper.IDgard.csproj", "{ED537711-637F-4CE3-AB3B-BEB4E5F3D8BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "..\..\..\Services\Common\Infrastructure\Common.Infrastructure.csproj", "{CB959AEE-5217-417F-AECD-7232AE1234BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01A4459F-D772-441A-B5B7-59969DFF2810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01A4459F-D772-441A-B5B7-59969DFF2810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01A4459F-D772-441A-B5B7-59969DFF2810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01A4459F-D772-441A-B5B7-59969DFF2810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE39642A-6763-4616-A03D-08DE90959751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE39642A-6763-4616-A03D-08DE90959751}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE39642A-6763-4616-A03D-08DE90959751}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE39642A-6763-4616-A03D-08DE90959751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0BBAE1F-52AC-421A-BFA0-7A695DA910CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0BBAE1F-52AC-421A-BFA0-7A695DA910CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0BBAE1F-52AC-421A-BFA0-7A695DA910CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0BBAE1F-52AC-421A-BFA0-7A695DA910CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17795E9C-615D-4225-8C29-EF144C9F755E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17795E9C-615D-4225-8C29-EF144C9F755E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17795E9C-615D-4225-8C29-EF144C9F755E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17795E9C-615D-4225-8C29-EF144C9F755E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CBF77B6-DF73-46E5-AE21-343CEDDE90D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CBF77B6-DF73-46E5-AE21-343CEDDE90D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CBF77B6-DF73-46E5-AE21-343CEDDE90D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CBF77B6-DF73-46E5-AE21-343CEDDE90D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED537711-637F-4CE3-AB3B-BEB4E5F3D8BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED537711-637F-4CE3-AB3B-BEB4E5F3D8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED537711-637F-4CE3-AB3B-BEB4E5F3D8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED537711-637F-4CE3-AB3B-BEB4E5F3D8BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB959AEE-5217-417F-AECD-7232AE1234BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB959AEE-5217-417F-AECD-7232AE1234BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB959AEE-5217-417F-AECD-7232AE1234BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB959AEE-5217-417F-AECD-7232AE1234BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E0BBAE1F-52AC-421A-BFA0-7A695DA910CD} = {ECD332BE-6818-4EBD-B4FC-CBFDFFC7701E}
+		{17795E9C-615D-4225-8C29-EF144C9F755E} = {ECD332BE-6818-4EBD-B4FC-CBFDFFC7701E}
+		{ED537711-637F-4CE3-AB3B-BEB4E5F3D8BB} = {62414481-A643-4A07-A2FA-C55373013DD7}
+		{CB959AEE-5217-417F-AECD-7232AE1234BA} = {ECD332BE-6818-4EBD-B4FC-CBFDFFC7701E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7815B834-4089-4196-81D9-AC78AC36FD68}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\..\\Services\\Common\\DataAccess\\Common.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName1 = FileSharing.Service.sln
+		SccProjectName1 = ../../../Services/Common/DataAccess
+		SccLocalPath1 = ..\\..\\..\\Services\\Common\\DataAccess
+		SccProjectUniqueName2 = ..\\..\\..\\Services\\Common\\BusinessObjects\\Common.BusinessObjects.csproj
+		SccProjectTopLevelParentUniqueName2 = FileSharing.Service.sln
+		SccProjectName2 = ../../../Services/Common/BusinessObjects
+		SccLocalPath2 = ..\\..\\..\\Services\\Common\\BusinessObjects
+		SccProjectUniqueName3 = ..\\..\\..\\Services\\FileSharing\\API\\FileSharing.API.csproj
+		SccProjectName3 = ../../../Services/FileSharing/API
+		SccLocalPath3 = ..\\..\\..\\Services\\FileSharing\\API
+		SccProjectUniqueName4 = ..\\..\\..\\Services\\FileSharing\\Contracts\\FileSharing.Contracts.csproj
+		SccProjectName4 = ../../../Services/FileSharing/Contracts
+		SccLocalPath4 = ..\\..\\..\\Services\\FileSharing\\Contracts
+		SccProjectUniqueName5 = ..\\..\\..\\Services\\FileSharing\\Service\\FileSharing.Service.csproj
+		SccProjectName5 = ../../../Services/FileSharing/Service
+		SccLocalPath5 = ..\\..\\..\\Services\\FileSharing\\Service
+		SccProjectUniqueName6 = ..\\..\\..\\Services\\FileSharing\\Wrapper\\IDgard\\FileSharing.Wrapper.IDgard.csproj
+		SccProjectTopLevelParentUniqueName6 = FileSharing.Service.sln
+		SccProjectName6 = ../../../Services/FileSharing/Wrapper/IDgard
+		SccLocalPath6 = ..\\..\\..\\Services\\FileSharing\\Wrapper\\IDgard
+	EndGlobalSection
+EndGlobal

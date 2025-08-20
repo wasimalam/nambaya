@@ -1,0 +1,427 @@
+<div *ngIf="!isPharmacist && !isCardiologist" class="main-heading">
+  <h4 class="sample-title" translate>
+    <span (click)="goBack()" class="icon-previous"></span> {{ pageTitle | translate }}
+  </h4>
+</div>
+<div *ngIf="isPharmacist || isCardiologist" class="main-heading">
+  <h4 class="sample-title">
+    <span (click)="goToPatients()" class="icon-previous"></span>&nbsp;
+    <span *ngIf="caseObject">
+      {{ caseObject.firstName + ' ' + this.caseObject.lastName }}
+      <span class="separator"></span>
+      <span *ngIf="isPharmacist" class="patient-id">{{ caseObject.pharmacyPatientID }}</span>
+      <span *ngIf="isCardiologist" class="patient-id">{{ caseObject.caseIDString }}</span>
+    </span>
+  </h4>
+</div>
+<app-loader [isLoading]="isLoading"></app-loader>
+<div [class.main-bg]="isPharmacist || isCardiologist">
+  <app-patient-wizard *ngIf="isPharmacist" [caseObject]="caseObject" [parentData]="parentData"></app-patient-wizard>
+  <app-cardio-wizard *ngIf="isCardiologist" [caseObject]="caseObject" [parentData]="parentData"></app-cardio-wizard>
+  <div class="sample-wrapper">
+    <section class="sample-content">
+      <article class="sample-column">
+        <div class="column-holder">
+          <div
+            class="columns add"
+            *ngIf="isCardiologist && caseObject && caseObject.statusID < 656"
+            style="padding-left: 0px; margin-bottom: 15px"
+          >
+            <div class="col-lg-12" style="padding-left: 0px;">
+              <div class="box">
+                <button
+                  translate
+                  type="button"
+                  (click)="openAssignCaseDialog()"
+                  class="btn-secandory save-close-button"
+                  igxButton="raised"
+                  igxRipple
+                >
+                  <span class="fas fa-clipboard-check"></span>assign_case
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 medication-plan" style="margin-bottom: 10px; padding-left: 15px">
+            <a
+              *ngIf="medicationPlan && !isDownloadingFile"
+              (click)="downloadFile()"
+              href="javascript:void(0)"
+              class="switch-button"
+            >
+              <span class="fas fa-arrow-down"></span>
+              <span class="download-text">{{ 'download_medication_analysis' | translate }}</span>
+            </a>
+            <!--<a *ngIf="medicationPlan && !isDownloadingFile"
+               (click)="downloadFile()"
+               translate
+               href="javascript:void(0)"
+               class="custom-link">
+              <span class="fas fa-file-download"></span> {{ 'download_medication_analysis' | translate }}
+            </a>-->
+            <igx-circular-bar
+              *ngIf="isDownloadingFile"
+              [animate]="false"
+              [indeterminate]="true"
+              [textVisibility]="false"
+            ></igx-circular-bar>
+            <span *ngIf="isDownloadingFile" class="please-wait">{{ 'please_wait' | translate }}</span>
+          </div>
+          <div class="col-lg-12">
+            <div
+              class="col-lg-12 no-record"
+              *ngIf="drugGroups && drugGroups.length === 0"
+              style="margin-left: 4px"
+              translate
+            >
+              no_medication_exists
+            </div>
+          </div>
+          <div class="col-lg-12" *ngFor="let drugGroup of drugGroups; index as i">
+            <h3
+              class="igx-card-header__title"
+              style="margin-bottom: 30px; border-bottom: 1px solid #ccc; padding: 0 0 20px;"
+            >
+              {{ i + 1 }}. {{ drugGroup.drugGroupName }}
+            </h3>
+            <div class="row" style="margin-bottom: 20px;">
+              <!--Start Drug Detail display-->
+
+              <div class="drug-group col-xl-3 col-lg-4 col-md-6" *ngFor="let drugDetail of drugGroup.drugDetailsList">
+                <igx-card [class.inactive-drug-detail]="!drugDetail.isActive">
+                  <igx-card-header>
+                    <h3 class="igx-card-header__title">
+                      {{ drugDetail.medicineName }}
+                    </h3>
+                    <div class="pzn-container">
+                      <div class="pzn">
+                        <h5 class="igx-card-header__subtitle" translate>PZN: {{ drugDetail.pzn }}</h5>
+                      </div>
+                    </div>
+                  </igx-card-header>
+                  <igx-card-content>
+                    <div class="igx-card-content__text" style="margin-bottom: 10px;">
+                      <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-3">
+                          <span translate style="display: block;">Morning</span>
+                          <p class="drug-additional-text igx-card-content__text">{{ drugDetail.dosageMorning }}</p>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-3">
+                          <span translate style="display: block;"> Noon</span>
+                          <p class="drug-additional-text igx-card-content__text">{{ drugDetail.dosageNoon }}</p>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-3">
+                          <span translate style="display: block;">Evening</span>
+                          <p class="drug-additional-text igx-card-content__text">{{ drugDetail.dosageEvening }}</p>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-3">
+                          <span translate style="display: block;">Night</span>
+                          <p class="drug-additional-text igx-card-content__text">{{ drugDetail.dosageNight }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="drug-additional-text igx-card-content__text">
+                      {{ 'Additional Text' | translate }}: {{ drugDetail.additionalText }}
+                    </p>
+                    <h6 translate>Ingredients</h6>
+                    <div class="ingredients">
+                      <span *ngFor="let drugIngredient of drugDetail.drugIngredientsList">
+                        {{ drugIngredient.activeIngredients }} : {{ drugIngredient.strength }}
+                      </span>
+                    </div>
+                  </igx-card-content>
+                  <igx-card-actions class="card-action-footer">
+                    <a
+                      translate
+                      [routerLink]="[]"
+                      (click)="openDrugDetailDialog(drugDetail, drugGroup.drugGroupName)"
+                      class="more-details"
+                      >More Details</a
+                    >
+                  </igx-card-actions>
+                </igx-card>
+              </div>
+
+              <!--End Drug Detail display-->
+              <!--Start Free text display-->
+
+              <div
+                class="drug-group col-xl-3 col-lg-4 col-md-6"
+                *ngFor="let drugFreeText of drugGroup.drugFreeTextList"
+              >
+                <igx-card>
+                  <igx-card-header>
+                    <h3 class="igx-card-header__title" translate>Free Text</h3>
+                    <!--<button *ngIf="!isCardiologist" title="Edit Group" style="float: right" (click)="openFreeTextDialog(drugFreeText)"
+                          igxButton="icon" igxRipple igxButtonColor="#E41C77" igxRippleCentered="true">
+                    <igx-icon fontSet="material" translate>edit</igx-icon>
+                  </button>-->
+                  </igx-card-header>
+                  <igx-card-content>
+                    <p class="igx-card-content__text">{{ drugFreeText.freeTextInput }}</p>
+                  </igx-card-content>
+                </igx-card>
+              </div>
+
+              <!--End Free text display-->
+              <!--Start Recipes display-->
+
+              <div class="drug-group col-xl-3 col-lg-4 col-md-6" *ngFor="let drugReceipe of drugGroup.drugReceipeList">
+                <igx-card>
+                  <igx-card-header>
+                    <h3 class="igx-card-header__title" translate>Recipe Information</h3>
+                    <!--<button *ngIf="!isCardiologist" title="Edit Group" style="float: right" (click)="openRecipeDialog(drugReceipe)"
+                          igxButton="icon" igxRipple igxButtonColor="#E41C77" igxRippleCentered="true">
+                    <igx-icon fontSet="material" translate>edit</igx-icon>
+                  </button>-->
+                    <h5 class="igx-card-header__subtitle">{{ drugReceipe.formulationText }}</h5>
+                  </igx-card-header>
+                  <igx-card-content>
+                    <p class="igx-card-content__text">{{ drugReceipe.formulationAdditionalText }}</p>
+                  </igx-card-content>
+                </igx-card>
+              </div>
+              <!--End Recipes display-->
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <igx-dialog
+    #drugDetailDialog
+    leftButtonLabel="{{ 'Cancel' | translate }}"
+    (onLeftButtonSelect)="drugDetailDialog.close()"
+    [rightButtonLabel]=""
+    [closeOnOutsideSelect]="true"
+  >
+    <div class="sample-wrapper dialog add">
+      <section class="sample-content">
+        <article class="sample-column">
+          <form class="input-group-form" [formGroup]="drugDetailForm">
+            <div class="main-heading">
+              <div class="columns row">
+                <div [class]="activeDrugGroupName ? 'col-lg-9' : 'col-lg-5'">
+                  <h4 class="sample-title" translate>{{ 'Drug Group' | translate }} : {{ activeDrugGroupName }}</h4>
+                </div>
+              </div>
+            </div>
+            <div class="column-holder">
+              <div class="columns row">
+                <div class="col-lg-4">
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="pzn" translate>PZN</label>
+                      <input igxInput name="pzn" id="pzn" type="text" formControlName="pzn" />
+                    </igx-input-group>
+                  </div>
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="medicineName" translate>Drug Name</label>
+                      <input
+                        igxInput
+                        name="medicineName"
+                        id="medicineName"
+                        type="text"
+                        formControlName="medicineName"
+                      />
+                    </igx-input-group>
+                  </div>
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="dosageUnitCode" translate>Dosage Unit Code</label>
+                      <input
+                        igxInput
+                        name="dosageUnitCode"
+                        id="dosageUnitCode"
+                        type="text"
+                        formControlName="dosageUnitCode"
+                      />
+                    </igx-input-group>
+                  </div>
+                  <input type="hidden" name="id" formControlName="id" />
+                  <input
+                    *ngIf="isDrugDetailAddingUnderGroup"
+                    type="hidden"
+                    name="drugGroupID"
+                    formControlName="drugGroupID"
+                  />
+                </div>
+                <div class="col-lg-4">
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="dosageFormCode" translate>Dosage Form Code</label>
+                      <input
+                        igxInput
+                        name="dosageFormCode"
+                        id="dosageFormCode"
+                        type="text"
+                        formControlName="dosageFormCode"
+                      />
+                    </igx-input-group>
+                  </div>
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="dosageForm" translate>Dosage Form</label>
+                      <input igxInput name="dosageForm" id="dosageForm" type="text" formControlName="dosageForm" />
+                    </igx-input-group>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        drugDetailForm.controls.dosageForm.touched &&
+                        drugDetailForm.controls.dosageForm.errors?.invalidMaxLength
+                      "
+                      translate
+                      >max_7_characters_allowed
+                    </small>
+                  </div>
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="dosageUnitText" translate>Dosage Unit Text</label>
+                      <input
+                        igxInput
+                        name="dosageUnitText"
+                        id="dosageUnitText"
+                        type="text"
+                        formControlName="dosageUnitText"
+                      />
+                    </igx-input-group>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="box">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label igxLabel style="margin-top: 15px" translate>Morning</label>
+                      </div>
+                      <div class="col-lg-4">
+                        <igx-input-group
+                          ><input
+                            igxInput
+                            name="dosageMorning"
+                            placeholder="{{ 'Quantity' | translate }}"
+                            type="text"
+                            formControlName="dosageMorning"
+                        /></igx-input-group>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="box">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label igxLabel style="margin-top: 15px" translate>Noon</label>
+                      </div>
+                      <div class="col-lg-4">
+                        <igx-input-group
+                          ><input
+                            igxInput
+                            name="dosageNoon"
+                            placeholder="{{ 'Quantity' | translate }}"
+                            type="text"
+                            formControlName="dosageNoon"
+                        /></igx-input-group>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="box">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label igxLabel style="margin-top: 15px" translate>Evening</label>
+                      </div>
+                      <div class="col-lg-4">
+                        <igx-input-group
+                          ><input
+                            igxInput
+                            name="dosageEvening"
+                            placeholder="{{ 'Quantity' | translate }}"
+                            type="text"
+                            formControlName="dosageEvening"
+                        /></igx-input-group>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="box">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label igxLabel style="margin-top: 15px" translate>Night</label>
+                      </div>
+                      <div class="col-lg-4">
+                        <igx-input-group
+                          ><input
+                            igxInput
+                            name="dosageNight"
+                            placeholder="{{ 'Quantity' | translate }}"
+                            type="text"
+                            formControlName="dosageNight"
+                        /></igx-input-group>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="row">
+                    <div class="col-lg-4" style="display: inline-block">
+                      <div class="box">
+                        <igx-input-group>
+                          <label igxLabel for="hints" translate>Hints</label>
+                          <input igxInput name="hints" id="hints" type="text" formControlName="hints" />
+                        </igx-input-group>
+                      </div>
+                      <div class="box">
+                        <igx-input-group>
+                          <label igxLabel for="treatmentReason" translate>Treatment Reason</label>
+                          <input
+                            igxInput
+                            name="treatmentReason"
+                            id="treatmentReason"
+                            type="text"
+                            formControlName="treatmentReason"
+                          />
+                        </igx-input-group>
+                      </div>
+                      <div class="box">
+                        <igx-input-group>
+                          <label igxLabel for="additionalText" translate>Additional Text</label>
+                          <input
+                            igxInput
+                            name="additionalText"
+                            id="additionalText"
+                            type="text"
+                            formControlName="additionalText"
+                          />
+                        </igx-input-group>
+                      </div>
+                    </div>
+                    <div class="col-lg-8" style="display: inline-block">
+                      <div
+                        class="box"
+                        formArrayName="drugIngredientsList"
+                        *ngFor="let item of drugIngredientsList.controls; let i = index"
+                      >
+                        <div style="display: inline-block; margin-right: 50px" [formGroupName]="i">
+                          <igx-input-group>
+                            <label igxLabel translate>Active Ingredients</label>
+                            <input igxInput name="activeIngredients" type="text" formControlName="activeIngredients" />
+                          </igx-input-group>
+                        </div>
+                        <div style="display: inline-block" [formGroupName]="i">
+                          <igx-input-group>
+                            <label igxLabel translate>Strength</label>
+                            <input igxInput name="strength" type="text" formControlName="strength" />
+                          </igx-input-group>
+                          <input type="hidden" name="id" formControlName="id" />
+                          <input type="hidden" name="drugDetailsID" formControlName="drugDetailsID" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </article>
+      </section>
+    </div>
+  </igx-dialog>
+</div>

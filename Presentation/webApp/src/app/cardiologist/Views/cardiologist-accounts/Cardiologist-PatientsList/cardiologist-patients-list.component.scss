@@ -1,0 +1,107 @@
+.column-holder {
+  .grid__wrapper {
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 4px;
+
+    .igx-button--icon {
+      background: #614194;
+      border-radius: 0;
+      color: #fff;
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+  }
+}
+
+.cellAlignSyle {
+  text-align: right;
+  float: right;
+}
+
+.cellAlignSyle > span {
+  float: right;
+}
+
+.up {
+  color: green;
+}
+
+.down {
+  color: green;
+}
+
+.headerAlignSyle {
+  text-align: right !important;
+}
+
+.currency-badge-container {
+  width: 80px;
+  float: right;
+}
+
+.badge-left {
+  float: left;
+}
+
+.igx-grid__filtering-cell {
+  display: none !important;
+}
+
+.igx-grid__thead-wrapper,
+.igx-grid__tfoot {
+  background: transparent !important;
+  color: #fff !important;
+  border-radius: 4px 4px 0 0px;
+}
+
+.igx-input-group__bundle,
+.igx-input-group--invalid .igx-input-group__bundle {
+  box-shadow: none !important;
+  /*border: 1px solid #ccc !important;*/
+}
+
+.igx-grid,
+.igx-grid--cosy,
+.igx-grid--compact {
+  box-shadow: none !important;
+}
+.toggle-button {
+  width: 150px;
+  margin-bottom: 10px;
+}
+.toggle-content {
+  display: flex;
+  width: auto;
+  height: auto;
+  min-height: 190px;
+  max-width: 190px;
+}
+.toggle-content.add {
+  height: auto;
+}
+.toggle-section {
+  flex-flow: row wrap;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  background-color: #ffffff;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.search-area .icon-cheveron-down,
+.search-area .icon-Path-1941,
+.search-area .icon-cancel {
+  cursor: pointer;
+}
+.mysortingArea {
+  width: 100%;
+  cursor: pointer;
+}
+.green-case-status {
+  color: #32b01b !important;
+}
+.red-case-status {
+  color: #ca3856 !important;
+}

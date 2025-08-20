@@ -1,0 +1,156 @@
+<div class="main-heading">
+  <h4 translate class="sample-title" translate>
+    <span (click)="goBack()" class="icon-previous"></span> {{ pageTitle }}
+  </h4>
+</div>
+<div class="column-holder">
+  <div class="" style="float: left">
+    <button
+      style="font-weight: normal"
+      translate
+      [routerLink]="[urlPrefix + '/dashboard']"
+      class="btn-primary"
+      igxButton="raised"
+      igxRipple
+    >
+      <span class="icon-Union-2"></span> &nbsp; Dashboard
+    </button>
+  </div>
+  <form class="input-group-form" [formGroup]="patientSearchForm" (ngSubmit)="applyFilters(true)">
+    <div class="search-area">
+      <div class="box">
+        <input
+          #caseIDString
+          data-description="Case Id"
+          class="form-control"
+          type="search"
+          placeholder="{{ 'navigator_case_id' | translate }}"
+          formControlName="caseIDString"
+        />
+        <span class="icon-Path-1941" (click)="applyFilters(true)"></span>
+      </div>
+    </div>
+  </form>
+  <div class="tags-area" *ngIf="filterTags.length > 0">
+    <ul>
+      <li><span class="active-filter" translate>Active Filters: </span></li>
+      <li *ngFor="let tag of filterTags; index as i">
+        <span class="">{{ tag.Description | translate }}: {{ tag.Value | translate }}</span>
+        <a (click)="removeFilter(tag.Property)" class="icon-cancel-circle"></a>
+      </li>
+    </ul>
+  </div>
+  <div class="grid__wrapper">
+    <igx-grid
+      #grid1
+      [data]="data | async"
+      width="100%"
+      [height]="null"
+      [paging]="true"
+      [perPage]="perPage"
+      [emptyGridMessage]="'There are no records to display' | translate"
+      [paginationTemplate]="customPager"
+      [cellSelection]="'none'"
+      (onCellClick)="handleRowClick($event)"
+    >
+      <igx-column field="caseIDString">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate>navigator_case_id</a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+      </igx-column>
+
+      <igx-column field="name">
+        <ng-template igxHeader let-column>
+          <div>
+            <a translate> Name </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          {{ value }}
+        </ng-template>
+      </igx-column>
+
+      <igx-column field="pharmacyID">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Pharmacy </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          {{ value | pharmacyName: pharmacies:'pharmacy' }}
+        </ng-template>
+      </igx-column>
+
+      <igx-column field="pharmacyID">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Identification </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          {{ value | pharmacyIdentification: pharmacies:'pharmacy' }}
+        </ng-template>
+      </igx-column>
+
+      <igx-column field="statusID" *ngIf="filterParam === 'dispatched-cases'">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Status </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value translate>
+          {{ 'center_case_statuses.' + caseStatuses[value] | translate }}
+        </ng-template>
+      </igx-column>
+
+      <igx-column [pinned]="true" field="caseID" header="{{ 'Action' | translate }}" width="100px">
+        <ng-template igxCell let-value let-cell="cell">
+          <div class="grid-actions">
+            <button
+              title="{{ 'Take Action' | translate }}"
+              class="list-drop"
+              (click)="navigateToSendReport(cell.rowIndex)"
+            >
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </ng-template>
+      </igx-column>
+    </igx-grid>
+    <ng-template #customPager let-api>
+      <igx-paginator
+        #paginator
+        [totalRecords]="totalCount"
+        [(perPage)]="perPage"
+        [selectLabel]="'Records per page:' | translate"
+        [selectOptions]="selectOptions"
+        [displayDensity]="grid1.displayDensity"
+        (pageChange)="paginate($event)"
+        (perPageChange)="perPageChangeFn($event)"
+      >
+      </igx-paginator>
+    </ng-template>
+  </div>
+</div>

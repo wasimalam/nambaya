@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification.API", "..\..\..\Services\Notification\API\Notification.API.csproj", "{0855B218-C436-4B36-8FE1-187CA616AAAE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{930A78B0-089E-40E8-B532-254252E226ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "..\..\..\Services\Common\Infrastructure\Common.Infrastructure.csproj", "{BD2D370C-7AD8-40BE-BED3-41718CB6565A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Interfaces", "..\..\..\Services\Common\Interfaces\Common.Interfaces.csproj", "{62CC3AA3-DAAF-413C-A0C1-D7632A33B4D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.BusinessObjects", "..\..\..\Services\Common\BusinessObjects\Common.BusinessObjects.csproj", "{09408845-337B-4479-A572-8A67DC33AB25}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0855B218-C436-4B36-8FE1-187CA616AAAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0855B218-C436-4B36-8FE1-187CA616AAAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0855B218-C436-4B36-8FE1-187CA616AAAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0855B218-C436-4B36-8FE1-187CA616AAAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2D370C-7AD8-40BE-BED3-41718CB6565A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2D370C-7AD8-40BE-BED3-41718CB6565A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2D370C-7AD8-40BE-BED3-41718CB6565A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2D370C-7AD8-40BE-BED3-41718CB6565A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62CC3AA3-DAAF-413C-A0C1-D7632A33B4D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62CC3AA3-DAAF-413C-A0C1-D7632A33B4D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62CC3AA3-DAAF-413C-A0C1-D7632A33B4D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62CC3AA3-DAAF-413C-A0C1-D7632A33B4D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09408845-337B-4479-A572-8A67DC33AB25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09408845-337B-4479-A572-8A67DC33AB25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09408845-337B-4479-A572-8A67DC33AB25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09408845-337B-4479-A572-8A67DC33AB25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BD2D370C-7AD8-40BE-BED3-41718CB6565A} = {930A78B0-089E-40E8-B532-254252E226ED}
+		{62CC3AA3-DAAF-413C-A0C1-D7632A33B4D8} = {930A78B0-089E-40E8-B532-254252E226ED}
+		{09408845-337B-4479-A572-8A67DC33AB25} = {930A78B0-089E-40E8-B532-254252E226ED}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {28713EB0-C17C-455F-AAC2-8D43BF0E5007}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.ssidecisions.com/tfs/projects2017
+		SccProjectUniqueName0 = ..\\..\\..\\Services\\Notification\\API\\Notification.API.csproj
+		SccProjectName0 = ../../../Services/Notification/API
+		SccLocalPath0 = ..\\..\\..\\Services\\Notification\\API
+		SccProjectUniqueName1 = ..\\..\\..\\Services\\Common\\Infrastructure\\Common.Infrastructure.csproj
+		SccProjectTopLevelParentUniqueName1 = Notification.sln
+		SccProjectName1 = ../../../Services/Common/Infrastructure
+		SccLocalPath1 = ..\\..\\..\\Services\\Common\\Infrastructure
+		SccProjectUniqueName2 = ..\\..\\..\\Services\\Common\\Interfaces\\Common.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName2 = Notification.sln
+		SccProjectName2 = ../../../Services/Common/Interfaces
+		SccLocalPath2 = ..\\..\\..\\Services\\Common\\Interfaces
+		SccProjectUniqueName3 = ..\\..\\..\\Services\\Common\\BusinessObjects\\Common.BusinessObjects.csproj
+		SccProjectTopLevelParentUniqueName3 = Notification.sln
+		SccProjectName3 = ../../../Services/Common/BusinessObjects
+		SccLocalPath3 = ..\\..\\..\\Services\\Common\\BusinessObjects
+		SccLocalPath4 = .
+	EndGlobalSection
+EndGlobal

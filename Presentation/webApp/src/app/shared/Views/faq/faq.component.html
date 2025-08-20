@@ -1,0 +1,14 @@
+<div class="main-heading">
+  <h4 class="sample-title" translate><span (click)="goBack()" class="icon-previous"></span> FAQ</h4>
+</div>
+
+<div id="help-section" class="faq-section">
+  <div class="sample-wrapper">
+    <section class="sample-content">
+      <article class="sample-column">
+        <app-faq-cardiologist *ngIf="applicationId === 'cardiologist'"></app-faq-cardiologist>
+        <app-faq-pharmacist *ngIf="applicationId === 'pharmacist'"></app-faq-pharmacist>
+      </article>
+    </section>
+  </div>
+</div>

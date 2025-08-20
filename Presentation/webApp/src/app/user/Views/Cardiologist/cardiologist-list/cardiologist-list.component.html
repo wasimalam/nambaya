@@ -1,0 +1,292 @@
+<div class="main-heading">
+  <h4 class="sample-title" translate><span (click)="goBack()" class="icon-previous"></span> Cardiologists</h4>
+</div>
+<div class="column-holder">
+  <div class="" style="float: left">
+    <button
+      style="font-weight: normal"
+      translate
+      [routerLink]="[urlPrefix + '/dashboard']"
+      class="btn-primary"
+      igxButton="raised"
+      igxRipple
+    >
+      <span class="icon-Union-2"></span> &nbsp; Dashboard
+    </button>
+  </div>
+  <form class="input-group-form" [formGroup]="cardiologistSearchForm" (ngSubmit)="applyCardiologistFilters(true)">
+    <div class="search-area">
+      <div class="box">
+        <input
+          #Name
+          data-description="Name"
+          class="form-control"
+          type="search"
+          placeholder="Name"
+          formControlName="Name"
+        />
+        <span class="icon-cheveron-down" (click)="clickEvent($event)" id="chev"></span>
+        <div class="dropdown-search" [ngClass]="{ active: toggleBtn }">
+          <div class="dropdown" (clickOutside)="onClickedOutside($event)">
+            <a (click)="toggleBtn = false" class="icon-cancel"></a>
+            <ul class="row">
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="Email" translate>Email</label>
+                  <input
+                    #Email
+                    data-description="Email"
+                    igxInput
+                    name="Email"
+                    id="Email"
+                    type="email"
+                    formControlName="Email"
+                  />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="ZipCode" translate>Zip Code</label>
+                  <input
+                    #ZipCode
+                    data-description="Zip Code"
+                    igxInput
+                    name="ZipCode"
+                    id="ZipCode"
+                    type="text"
+                    formControlName="ZipCode"
+                  />
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    cardiologistSearchForm.controls.ZipCode.touched &&
+                    cardiologistSearchForm.controls.ZipCode.errors?.invalidNumber
+                  "
+                  translate
+                >
+                  Zip Code is not a valid number
+                </small>
+              </li>
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel translate for="Phone">Mobile</label>
+                  <input
+                    #Phone
+                    igxInput
+                    data-description="Phone"
+                    name="Phone"
+                    id="Phone"
+                    type="text"
+                    formControlName="Phone"
+                  />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="Phone" translate>Doctor ID</label>
+                  <input
+                    #DoctorID
+                    igxInput
+                    data-description="Doctor ID"
+                    name="DoctorID"
+                    id="DoctorID"
+                    type="text"
+                    formControlName="DoctorID"
+                  />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6">
+                <igx-select
+                  #isActive
+                  data-description="filter_active_label"
+                  name="isActive"
+                  id="isActive"
+                  formControlName="isActive"
+                >
+                  <igx-select-item [value]="true">
+                    {{ 'Active' | translate }}
+                  </igx-select-item>
+                  <igx-select-item [value]="false">
+                    {{ 'Inactive' | translate }}
+                  </igx-select-item>
+                  <label translate igxLabel for="isActive">filter_active_label</label>
+                </igx-select>
+              </li>
+              <li class="col-lg-6">
+                <igx-select
+                  #isLocked
+                  data-description="filter_locked_label"
+                  name="isLocked"
+                  id="isLocked"
+                  formControlName="isLocked"
+                >
+                  <igx-select-item [value]="true">
+                    {{ 'Locked' | translate }}
+                  </igx-select-item>
+                  <igx-select-item [value]="false">
+                    {{ 'unlocked' | translate }}
+                  </igx-select-item>
+                  <label translate igxLabel for="isLocked">filter_locked_label</label>
+                </igx-select>
+              </li>
+              <li class="col-lg-12">
+                <button class="btn btn-primary" translate>Search</button>
+                <button (click)="resetCardiologistFilters()" type="button" class="btn btn-default" translate>
+                  Reset
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <span class="icon-Path-1941" (click)="applyCardiologistFilters(true)"></span>
+      </div>
+    </div>
+  </form>
+  <div class="tags-area" *ngIf="filterTags.length > 0">
+    <ul>
+      <li><span class="active-filter" translate>Active Filters: </span></li>
+      <li *ngFor="let tag of filterTags; index as i">
+        <span *ngIf="tag.Property !== 'isActive' && tag.Property !== 'isLocked'" class=""
+          >{{ tag.Description | translate }}: {{ tag.Value | translate }}
+        </span>
+        <span *ngIf="tag.Property === 'isActive'" class=""
+          >{{ tag.Description | translate }}: <span translate>{{ tag.Value ? 'Active' : 'Inactive' }}</span>
+        </span>
+        <span *ngIf="tag.Property === 'isLocked'" class=""
+          >{{ tag.Description | translate }}: <span translate>{{ tag.Value ? 'Locked' : 'unlocked' }}</span>
+        </span>
+        <a (click)="removeFilter(tag.Property)" class="icon-cancel-circle"></a>
+      </li>
+    </ul>
+  </div>
+  <div class="grid__wrapper">
+    <igx-grid
+      #cardiologistGrid
+      [data]="data | async"
+      width="100%"
+      [height]="null"
+      [paging]="true"
+      [perPage]="perPage"
+      [paginationTemplate]="customPager"
+      [cellSelection]="'none'"
+      (onCellClick)="handleRowClick($event)"
+      [emptyGridMessage]="'There are no records to display' | translate"
+    >
+      <igx-column field="name" width="250px">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Name </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="email">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Email </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="doctorID">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Doctor ID </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="phone">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Mobile </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="zipCode" width="150px">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Zip Code </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="isActive" width="150px">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Status </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value
+          ><span translate>{{ value ? 'Active' : 'Inactive' }}</span></ng-template
+        >
+      </igx-column>
+      <igx-column field="isLocked" width="150px">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Locked </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value
+          ><span translate>{{ value ? 'Locked' : 'unlocked' }}</span></ng-template
+        >
+      </igx-column>
+      <igx-column [pinned]="true" field="id" header="{{ 'Action' | translate }}" width="100px">
+        <ng-template igxCell let-value>
+          <div class="grid-actions">
+            <button
+              title="{{ 'Edit Cardiologist' | translate }}"
+              class="list-drop"
+              [routerLink]="[urlPrefix + '/cardiologist/edit', value]"
+            >
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+          </div>
+        </ng-template>
+      </igx-column>
+    </igx-grid>
+    <ng-template #customPager>
+      <igx-paginator
+        #paginator
+        [totalRecords]="totalCount"
+        [(perPage)]="perPage"
+        [selectLabel]="'Records per page:' | translate"
+        [selectOptions]="selectOptions"
+        [displayDensity]="cardiologistGrid.displayDensity"
+        (pageChange)="paginate($event)"
+        (perPageChange)="perPageChangeFn($event)"
+      >
+      </igx-paginator>
+    </ng-template>
+  </div>
+</div>

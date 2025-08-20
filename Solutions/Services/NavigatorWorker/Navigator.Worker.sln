@@ -1,0 +1,102 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{D4D95C4E-305C-4C18-86B2-862941FB215B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{95579470-E506-41CA-8278-1653A1E7CE00}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Navigator.Contracts", "..\..\..\Services\Navigator.Worker\Navigator.Contracts\Navigator.Contracts.csproj", "{4FFE8614-4E56-45F5-BE87-AE3B90B15699}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Navigator.Service", "..\..\..\Services\Navigator.Worker\Navigator.Service\Navigator.Service.csproj", "{5EFE7DED-AD71-4AEC-A466-CE265D67A7A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Navigator.Worker", "..\..\..\Services\Navigator.Worker\Navigator.Worker\Navigator.Worker.csproj", "{3A9E4463-2926-4D7C-9A57-E29732A0B751}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Contracts", "..\..\..\Services\Patient\Contracts\Patient.Contracts.csproj", "{EC4889DB-A80C-47C6-8741-DA080A526F65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiologist.Contracts", "..\..\..\Services\Cardiologist\Contracts\Cardiologist.Contracts.csproj", "{A364D133-FC5D-45D1-9510-7E11454898F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "..\..\..\Services\Common\Infrastructure\Common.Infrastructure.csproj", "{9B55C13E-C8C6-42D1-933C-26B1B24BBDF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.BusinessObjects", "..\..\..\Services\Common\BusinessObjects\Common.BusinessObjects.csproj", "{2AE447F9-8C48-428B-AF32-DAD9EADD5A45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FFE8614-4E56-45F5-BE87-AE3B90B15699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FFE8614-4E56-45F5-BE87-AE3B90B15699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FFE8614-4E56-45F5-BE87-AE3B90B15699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FFE8614-4E56-45F5-BE87-AE3B90B15699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EFE7DED-AD71-4AEC-A466-CE265D67A7A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EFE7DED-AD71-4AEC-A466-CE265D67A7A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EFE7DED-AD71-4AEC-A466-CE265D67A7A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EFE7DED-AD71-4AEC-A466-CE265D67A7A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A9E4463-2926-4D7C-9A57-E29732A0B751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A9E4463-2926-4D7C-9A57-E29732A0B751}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A9E4463-2926-4D7C-9A57-E29732A0B751}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A9E4463-2926-4D7C-9A57-E29732A0B751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC4889DB-A80C-47C6-8741-DA080A526F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC4889DB-A80C-47C6-8741-DA080A526F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC4889DB-A80C-47C6-8741-DA080A526F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC4889DB-A80C-47C6-8741-DA080A526F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A364D133-FC5D-45D1-9510-7E11454898F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A364D133-FC5D-45D1-9510-7E11454898F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A364D133-FC5D-45D1-9510-7E11454898F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A364D133-FC5D-45D1-9510-7E11454898F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B55C13E-C8C6-42D1-933C-26B1B24BBDF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B55C13E-C8C6-42D1-933C-26B1B24BBDF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B55C13E-C8C6-42D1-933C-26B1B24BBDF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B55C13E-C8C6-42D1-933C-26B1B24BBDF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AE447F9-8C48-428B-AF32-DAD9EADD5A45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AE447F9-8C48-428B-AF32-DAD9EADD5A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AE447F9-8C48-428B-AF32-DAD9EADD5A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AE447F9-8C48-428B-AF32-DAD9EADD5A45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EC4889DB-A80C-47C6-8741-DA080A526F65} = {95579470-E506-41CA-8278-1653A1E7CE00}
+		{A364D133-FC5D-45D1-9510-7E11454898F2} = {95579470-E506-41CA-8278-1653A1E7CE00}
+		{9B55C13E-C8C6-42D1-933C-26B1B24BBDF1} = {D4D95C4E-305C-4C18-86B2-862941FB215B}
+		{2AE447F9-8C48-428B-AF32-DAD9EADD5A45} = {D4D95C4E-305C-4C18-86B2-862941FB215B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F0EB8F1D-3E96-4F62-9333-1651B732BB35}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.ssidecisions.com/tfs/projects2017
+		SccProjectUniqueName0 = ..\\..\\..\\Services\\Patient\\Contracts\\Patient.Contracts.csproj
+		SccProjectTopLevelParentUniqueName0 = Navigator.Worker.sln
+		SccProjectName0 = ../../../Services/Patient/Contracts
+		SccLocalPath0 = ..\\..\\..\\Services\\Patient\\Contracts
+		SccProjectUniqueName1 = ..\\..\\..\\Services\\Cardiologist\\Contracts\\Cardiologist.Contracts.csproj
+		SccProjectTopLevelParentUniqueName1 = Navigator.Worker.sln
+		SccProjectName1 = ../../../Services/Cardiologist/Contracts
+		SccLocalPath1 = ..\\..\\..\\Services\\Cardiologist\\Contracts
+		SccProjectUniqueName2 = ..\\..\\..\\Services\\Common\\Infrastructure\\Common.Infrastructure.csproj
+		SccProjectTopLevelParentUniqueName2 = Navigator.Worker.sln
+		SccProjectName2 = ../../../Services/Common/Infrastructure
+		SccLocalPath2 = ..\\..\\..\\Services\\Common\\Infrastructure
+		SccProjectUniqueName3 = ..\\..\\..\\Services\\Common\\BusinessObjects\\Common.BusinessObjects.csproj
+		SccProjectTopLevelParentUniqueName3 = Navigator.Worker.sln
+		SccProjectName3 = ../../../Services/Common/BusinessObjects
+		SccLocalPath3 = ..\\..\\..\\Services\\Common\\BusinessObjects
+		SccLocalPath4 = .
+		SccProjectUniqueName5 = ..\\..\\..\\Services\\Navigator.Worker\\Navigator.Contracts\\Navigator.Contracts.csproj
+		SccProjectName5 = ../../../Services/Navigator.Worker/Navigator.Contracts
+		SccLocalPath5 = ..\\..\\..\\Services\\Navigator.Worker\\Navigator.Contracts
+		SccProjectUniqueName6 = ..\\..\\..\\Services\\Navigator.Worker\\Navigator.Service\\Navigator.Service.csproj
+		SccProjectName6 = ../../../Services/Navigator.Worker/Navigator.Service
+		SccLocalPath6 = ..\\..\\..\\Services\\Navigator.Worker\\Navigator.Service
+		SccProjectUniqueName7 = ..\\..\\..\\Services\\Navigator.Worker\\Navigator.Worker\\Navigator.Worker.csproj
+		SccProjectName7 = ../../../Services/Navigator.Worker/Navigator.Worker
+		SccLocalPath7 = ..\\..\\..\\Services\\Navigator.Worker\\Navigator.Worker
+	EndGlobalSection
+EndGlobal

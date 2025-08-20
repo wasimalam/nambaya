@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Cardiologist.Service.csproj.vspscc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="BouncyCastle.NetCore" Version="1.8.6" /> 
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.1" /> 
+    <PackageReference Include="QRCoder" Version="1.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\DataAccess\Common.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Common\Services\Common.Services.csproj" />
+    <ProjectReference Include="..\..\UserManagement\Contracts\UserManagement.Contracts.csproj" />
+    <ProjectReference Include="..\Contracts\Cardiologist.Contracts.csproj" />
+    <ProjectReference Include="..\Repository\Cardiologist.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="iTextSharp.LGPLv2.Core">
+      <HintPath>..\..\Dlls\iTextSharp.LGPLv2.Core.dll</HintPath>      
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,155 @@
+<div class="main-heading">
+  <h4 translate class="sample-title"><span class="icon-previous"></span> Dashboard</h4>
+  <span class="date-dashboard">{{ currentDate }}</span>
+</div>
+<app-loader [isLoading]="isLoading"></app-loader>
+<div class="sample-wrapper dashboard-bg" *ngIf="!gettingData">
+  <section class="sample-content">
+    <article class="sample-column">
+      <div class="layout-sample">
+        <div class="layout-box col-lg-12">
+          <div class="row" style="margin: 0;">
+            <div class="col-lg-3">
+              <div
+                class="layout-box__el tile-border"
+                igxFlex
+                title="{{ 'New Cases' | translate }}"
+                [routerLink]="['/pharmacist/patients', 'casestarted']"
+              >
+                <img src="assets/images/dashboard/small-case-started-min.png" />
+                <div class="tile-stat-number">{{ pharmacyStatsData.started }}</div>
+                <div class="tile-titles">{{ 'New Cases' | translate }}</div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div
+                class="layout-box__el tile-border"
+                igxFlex
+                title="{{ 'ECG Pending' | translate }}"
+                [routerLink]="['/pharmacist/patients', 'ecgpending']"
+              >
+                <img src="assets/images/dashboard/small-device-assigned-min.png" />
+                <div class="tile-stat-number">{{ pharmacyStatsData.pending }}</div>
+                <div class="tile-titles">{{ 'ECG Pending' | translate }}</div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div
+                class="layout-box__el tile-border"
+                igxFlex
+                title="{{ 'ECG Transmitted' | translate }}"
+                [routerLink]="['/pharmacist/patients', 'ecgtransmitted']"
+              >
+                <img src="assets/images/dashboard/small-ecg-transmitted-min.png" />
+                <div class="tile-stat-number">{{ pharmacyStatsData.qecompleted }}</div>
+                <div class="tile-titles">{{ 'ECG Transmitted' | translate }}</div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div
+                class="layout-box__el tile-border"
+                igxFlex
+                title="{{ 'Report Completed' | translate }}"
+                [routerLink]="['/pharmacist/patients', 'ecgaccessed']"
+              >
+                <img src="assets/images/dashboard/small-case-completed-min.png" />
+                <div class="tile-stat-number">{{ pharmacyStatsData.detailcompleted }}</div>
+                <div class="tile-titles">{{ 'Report Completed' | translate }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+  <section class="sample-content">
+    <article class="sample-column">
+      <div class="layout-sample">
+        <div class="layout-box">
+          <div class="row pharmacist mr-0 ml-0">
+            <div class="col-lg-4 col-12">
+              <div #elementGoals class="chart-area goals">
+                <div class="">
+                  <div class="tile-chart-title" translate>
+                    Goals
+                  </div>
+                </div>
+                <ngx-charts-gauge
+                  class="charts-gauge-area"
+                  [scheme]="guagecolorScheme"
+                  [results]="gaugeData"
+                  [min]="0"
+                  [max]="100"
+                  [angleSpan]="360"
+                  [startAngle]="0"
+                  [legend]="true"
+                  [legendTitle]="legendTitle | translate"
+                  [valueFormatting]="goalValueFormatFn"
+                  [showAxis]="false"
+                  [units]="guageUnits"
+                  (select)="onSelect($event)"
+                >
+                  <ng-template #tooltipTemplate let-model="model">
+                    <span>{{ model.name }}</span>
+                  </ng-template>
+                </ngx-charts-gauge>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-12">
+              <div #elementCasesStarted class="chart-area pCasesStarted">
+                <div class="">
+                  <div class="tile-chart-title" translate>Cases Started</div>
+                </div>
+                <ngx-charts-bar-vertical
+                  class="charts-gauge-area"
+                  [scheme]="colorScheme"
+                  [view]="[elementCasesStarted.offsetWidth, 290]"
+                  [results]="monthlyCasesStartedData"
+                  [gradient]="gradient"
+                  [xAxis]="showXAxis"
+                  [yAxis]="showYAxis"
+                  [legend]="showLegend"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxisLabel]="xAxisLabel"
+                  [yAxisLabel]="yAxisLabel"
+                  maxYAxisTickLength="12"
+                  maxXAxisTickLength="12"
+                  (select)="onSelect($event)"
+                  [yAxisTickFormatting]="yAxisTickFormattingFn"
+                >
+                </ngx-charts-bar-vertical>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+              <div #elementCasesCompleted class="chart-area pCasesCompleted">
+                <div class="">
+                  <div class="tile-chart-title" translate>Completed Cases</div>
+                </div>
+                <ngx-charts-bar-vertical
+                  class="charts-gauge-area"
+                  [scheme]="colorScheme"
+                  [view]="[elementCasesCompleted.offsetWidth, 290]"
+                  [results]="monthlyCasesCompletedData"
+                  [gradient]="gradient"
+                  [xAxis]="showXAxis"
+                  [yAxis]="showYAxis"
+                  [legend]="showLegend"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxisLabel]="xAxisLabel"
+                  [yAxisLabel]="yAxisLabel"
+                  maxYAxisTickLength="10"
+                  (select)="onSelect($event)"
+                  [yAxisTickFormatting]="yAxisTickFormattingFn"
+                >
+                </ngx-charts-bar-vertical>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>

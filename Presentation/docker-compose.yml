@@ -1,0 +1,27 @@
+version: '3'
+
+networks:
+  frontend:
+    driver: ${NETWORKS_DRIVER}
+  backend:
+    driver: ${NETWORKS_DRIVER}
+
+services:
+#### angular #########################################
+    angular:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./webApp
+        dockerfile: Dockerfile.dev
+        args:         
+          - no_proxy
+      environment:
+      - NODE_ENV=development
+      env_file:
+        - ./.env
+      ports:
+        - "${NG_HOST_HTTP_PORT}:80"
+        - "${NG_HOST_HTTPS_PORT}:9222"
+      networks:
+        - frontend
+        - backend

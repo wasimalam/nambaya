@@ -1,0 +1,230 @@
+<div class="sample-wrapper">
+  <section class="sample-content">
+    <article class="sample-column">
+      <app-loader [isLoading]="isLoading"></app-loader>
+      <form class="input-group-form" (ngSubmit)="createNewCenter()" [formGroup]="centerAccountsForm">
+        <div class="main-heading">
+          <h4 class="sample-title" translate>
+            <span (click)="goBack()" class="icon-previous"></span> add_center_group_user
+          </h4>
+        </div>
+        <div class="column-holder">
+          <div class="columns add">
+            <div class="col-lg-12">
+              <div class="box">
+                <button class="btn-primary" translate igxButton="raised" igxRipple>
+                  <span class="icon-save"></span>Save
+                </button>
+                <button type="button" (click)="goBack()" translate class="btn-secandory" igxButton="raised" igxRipple>
+                  <span class="icon-highlight_remove"></span>Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>Basic</span>
+              <p translate>
+                having_an_up_to_date_email_address_attached_to_your_account
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box">
+                <igx-input-group>
+                  <label translate igxLabel for="firstName">First Name</label>
+                  <input igxInput name="firstName" id="firstName" type="text" required formControlName="firstName" />
+                </igx-input-group>
+                <small
+                  *ngIf="
+                    centerAccountsForm.controls.firstName.touched &&
+                    centerAccountsForm.controls.firstName.errors?.required
+                  "
+                  class="text-danger"
+                  translate
+                  >First name is required
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    centerAccountsForm.controls.firstName.touched &&
+                    centerAccountsForm.controls.firstName.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_45_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel translate for="lastName">Last Name</label>
+                  <input igxInput name="lastName" id="lastName" type="text" required formControlName="lastName" />
+                </igx-input-group>
+                <small
+                  *ngIf="
+                    centerAccountsForm.controls.lastName.touched &&
+                    centerAccountsForm.controls.lastName.errors?.required
+                  "
+                  class="text-danger"
+                  translate
+                  >Last name is required
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    centerAccountsForm.controls.lastName.touched &&
+                    centerAccountsForm.controls.lastName.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_45_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel translate for="email">Email address</label>
+                  <input igxInput name="email" id="email" type="email" required formControlName="email" />
+                </igx-input-group>
+                <small
+                  *ngIf="
+                    centerAccountsForm.controls.email.touched && centerAccountsForm.controls.email.errors?.required
+                  "
+                  class="text-danger"
+                  translate
+                  >Email is required
+                </small>
+                <small
+                  *ngIf="
+                    centerAccountsForm.controls.email.touched &&
+                    centerAccountsForm.controls.email.errors?.email &&
+                    !centerAccountsForm.controls.email.errors?.invalidMaxLength
+                  "
+                  class="text-danger"
+                  translate
+                  >invalid_email_address
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    centerAccountsForm.controls.email.touched &&
+                    centerAccountsForm.controls.email.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_80_characters_allowed
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>Contact Details</span>
+              <p translate>
+                please_add_your_phone_number_to_be_contacted_by_SMS
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box">
+                <ngx-intl-tel-input
+                  [cssClass]="'custom'"
+                  [preferredCountries]="preferredCountries"
+                  [enableAutoCountrySelect]="true"
+                  [enablePlaceholder]="true"
+                  [searchCountryFlag]="true"
+                  [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                  [selectFirstCountry]="false"
+                  [selectedCountryISO]="CountryISO.Germany"
+                  [maxLength]="15"
+                  [phoneValidation]="true"
+                  [separateDialCode]="separateDialCode"
+                  name="phone"
+                  formControlName="phone">
+                </ngx-intl-tel-input>
+                <small
+                  class="text-danger"
+                  *ngIf="this.centerAccountsForm.controls.phone.status === 'INVALID'"
+                  translate
+                >Phone number is not valid
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="street" name="street" type="text" formControlName="street" />
+                  <label igxLabel translate for="street">Street</label>
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    centerAccountsForm.controls.street.touched &&
+                    centerAccountsForm.controls.street.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_200_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="address" name="address" type="text" formControlName="address" />
+                  <label igxLabel translate for="address">City</label>
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    centerAccountsForm.controls.address.touched &&
+                    centerAccountsForm.controls.address.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_200_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="zipCode" name="zipCode" type="text" formControlName="zipCode" />
+                  <label igxLabel translate for="zipCode">Zip Code</label>
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    centerAccountsForm.controls.zipCode.touched &&
+                    centerAccountsForm.controls.zipCode.errors?.invalidNumber &&
+                    !centerAccountsForm.controls.zipCode.errors?.invalidMaxLength
+                  "
+                  translate
+                >
+                  Zip Code is not a valid number
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    centerAccountsForm.controls.zipCode.touched &&
+                    centerAccountsForm.controls.zipCode.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_5_characters_allowed
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>Status</span>
+              <p translate>Keep securing the system by ensuring user status.</p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box" translate>
+                <igx-switch
+                  [checked]="true"
+                  name="isActive"
+                  id="isActive"
+                  [(ngModel)]="isActiveToggle"
+                  formControlName="isActive"
+                >
+                </igx-switch>
+                {{ isActiveToggle ? 'Active' : 'Inactive' }}
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+        </div>
+      </form>
+    </article>
+  </section>
+</div>

@@ -1,0 +1,79 @@
+.hours small {
+  margin-left: 15px !important;
+}
+.quick-evaluation {
+  margin-top: 60px;
+}
+.quick-evaluation label {
+  margin-top: -40px;
+}
+.quick-evaluation span.igx-radio__label {
+  margin: 0 15px 5px !important;
+}
+
+.image-loader {
+  color: #cf3752;
+  padding-left: 0px;
+  margin-top: 0px !important;
+}
+.quick-eval-table {
+  border: 1px solid #ffeeee !important;
+}
+.quick-eval-table th,
+.quick-eval-table td {
+  padding: 0.5rem !important;
+}
+.quick-table-header {
+  background-color: #a7998e;
+}
+.quick-table-red-red {
+  background-color: #ff0f0f;
+}
+.quick-eval-table th,
+.quick-table-red-red td,
+.quick-table-red td,
+.quick-table-red-red .igx-radio__label,
+.quick-table-red .igx-radio__label,
+.quick-table-red-red .igx-typography,
+.quick-table-red .igx-typography,
+.quick-table-red-red .igx-radio,
+.quick-table-red .igx-radio {
+  color: #ffeeee !important;
+}
+.quick-table-red {
+  background-color: #ff0f0f;
+  color: #fff;
+}
+.quick-table-orange {
+  background-color: #ffaa00;
+  color: rgba(0, 0, 0, 0.87);
+}
+.quick-table-yellow {
+  background-color: #fadd69;
+  color: rgba(0, 0, 0, 0.87);
+}
+.quick-table-green {
+  background-color: #92d050;
+  color: rgba(0, 0, 0, 0.87);
+}
+.quick-table-orange td,
+.quick-table-yellow td,
+.quick-table-green td {
+  color: #5b5141;
+}
+.row-selector {
+  border-right: none !important;
+}
+@import "~igniteui-angular/lib/core/styles/themes/index";
+$grid-sample-theme: igx-grid-theme(
+  $row-selected-background: #ffecf5,
+  $row-selected-hover-background: #ffecf5,
+  $row-selected-text-color: rgba(0, 0, 0, 0.74),
+  $row-border-color: #b09fca,
+  $cell-selected-background: #ffecf5,
+  $cell-selected-text-color: rgba(0, 0, 0, 0.74)
+);
+
+:host ::ng-deep {
+  @include igx-grid($grid-sample-theme);
+}

@@ -1,0 +1,195 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+<div class="sample-wrapper">
+  <section class="sample-content">
+    <article class="sample-column">
+      <form class="input-group-form" (ngSubmit)="updatePharmacy()" [formGroup]="pharmacyEditForm">
+        <div class="main-heading">
+          <h4 class="sample-title" translate><span (click)="goBack()" class="icon-previous"></span> Edit Pharmacy</h4>
+        </div>
+        <div class="column-holder">
+          <div class="columns add">
+            <div class="col-lg-12">
+              <div class="box">
+                <button class="btn-primary" igxButton="raised" igxRipple translate>
+                  <span class="icon-save"></span>Save
+                </button>
+                <button type="button" (click)="goBack()" class="btn-secandory" igxButton="raised" igxRipple translate>
+                  <span class="icon-highlight_remove"></span>Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>Basic</span>
+              <p translate>
+                having_an_up_to_date_email_address_attached_to_your_account
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel for="firstName" translate>Name</label>
+                  <input igxInput name="name" id="firstName" type="text" required formControlName="name" />
+                </igx-input-group>
+                <small
+                  [hidden]="pharmacyEditForm.controls.name.valid || pharmacyEditForm.controls.name.untouched"
+                  class="text-danger"
+                  translate
+                >
+                  Name is required
+                </small>
+              </div>
+
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel for="identification" translate>Identification</label>
+                  <input
+                    igxInput
+                    name="name"
+                    id="identification"
+                    type="text"
+                    required
+                    formControlName="identification"
+                  />
+                </igx-input-group>
+                <small
+                  [hidden]="
+                    pharmacyEditForm.controls.identification.valid || pharmacyEditForm.controls.identification.untouched
+                  "
+                  class="text-danger"
+                  translate
+                  >identification_required
+                </small>
+              </div>
+
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel for="email" translate>Email address</label>
+                  <input igxInput name="email" id="email" type="email" required formControlName="email" readonly />
+                </igx-input-group>
+                <small
+                  [hidden]="pharmacyEditForm.controls.email.valid || pharmacyEditForm.controls.email.untouched"
+                  class="text-danger"
+                  translate
+                >
+                  Email is required
+                </small>
+              </div>
+
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel for="contact" translate>responsive_partner</label>
+                  <input igxInput name="contact" id="contact" type="text" formControlName="contact" />
+                </igx-input-group>
+              </div>
+
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel for="phone" translate>Mobile</label>
+                  <input type="text" id="phone" igxInput name="phone" formControlName="phone" />
+                </igx-input-group>
+                <small
+                  [hidden]="pharmacyEditForm.controls.phone.valid || pharmacyEditForm.controls.phone.untouched"
+                  class="text-danger"
+                  translate
+                >
+                  Phone is required
+                </small>
+              </div>
+
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel for="fax" translate>Fax</label>
+                  <input igxInput name="fax" id="fax" type="text" formControlName="fax" />
+                </igx-input-group>
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>Contact Details</span>
+              <p translate>
+                please_add_your_phone_number_to_be_contacted_by_SMS
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="street" name="street" type="text" required formControlName="street" />
+                  <label igxLabel for="street" translate>Street</label>
+                </igx-input-group>
+                <small
+                  [hidden]="pharmacyEditForm.controls.street.valid || pharmacyEditForm.controls.street.untouched"
+                  class="text-danger"
+                  translate
+                >
+                  Street is required
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="address" name="address" type="text" formControlName="address" />
+                  <label igxLabel for="address" translate>City</label>
+                </igx-input-group>
+                <small
+                  [hidden]="pharmacyEditForm.controls.address.valid || pharmacyEditForm.controls.address.untouched"
+                  class="text-danger"
+                  translate
+                >
+                  Address is required
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="zipCode" name="zipCode" type="text" required formControlName="zipCode" />
+                  <label igxLabel for="zipCode" translate>Zip Code</label>
+                </igx-input-group>
+                <small
+                  *ngIf="
+                    pharmacyEditForm.controls.zipCode.touched && pharmacyEditForm.controls.zipCode.errors?.required
+                  "
+                  class="text-danger"
+                  translate
+                >
+                  Zip Code is required
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    pharmacyEditForm.controls.zipCode.touched && pharmacyEditForm.controls.zipCode.errors?.invalidNumber
+                  "
+                  translate
+                >
+                  Zip Code is not a valid number
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>Status</span>
+            </div>
+            <div class="col-lg-3">
+              <div class="box" translate>
+                <igx-switch [checked]="true" name="isActive" id="isActive" formControlName="isActive"> </igx-switch>
+                {{ pharmacyEditForm.value.isActive ? 'Active' : 'Inactive' }}
+              </div>
+            </div>
+
+            <div class="col-lg-3">
+              <div class="box" translate>
+                <igx-switch [checked]="true" name="isLocked" id="isLocked" formControlName="isLocked"> </igx-switch>
+                {{ pharmacyEditForm.value.isLocked ? 'Locked' : 'unlocked' }}
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+        </div>
+      </form>
+    </article>
+  </section>
+</div>

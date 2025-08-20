@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>615c5775-30d2-4ab9-a6ba-8d4d73540623</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Notification.API.csproj.vspscc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="6.2.3" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="6.2.3" />
+    <PackageReference Include="Scrutor" Version="3.2.1" />
+    <PackageReference Include="Serilog" Version="2.9.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>    
+    <ProjectReference Include="..\..\Common\BusinessObjects\Common.BusinessObjects.csproj" />
+    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Common\Interfaces\Common.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Common\Services\Common.Services.csproj" />
+    <ProjectReference Include="..\..\Logging\Contracts\Logging.Contracts.csproj" />
+  </ItemGroup>
+</Project>

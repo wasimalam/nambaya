@@ -1,0 +1,145 @@
+<div *ngIf="!isPharmacist" class="main-heading">
+  <h4 translate class="sample-title"><span (click)="goBack()" class="icon-previous"></span> Import Patient</h4>
+</div>
+<div [class.main-bg]="isPharmacist">
+  <app-patient-wizard *ngIf="isPharmacist"></app-patient-wizard>
+  <div class="sample-wrapper">
+    <section class="sample-content">
+      <article class="sample-column">
+        <div class="column-holder">
+          <div class="columns add">
+            <div class="col-lg-12 row">
+              <div *ngIf="isPharmacist" class="box box-wizard">
+                <button
+                  type="submit"
+                  translate
+                  class="btn-secandory next-button skip-disabled"
+                  igxButton="raised"
+                  igxRipple
+                >
+                  <span class="fas fa-angle-right"></span> Next &nbsp;&nbsp;
+                </button>
+                <button type="button" translate class="btn-secandory skip-disabled" igxButton="raised" igxRipple>
+                  <span class="fas fa-angle-right"></span><span class="fas fa-angle-right skip-button"></span>Skip
+                </button>
+                <button
+                  translate
+                  type="button"
+                  routerLink="/pharmacist/patients"
+                  class="btn-secandory"
+                  igxButton="raised"
+                  igxRipple
+                >
+                  <span class="icon-cancel-circle"></span>close
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <form class="input-group-form" [formGroup]="importPatientForm">
+            <div class="columns row" style="margin-bottom: 0px">
+              <div class="col-lg-6" style="padding-left: 0;">
+                <div class="box">
+                  <igx-input-group>
+                    <igx-prefix>
+                      <span>{{ pharmacyIdPrefix }}-</span>
+                    </igx-prefix>
+                    <label translate igxLabel for="PharmacyPatientID">Pharmacy Patient ID</label>
+                    <input
+                      igxInput
+                      name="PharmacyPatientID"
+                      id="PharmacyPatientID"
+                      type="text"
+                      required
+                      formControlName="PharmacyPatientID"
+                    />
+                  </igx-input-group>
+                </div>
+                <small
+                  [hidden]="
+                    importPatientForm.controls.PharmacyPatientID.valid ||
+                    importPatientForm.controls.PharmacyPatientID.untouched
+                  "
+                  class="text-danger"
+                  translate
+                >
+                  Patient ID is required
+                </small>
+              </div>
+            </div>
+          </form>
+          <div class="columns row" style="margin-bottom: 20px">
+            <div class="col-lg-6" style="padding-left: 0;">
+              <div class="center upload-holder">
+                <span class="icon-cloud-upload"></span>
+                <span translate>drop_xml_file_here</span>
+                <ngx-file-drop
+                  dropZoneLabel="Drop files here"
+                  (onFileDrop)="dropped($event)"
+                  (onFileOver)="fileOver($event)"
+                  (onFileLeave)="fileLeave($event)"
+                  [multiple]="false"
+                >
+                  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                    <button
+                      translate
+                      class="btn-primary"
+                      [disabled]="uploading"
+                      igxButton="raised"
+                      igxRipple
+                      (click)="openFileSelector()"
+                    >
+                      <i class="fas fa-file"></i> Select XML File
+                    </button>
+                  </ng-template>
+                </ngx-file-drop>
+              </div>
+
+              <div class="upload-table" *ngIf="fileToUpload != null">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th translate style="text-align: left!important;">Name</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody class="upload-name-style">
+                    <tr *ngFor="let item of files; let i = index">
+                      <td style="text-align: left!important;">{{ item.relativePath }}</td>
+                      <td class="text-right">
+                        <button
+                          translate
+                          (click)="uploadPatientFile()"
+                          igxButton="raised"
+                          style="color: white; margin: 10px;"
+                          [disabled]="uploading"
+                        >
+                          <i class="fas fa-spinner fa-spin" *ngIf="uploading"></i>
+                          <i class="fas fa-file-upload" *ngIf="!uploading"></i> &nbsp;Upload
+                        </button>
+                        <button
+                          translate
+                          style=" margin: 10px;"
+                          (click)="cancelUpload()"
+                          igxButton="outlined"
+                          [disabled]="uploading"
+                        >
+                          <i class="fas fa-times"></i> &nbsp;Remove
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="uploading">
+                <div class="linear-container">
+                  <igx-linear-bar [striped]="false" [max]="100" [value]="progress" type="danger"></igx-linear-bar>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+</div>

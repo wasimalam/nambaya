@@ -1,0 +1,322 @@
+version: '3'
+
+networks:
+  frontend:
+    driver: ${NETWORKS_DRIVER}
+  backend:
+    driver: ${NETWORKS_DRIVER}
+
+volumes:
+  aspnetcore:
+    driver: ${VOLUMES_DRIVER}
+  mssql:
+    driver: ${VOLUMES_DRIVER}
+
+services:
+### Centralgroup  #########################################
+    centralgroup:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./CentralGroup/API/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - PharmaAssociationEmails=[ "mubaidullah@ssidecisions.com", "nambayaqa@gmail.com" ]
+        - DoctorAssociationEmails=[ "mubaidullah@ssidecisions.com", "nambayaqa@gmail.com" ]
+      volumes:
+        - ${DOTNET_CODE_PATH_HOST}:/source
+      ports:
+        - "${CENTRAL_GROUP_PORT}:80"
+      extra_hosts:
+        - "service.qtlife.com:${DOCKER_HOST_IP}"
+        - "identity.qtlife.com:${DOCKER_HOST_IP}"
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### Cardiologist  #########################################
+    cardiologist:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./Cardiologist/API/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+      volumes:
+        - ${DOTNET_CODE_PATH_HOST}:/source
+      ports:
+        - "${CARDIOLOGIST_PORT}:80"
+      extra_hosts:
+        - "service.qtlife.com:${DOCKER_HOST_IP}"
+        - "identity.qtlife.com:${DOCKER_HOST_IP}"
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### FileSharing  #########################################
+    filesharing:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./FileSharing/API/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+      volumes:
+        - ${DOTNET_CODE_PATH_HOST}:/source
+      ports:
+        - "${FILESHARING_PORT}:80"
+      extra_hosts:
+        - "service.qtlife.com:${DOCKER_HOST_IP}"
+        - "identity.qtlife.com:${DOCKER_HOST_IP}"
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### Identity  #########################################
+    identity:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./Identity/API/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+      volumes:
+        - ${DOTNET_CODE_PATH_HOST}:/source
+      ports:
+        - "${IDENTITY_PORT}:80"
+      depends_on:
+        - usermanagement
+      extra_hosts:
+        - "service.qtlife.com:${DOCKER_HOST_IP}"
+        - "identity.qtlife.com:${DOCKER_HOST_IP}"
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### NambayaUser  #########################################
+    nambayauser:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./NambayaUser/API/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+      volumes:
+        - ${DOTNET_CODE_PATH_HOST}:/source
+      ports:
+        - "${NAMBAYAUSER_PORT}:80"
+      extra_hosts:
+        - "service.qtlife.com:${DOCKER_HOST_IP}"
+        - "identity.qtlife.com:${DOCKER_HOST_IP}"
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### Patient  #########################################
+    patient:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./Patient/API/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+      volumes:
+        - ${DOTNET_CODE_PATH_HOST}:/source
+      ports:
+        - "${PATIENT_PORT}:80"
+      extra_hosts:
+        - "service.qtlife.com:${DOCKER_HOST_IP}"
+        - "identity.qtlife.com:${DOCKER_HOST_IP}"
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### Pharmacist  #########################################
+    pharmacist:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./Pharmacist/API/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+      volumes:
+        - ${DOTNET_CODE_PATH_HOST}:/source
+      ports:
+        - "${PHARMACIST_PORT}:80"
+      extra_hosts:
+        - "service.qtlife.com:${DOCKER_HOST_IP}"
+        - "identity.qtlife.com:${DOCKER_HOST_IP}"
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### UserManagement  #########################################
+    usermanagement:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./UserManagement/API/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+      volumes:
+        - ${DOTNET_CODE_PATH_HOST}:/source
+      ports:
+        - "${USERMANAGEMENT_PORT}:80"
+      extra_hosts:
+        - "service.qtlife.com:${DOCKER_HOST_IP}"
+        - "identity.qtlife.com:${DOCKER_HOST_IP}"
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### Logging  #########################################
+    logging:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./Logging/API/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+      volumes:
+        - ${DOTNET_CODE_PATH_HOST}:/source
+      ports:
+        - "${LOGGING_PORT}:80"
+      extra_hosts:
+        - "service.qtlife.com:${DOCKER_HOST_IP}"
+        - "identity.qtlife.com:${DOCKER_HOST_IP}"
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### mock  #########################################
+    mock:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./Navigator.Worker/Navigator.Worker.Mock/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+      volumes:
+        - ${DATA_PATH_HOST}/navigator:/usr/Navigator
+      extra_hosts:
+        - "service.qtlife.com:${DOCKER_HOST_IP}"
+        - "identity.qtlife.com:${DOCKER_HOST_IP}"
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### Notification ################################################
+    notification:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./Notification/API/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+      volumes:
+        - ${DOTNET_CODE_PATH_HOST}:/source
+      extra_hosts:
+        - "service.qtlife.com:${DOCKER_HOST_IP}"
+        - "identity.qtlife.com:${DOCKER_HOST_IP}"
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### dbmaintenance ################################################
+    dbmaintenance:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./Backup/DBMaintenance/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      privileged: true
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Production
+        - FTPConfiguration__ServerUrl=ftp://172.18.12.231
+        - FTPConfiguration__UserName=admin
+        - FTPConfiguration__Password=ABC123ssi
+      volumes:
+        - ${DATA_PATH_HOST}/mssql:/var/opt/mssql
+      extra_hosts:
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend
+### s3maintenance ################################################
+    s3maintenance:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./Backup/S3Maintenance/Dockerfile
+        args:
+          - no_proxy
+      env_file:
+        - ./.env
+      privileged: true
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Production
+      extra_hosts:
+        - "mssql:${DOCKER_HOST_IP}"
+        - "rabbitmq:${DOCKER_HOST_IP}"
+      networks:
+        - frontend
+        - backend

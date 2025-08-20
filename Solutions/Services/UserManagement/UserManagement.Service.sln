@@ -1,0 +1,124 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B87F5DF5-526E-41BB-A183-565DC7FBA57A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.BusinessObjects", "..\..\..\Services\Common\BusinessObjects\Common.BusinessObjects.csproj", "{41D651ED-68FE-406F-89F4-CB289C3A185C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.DataAccess", "..\..\..\Services\Common\DataAccess\Common.DataAccess.csproj", "{8990506D-2480-4589-B5E8-643396326334}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "..\..\..\Services\Common\Infrastructure\Common.Infrastructure.csproj", "{08601BC2-E32B-4AFF-B034-A17DBBBEE7A3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Service", "..\..\..\Services\UserManagement\Service\UserManagement.Service.csproj", "{FD849B37-B45C-47A7-9CD7-46E6AD34ADCC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Repository", "..\..\..\Services\UserManagement\Repository\UserManagement.Repository.csproj", "{3FF20043-6704-4B40-B62B-27DEFB800601}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Contracts", "..\..\..\Services\UserManagement\Contracts\UserManagement.Contracts.csproj", "{DFD4B811-34E0-4276-A34D-A904930D48D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.API", "..\..\..\Services\UserManagement\API\UserManagement.API.csproj", "{7BBBF03F-3D7D-4D4A-AFF4-17A62E0D68A3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Services", "..\..\..\Services\Common\Services\Common.Services.csproj", "{10E0B9B6-30C6-4F7E-8D9A-0DD425F51930}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41D651ED-68FE-406F-89F4-CB289C3A185C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41D651ED-68FE-406F-89F4-CB289C3A185C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41D651ED-68FE-406F-89F4-CB289C3A185C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41D651ED-68FE-406F-89F4-CB289C3A185C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8990506D-2480-4589-B5E8-643396326334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8990506D-2480-4589-B5E8-643396326334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8990506D-2480-4589-B5E8-643396326334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8990506D-2480-4589-B5E8-643396326334}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08601BC2-E32B-4AFF-B034-A17DBBBEE7A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08601BC2-E32B-4AFF-B034-A17DBBBEE7A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08601BC2-E32B-4AFF-B034-A17DBBBEE7A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08601BC2-E32B-4AFF-B034-A17DBBBEE7A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD849B37-B45C-47A7-9CD7-46E6AD34ADCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD849B37-B45C-47A7-9CD7-46E6AD34ADCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD849B37-B45C-47A7-9CD7-46E6AD34ADCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD849B37-B45C-47A7-9CD7-46E6AD34ADCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FF20043-6704-4B40-B62B-27DEFB800601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FF20043-6704-4B40-B62B-27DEFB800601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FF20043-6704-4B40-B62B-27DEFB800601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FF20043-6704-4B40-B62B-27DEFB800601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFD4B811-34E0-4276-A34D-A904930D48D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD4B811-34E0-4276-A34D-A904930D48D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD4B811-34E0-4276-A34D-A904930D48D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD4B811-34E0-4276-A34D-A904930D48D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BBBF03F-3D7D-4D4A-AFF4-17A62E0D68A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BBBF03F-3D7D-4D4A-AFF4-17A62E0D68A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BBBF03F-3D7D-4D4A-AFF4-17A62E0D68A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BBBF03F-3D7D-4D4A-AFF4-17A62E0D68A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10E0B9B6-30C6-4F7E-8D9A-0DD425F51930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10E0B9B6-30C6-4F7E-8D9A-0DD425F51930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10E0B9B6-30C6-4F7E-8D9A-0DD425F51930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10E0B9B6-30C6-4F7E-8D9A-0DD425F51930}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{41D651ED-68FE-406F-89F4-CB289C3A185C} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{8990506D-2480-4589-B5E8-643396326334} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{08601BC2-E32B-4AFF-B034-A17DBBBEE7A3} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{10E0B9B6-30C6-4F7E-8D9A-0DD425F51930} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {90FC034E-D1AA-4761-80C7-08B5C93A7068}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.ssidecisions.com/tfs/projects2017
+		SccProjectUniqueName0 = ..\\..\\..\\Services\\Common\\BusinessObjects\\Common.BusinessObjects.csproj
+		SccProjectTopLevelParentUniqueName0 = UserManagement.Service.sln
+		SccProjectName0 = ../../../Services/Common/BusinessObjects
+		SccAuxPath0 = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath0 = ..\\..\\..\\Services\\Common\\BusinessObjects
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = ..\\..\\..\\Services\\Common\\DataAccess\\Common.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName1 = UserManagement.Service.sln
+		SccProjectName1 = ../../../Services/Common/DataAccess
+		SccAuxPath1 = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath1 = ..\\..\\..\\Services\\Common\\DataAccess
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = ..\\..\\..\\Services\\Common\\Infrastructure\\Common.Infrastructure.csproj
+		SccProjectTopLevelParentUniqueName2 = UserManagement.Service.sln
+		SccProjectName2 = ../../../Services/Common/Infrastructure
+		SccAuxPath2 = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath2 = ..\\..\\..\\Services\\Common\\Infrastructure
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName3 = ..\\..\\..\\Services\\UserManagement\\Service\\UserManagement.Service.csproj
+		SccProjectName3 = ../../../Services/UserManagement/Service
+		SccAuxPath3 = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath3 = ..\\..\\..\\Services\\UserManagement\\Service
+		SccProvider3 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName4 = ..\\..\\..\\Services\\UserManagement\\Repository\\UserManagement.Repository.csproj
+		SccProjectName4 = ../../../Services/UserManagement/Repository
+		SccAuxPath4 = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath4 = ..\\..\\..\\Services\\UserManagement\\Repository
+		SccProvider4 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName5 = ..\\..\\..\\Services\\UserManagement\\Contracts\\UserManagement.Contracts.csproj
+		SccProjectName5 = ../../../Services/UserManagement/Contracts
+		SccAuxPath5 = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath5 = ..\\..\\..\\Services\\UserManagement\\Contracts
+		SccProvider5 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName6 = ..\\..\\..\\Services\\UserManagement\\API\\UserManagement.API.csproj
+		SccProjectName6 = ../../../Services/UserManagement/API
+		SccAuxPath6 = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath6 = ..\\..\\..\\Services\\UserManagement\\API
+		SccProvider6 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName7 = ..\\..\\..\\Services\\Common\\Services\\Common.Services.csproj
+		SccProjectTopLevelParentUniqueName7 = UserManagement.Service.sln
+		SccProjectName7 = ../../../Services/Common/Services
+		SccAuxPath7 = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath7 = ..\\..\\..\\Services\\Common\\Services
+		SccProvider7 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+### Centralgroup  #########################################
+    centralgroup:
+      build:
+        context: ./
+        dockerfile: ./CentralGroup/API/Dockerfile
+### Cardiologist  #########################################
+    cardiologist:
+      build:
+        context: ./
+        dockerfile: ./Cardiologist/API/Dockerfile
+### FileSharing  #########################################
+    filesharing:
+      build:
+        context: ./
+        dockerfile: ./FileSharing/API/Dockerfile
+       
+### Identity  #########################################
+    identity:
+      hostname: ${HOSTNAME}
+      build:
+        context: ./
+        dockerfile: ./Identity/API/Dockerfile
+### NambayaUser  #########################################
+    nambayauser:
+      build:
+        context: ./
+        dockerfile: ./NambayaUser/API/Dockerfile
+### Patient  #########################################
+    patient:
+      build:
+        context: ./
+        dockerfile: ./Patient/API/Dockerfile
+### Pharmacist  #########################################
+    pharmacist:
+      build:
+        context: ./
+        dockerfile: ./Pharmacist/API/Dockerfile
+### UserManagement  #########################################
+    usermanagement:
+      build:
+        context: ./
+        dockerfile: ./UserManagement/API/Dockerfile
+### Logging  #########################################
+    logging:
+      build:
+        context: ./
+        dockerfile: ./Logging/API/Dockerfile
+### Notification ################################################
+    notification:
+      build:
+        context: ./
+        dockerfile: ./Notification/API/Dockerfile
+### dbmaintenance ################################################
+    dbmaintenance:
+      build:
+        context: ./
+        dockerfile: ./Backup/DBMaintenance/Dockerfile
+### s3maintenance ################################################
+    s3maintenance:
+      build:
+        context: ./
+        dockerfile: ./Backup/S3Maintenance/Dockerfile

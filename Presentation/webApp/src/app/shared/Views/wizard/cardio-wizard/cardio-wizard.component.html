@@ -1,0 +1,60 @@
+<app-loader [isLoading]="isLoadinginWizard"></app-loader>
+<div class="wizerd-area">
+  <div class="slide-nav cardio-wizard">
+    <ul class="tab-slider btn-next-pre feedback-area">
+      <li class="line"></li>
+      <li class="line" [class.w95p]="caseObject && caseObject.statusID >= caseStatuses.QE_COMPLETED"></li>
+      <li class="upload-patient review-btn">
+        <a class="review">
+          <span translate>Review</span>
+        </a>
+      </li>
+      <li
+        class="upload-patient"
+        [class.active]="parentData.cardioWizardCurrentStep === 1"
+        [class.done-area]="parentData.cardioWizardCurrentStep > 1"
+      >
+        <a routerLink="{{ cardioWizardDataContext.medicationStepURL }}">
+          <span class="fas icon-Pill"></span><span translate>Medications</span>
+        </a>
+      </li>
+      <li
+        class="upload-patient"
+        [class.active]="parentData.cardioWizardCurrentStep === 2"
+        [class.done-area]="parentData.cardioWizardCurrentStep > 2"
+      >
+        <a routerLink="{{ cardioWizardDataContext.qeStepURL }}">
+          <span class="fas icon-flag-checkered"></span><span translate>Quick Evaluation</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="tab-slider btn-next-pre result-area">
+      <li class="line"></li>
+      <li class="line" [class.w95p]="caseObject && caseObject.statusID >= caseStatuses.DE_COMPLETED"></li>
+      <li class="upload-patient result-btn">
+        <a class="result">
+          <span translate>Result</span>
+        </a>
+      </li>
+      <li
+        class="upload-patient"
+        [class.active]="parentData.cardioWizardCurrentStep === 3"
+        [class.done-area]="parentData.cardioWizardCurrentStep > 3"
+      >
+        <a routerLink="{{ cardioWizardDataContext.ecgStepURL }}">
+          <span class="fas icon-EKG"></span><span translate>Detailed Report</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<igx-dialog
+  #assignCaseConfirmDialog
+  title="{{ 'Confirmation' | translate }}"
+  leftButtonLabel="{{ 'Cancel' | translate }}"
+  (onLeftButtonSelect)="assignCaseConfirmDialog.close()"
+  rightButtonLabel="OK"
+  (onRightButtonSelect)="assignCase()"
+  message="{{ 'sure_to_assign_case' | translate }}"
+>
+</igx-dialog>

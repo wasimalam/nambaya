@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "//3mwMhZZgok4No4U+R5KX8Hc2lkJEkBYpXXqPu/KK5PmfLqyqwo5Bsw/76uqEmfKsTfQh9ifbYkwlFNIB1x7g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\bashi\\Downloads\\21-20-Sprint20\\21-20-Sprint20\\Services\\Common\\BusinessObjects\\Common.BusinessObjects.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\bashi\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\bashi\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

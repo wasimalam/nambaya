@@ -1,0 +1,51 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
+      <span igxButton="icon" igxToggleAction="navigation" (click)="toggleMenu()" style="margin-left: 6px;">
+        <igx-icon class="material-icons-area" fontSet="material" style="font-size: 24px;line-height: 26px;">
+          menu
+        </igx-icon>
+      </span>
+      <a class="navbar-brand" translate (click)="goToHome()">
+        <img width="88" height="35" src="../../../assets/images/logo.png" />
+      </a>
+      <div class="navbar-nav">
+        <a
+          *ngIf="isCardiologist"
+          class="nav-item nav-link text-uppercase"
+          target="_blank"
+          href="https://citrix-qtlife.nambaya-medical.de/Citrix/qtlifestoreWeb/"
+          routerLinkActive="active"
+        >
+          <i class="icon-Device"></i>
+        </a>
+        <a class="nav-item nav-link text-uppercase" (click)="goToHome()" routerLinkActive="active">
+          <i class="icon-Union-2"></i>
+        </a>
+        <!--<a class="nav-item nav-link text-uppercase" title="{{'help' | translate}}" [routerLink]="[urlPrefix+'/help']">
+          <i class="fas fa-info-circle"></i>
+        </a>-->
+        <div class="navbar-nav ml-auto">
+          <button (click)="toggleLanguage()" igxButton="outlined" class="lang-btn">{{ alternateLanguage }}</button>
+          <div class="nav-item" ngbDropdown display="dynamic" placement="bottom-right" *ngIf="render">
+            <a id="user-dropdown" class="nav-link" ngbDropdownToggle>
+              <ngx-avatar bgColor="#614194" size="32" name="{{ loggedUserName }}"></ngx-avatar>
+            </a>
+            <div ngbDropdownMenu aria-labelledby="user-dropdown">
+              <h6 class="dropdown-header" *ngIf="renderName">
+                <span translate>Logged in as</span> <b> {{ loggedUserName }}</b>
+              </h6>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" routerLink="{{ preferencesLink }}" translate>Settings</button>
+              <button class="dropdown-item" routerLink="{{ settingsLink }}" translate>Profile</button>
+              <button class="dropdown-item" routerLink="{{ urlPrefix }}/help" translate>Help</button>
+              <button class="dropdown-item" routerLink="{{ urlPrefix }}/faq" translate>FAQ</button>
+              <button class="dropdown-item" routerLink="{{ urlPrefix }}/password/change" translate>change_password</button>
+              <button class="dropdown-item" (click)="logout()" translate>Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

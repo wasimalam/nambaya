@@ -1,0 +1,133 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pharmacist.API", "..\..\..\Services\Pharmacist\API\Pharmacist.API.csproj", "{ABEBCD88-320B-4009-9C40-61C3E4297ACD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pharmacist.Repository", "..\..\..\Services\Pharmacist\Repository\Pharmacist.Repository.csproj", "{957624D3-F23A-4CE2-B4FA-D4B17FABFFAF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pharmacist.Contracts", "..\..\..\Services\Pharmacist\Contracts\Pharmacist.Contracts.csproj", "{478B34DA-41C4-4C9F-9AD1-642DE43A24D7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pharmacist.Service", "..\..\..\Services\Pharmacist\Service\Pharmacist.Service.csproj", "{E5CF03C6-FB65-4E80-A4A8-5CFA1F86B9E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{4A4BC937-0E0C-4B20-A990-4191854F6AC9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.DataAccess", "..\..\..\Services\Common\DataAccess\Common.DataAccess.csproj", "{73C91C34-AD0C-42D0-BCA6-322C9429A129}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.BusinessObjects", "..\..\..\Services\Common\BusinessObjects\Common.BusinessObjects.csproj", "{32E75C69-FD47-4934-B052-B96C2903B139}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "..\..\..\Services\Common\Infrastructure\Common.Infrastructure.csproj", "{D678C798-9CAE-4B22-BFAC-6A6B9EC22CDF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Services", "..\..\..\Services\Common\Services\Common.Services.csproj", "{9CE670C9-3846-4210-B8CF-C0FDB57E7B5F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{399443CF-D338-4980-B094-710E78600AD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Contracts", "..\..\..\Services\Patient\Contracts\Patient.Contracts.csproj", "{59986767-1BC8-4D9A-937B-E05B365E49EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Contracts", "..\..\..\Services\UserManagement\Contracts\UserManagement.Contracts.csproj", "{DE806FF3-9531-43A7-83D5-5ED49DFDF4FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABEBCD88-320B-4009-9C40-61C3E4297ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABEBCD88-320B-4009-9C40-61C3E4297ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABEBCD88-320B-4009-9C40-61C3E4297ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABEBCD88-320B-4009-9C40-61C3E4297ACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{957624D3-F23A-4CE2-B4FA-D4B17FABFFAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{957624D3-F23A-4CE2-B4FA-D4B17FABFFAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{957624D3-F23A-4CE2-B4FA-D4B17FABFFAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{957624D3-F23A-4CE2-B4FA-D4B17FABFFAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{478B34DA-41C4-4C9F-9AD1-642DE43A24D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{478B34DA-41C4-4C9F-9AD1-642DE43A24D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{478B34DA-41C4-4C9F-9AD1-642DE43A24D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{478B34DA-41C4-4C9F-9AD1-642DE43A24D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5CF03C6-FB65-4E80-A4A8-5CFA1F86B9E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5CF03C6-FB65-4E80-A4A8-5CFA1F86B9E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5CF03C6-FB65-4E80-A4A8-5CFA1F86B9E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5CF03C6-FB65-4E80-A4A8-5CFA1F86B9E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73C91C34-AD0C-42D0-BCA6-322C9429A129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73C91C34-AD0C-42D0-BCA6-322C9429A129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73C91C34-AD0C-42D0-BCA6-322C9429A129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73C91C34-AD0C-42D0-BCA6-322C9429A129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32E75C69-FD47-4934-B052-B96C2903B139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32E75C69-FD47-4934-B052-B96C2903B139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32E75C69-FD47-4934-B052-B96C2903B139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32E75C69-FD47-4934-B052-B96C2903B139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D678C798-9CAE-4B22-BFAC-6A6B9EC22CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D678C798-9CAE-4B22-BFAC-6A6B9EC22CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D678C798-9CAE-4B22-BFAC-6A6B9EC22CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D678C798-9CAE-4B22-BFAC-6A6B9EC22CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CE670C9-3846-4210-B8CF-C0FDB57E7B5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE670C9-3846-4210-B8CF-C0FDB57E7B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE670C9-3846-4210-B8CF-C0FDB57E7B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE670C9-3846-4210-B8CF-C0FDB57E7B5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59986767-1BC8-4D9A-937B-E05B365E49EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59986767-1BC8-4D9A-937B-E05B365E49EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59986767-1BC8-4D9A-937B-E05B365E49EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59986767-1BC8-4D9A-937B-E05B365E49EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE806FF3-9531-43A7-83D5-5ED49DFDF4FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE806FF3-9531-43A7-83D5-5ED49DFDF4FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE806FF3-9531-43A7-83D5-5ED49DFDF4FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE806FF3-9531-43A7-83D5-5ED49DFDF4FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{73C91C34-AD0C-42D0-BCA6-322C9429A129} = {4A4BC937-0E0C-4B20-A990-4191854F6AC9}
+		{32E75C69-FD47-4934-B052-B96C2903B139} = {4A4BC937-0E0C-4B20-A990-4191854F6AC9}
+		{D678C798-9CAE-4B22-BFAC-6A6B9EC22CDF} = {4A4BC937-0E0C-4B20-A990-4191854F6AC9}
+		{9CE670C9-3846-4210-B8CF-C0FDB57E7B5F} = {4A4BC937-0E0C-4B20-A990-4191854F6AC9}
+		{59986767-1BC8-4D9A-937B-E05B365E49EA} = {399443CF-D338-4980-B094-710E78600AD7}
+		{DE806FF3-9531-43A7-83D5-5ED49DFDF4FE} = {399443CF-D338-4980-B094-710E78600AD7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99FC034E-D1AA-4761-80C7-08B5C93A7968}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\..\\Services\\Common\\BusinessObjects\\Common.BusinessObjects.csproj
+		SccProjectTopLevelParentUniqueName1 = Pharmacist.Service.sln
+		SccProjectName1 = ../../../Services/Common/BusinessObjects
+		SccLocalPath1 = ..\\..\\..\\Services\\Common\\BusinessObjects
+		SccProjectUniqueName2 = ..\\..\\..\\Services\\Common\\DataAccess\\Common.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName2 = Pharmacist.Service.sln
+		SccProjectName2 = ../../../Services/Common/DataAccess
+		SccLocalPath2 = ..\\..\\..\\Services\\Common\\DataAccess
+		SccProjectUniqueName3 = ..\\..\\..\\Services\\Pharmacist\\API\\Pharmacist.API.csproj
+		SccProjectName3 = ../../../Services/Pharmacist/API
+		SccLocalPath3 = ..\\..\\..\\Services\\Pharmacist\\API
+		SccProjectUniqueName4 = ..\\..\\..\\Services\\Pharmacist\\Contracts\\Pharmacist.Contracts.csproj
+		SccProjectName4 = ../../../Services/Pharmacist/Contracts
+		SccLocalPath4 = ..\\..\\..\\Services\\Pharmacist\\Contracts
+		SccProjectUniqueName5 = ..\\..\\..\\Services\\Pharmacist\\Repository\\Pharmacist.Repository.csproj
+		SccProjectName5 = ../../../Services/Pharmacist/Repository
+		SccLocalPath5 = ..\\..\\..\\Services\\Pharmacist\\Repository
+		SccProjectUniqueName6 = ..\\..\\..\\Services\\Pharmacist\\Service\\Pharmacist.Service.csproj
+		SccProjectName6 = ../../../Services/Pharmacist/Service
+		SccLocalPath6 = ..\\..\\..\\Services\\Pharmacist\\Service
+		SccProjectUniqueName7 = ..\\..\\..\\Services\\Common\\Infrastructure\\Common.Infrastructure.csproj
+		SccProjectTopLevelParentUniqueName7 = Pharmacist.Service.sln
+		SccProjectName7 = ../../../Services/Common/Infrastructure
+		SccLocalPath7 = ..\\..\\..\\Services\\Common\\Infrastructure
+		SccProjectUniqueName8 = ..\\..\\..\\Services\\Common\\Services\\Common.Services.csproj
+		SccProjectTopLevelParentUniqueName8 = Pharmacist.Service.sln
+		SccProjectName8 = ../../../Services/Common/Services
+		SccLocalPath8 = ..\\..\\..\\Services\\Common\\Services
+		SccProjectUniqueName9 = ..\\..\\..\\Services\\Patient\\Contracts\\Patient.Contracts.csproj
+		SccProjectTopLevelParentUniqueName9 = Pharmacist.Service.sln
+		SccProjectName9 = ../../../Services/Patient/Contracts
+		SccLocalPath9 = ..\\..\\..\\Services\\Patient\\Contracts
+		SccProjectUniqueName10 = ..\\..\\..\\Services\\UserManagement\\Contracts\\UserManagement.Contracts.csproj
+		SccProjectTopLevelParentUniqueName10 = Pharmacist.Service.sln
+		SccProjectName10 = ../../../Services/UserManagement/Contracts
+		SccLocalPath10 = ..\\..\\..\\Services\\UserManagement\\Contracts
+	EndGlobalSection
+EndGlobal

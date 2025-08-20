@@ -1,0 +1,241 @@
+<div class="main-heading">
+  <h4 class="sample-title">
+    <span (click)="goToPatients()" class="icon-previous"></span>&nbsp;
+    <span *ngIf="caseObject">
+      {{ caseObject.firstName + ' ' + this.caseObject.lastName }}
+      <span class="separator"></span>
+      <span class="patient-id">{{ caseObject.caseIDString }}</span>
+    </span>
+  </h4>
+</div>
+
+<div class="main-bg">
+  <app-loader [isLoading]="isLoading"></app-loader>
+  <app-cardio-wizard [caseObject]="caseObject" [parentData]="parentData"></app-cardio-wizard>
+  <div class="sample-wrapper">
+    <section class="sample-content">
+      <article class="sample-column">
+        <div class="column-holder">
+          <div class="columns add" *ngIf="caseObject && caseObject.statusID < caseStatuses.DE_LOCKED">
+            <div class="col-lg-12 row">
+              <div class="box bhox-wizard">
+                <button
+                  translate
+                  type="button"
+                  (click)="openAssignCaseDialog()"
+                  class="btn-secandory save-close-button"
+                  igxButton="raised"
+                  igxRipple
+                >
+                  <span class="fas fa-clipboard-check"></span>assign_case
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns row" style="margin-bottom: 0px">
+            <div class="col-lg-12" style="padding-left: 0px">
+              <div
+                class="col-lg-12 no-record"
+                *ngIf="caseObject && caseObject.statusID === caseStatuses.QE_COMPLETED"
+                style="margin-left: 4px"
+                translate
+              >
+                case_not_assigned_info
+              </div>
+            </div>
+
+            <!-- Detailed evaluation is completed, Displaying the Report and remarks -->
+            <div
+              class="col-lg-12"
+              style="padding-left: 0px"
+              *ngIf="caseObject && caseObject.statusID >= caseStatuses.DE_COMPLETED"
+            >
+              <div class="box ecg-info" *ngIf="ecgReportData && ecgReportData.notesTypeID">
+                <label igxLabel translate>Recommendations</label><br />
+                <p translate>{{ notesTypeArray[ecgReportData.notesTypeID] }}</p>
+              </div>
+              <div class="box ecg-info" *ngIf="ecgReportData && ecgReportData.notes">
+                <label igxLabel translate>Remarks</label><br />
+                <p>{{ ecgReportData.notes }}</p>
+              </div>
+              <a *ngIf="!isDownloadingFile" (click)="downloadFile()" href="javascript:void(0)" class="switch-button">
+                <span class="fas fa-arrow-down"></span>
+                <span class="download-text">{{ 'download_detailed_report' | translate }}</span>
+              </a>
+              <div>
+                <igx-circular-bar
+                  *ngIf="isDownloadingFile"
+                  [animate]="false"
+                  [indeterminate]="true"
+                  [textVisibility]="false"
+                ></igx-circular-bar>
+                <span *ngIf="isDownloadingFile" class="please-wait">{{ 'please_wait' | translate }}</span>
+              </div>
+            </div>
+
+            <!-- Detailed evaluation is uploaded or case id just locked. Nurse and Cardio can see that -->
+            <div
+              class="col-lg-6"
+              *ngIf="
+                caseObject &&
+                (caseObject.statusID === caseStatuses.DE_LOCKED || caseObject.statusID === caseStatuses.DE_SIGN_PENDING)
+              "
+              style="padding-left: 0px"
+            >
+              <div class="center upload-holder">
+                <span class="icon-cloud-upload"></span>
+                <span translate>drop_pdf_file</span>
+                <ngx-file-drop
+                  dropZoneLabel="Drop files here"
+                  (onFileDrop)="dropped($event)"
+                  (onFileOver)="fileOver($event)"
+                  (onFileLeave)="fileLeave($event)"
+                  [multiple]="false"
+                >
+                  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                    <button class="btn-primary" igxButton="raised" igxRipple (click)="openFileSelector()" translate>
+                      <i class="fas fa-file"></i> Select File
+                    </button>
+                  </ng-template>
+                </ngx-file-drop>
+              </div>
+              <div
+                *ngIf="fileToUpload != null || (caseObject && caseObject.statusID === caseStatuses.DE_SIGN_PENDING)"
+                class="upload-table"
+                style="margin-top: 15px"
+              >
+                <div class="box" *ngIf="fileToUpload != null">
+                  {{ files[0].relativePath }}
+                </div>
+                <div class="box">
+                  <igx-select #noteTypeSelect name="noteType" id="noteType" [(ngModel)]="selectedNotes">
+                    <igx-select-item *ngFor="let noteType of noteTypes" [value]="noteType.id">
+                      {{ noteType.description | translate }}
+                    </igx-select-item>
+                    <label igxLabel for="noteType" translate>Recommendations</label>
+                  </igx-select>
+                </div>
+
+                <div class="box textarea">
+                  <igx-input-group>
+                    <label igxLabel for="remarks" translate>Remarks</label>
+                    <textarea igxInput name="Remarks" id="remarks" type="text" [(ngModel)]="remarks"></textarea>
+                    <igx-hint position="start">{{ remarks.length }} {{ 'of_500_characters' | translate }}</igx-hint>
+                  </igx-input-group>
+                </div>
+
+                <div class="box" style="margin-top: 20px;">
+                  <button
+                    *ngIf="roleCode === 'Cardiologist'"
+                    translate
+                    (click)="generateECGUploadVerificationOtp()"
+                    igxButton="raised"
+                    style="color: white;margin-right: 5px;"
+                    [disabled]="disableButtons || remarks.length > 500"
+                  >
+                    <i class="fas fa-spinner fa-spin" *ngIf="disableButtons"></i>
+                    <i class="fas fa-envelope" *ngIf="!disableButtons"></i>&nbsp; request_otp
+                  </button>
+                  <button
+                    *ngIf="roleCode === 'Nurse'"
+                    translate
+                    (click)="uploadUnsignedFile()"
+                    igxButton="raised"
+                    style="color: white;margin-right: 5px;"
+                    [disabled]="disableButtons || remarks.length > 500"
+                  >
+                    <i class="fas fa-spinner fa-spin" *ngIf="disableButtons"></i>
+                    <i class="fas fa-envelope" *ngIf="!disableButtons"></i>&nbsp; save
+                  </button>
+                  <button translate (click)="cancelUpload()" igxButton="outlined" [disabled]="disableButtons">
+                    <i class="fas fa-times"></i>&nbsp; Cancel
+                  </button>
+                </div>
+                <div *ngIf="roleCode === 'Cardiologist'" class="igx-input-group igx-input-group--comfortable">
+                  <div class="igx-input-group__hint">
+                    <igx-hint position="start">{{ 'upload_ecg_info' | translate }}</igx-hint>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="fileToUpload && uploading" class="commen-wrapper">
+                <div class="linear-container">
+                  <igx-linear-bar [striped]="false" [max]="100" [value]="progress" type="danger"></igx-linear-bar>
+                </div>
+              </div>
+
+              <div *ngIf="fileToUpload && saving">
+                <i class="fas fa-spinner fa-spin"></i> {{ 'encrypting_and_saving' | translate }}
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div
+                class="upload-table"
+                *ngIf="ecgReportData && caseObject && caseObject.statusID <= caseStatuses.DE_SIGN_PENDING"
+                style="margin-top: 20px;"
+              >
+                <h5 style="color:#664090; font-size: 14px; font-weight: bold;" translate>existing_ecg_file</h5>
+                <p>{{ ecgReportData.fileName }}</p>
+                <a *ngIf="!isDownloadingFile" (click)="downloadFile()" href="javascript:void(0)" class="switch-button">
+                  <span class="fas fa-arrow-down"></span>
+                  <span class="download-text">{{ 'download_detailed_report' | translate }}</span>
+                </a>
+                <div>
+                  <igx-circular-bar
+                    *ngIf="isDownloadingFile"
+                    [animate]="false"
+                    [indeterminate]="true"
+                    [textVisibility]="false"
+                  ></igx-circular-bar>
+                  <span *ngIf="isDownloadingFile" class="please-wait">{{ 'please_wait' | translate }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+</div>
+<igx-dialog
+  #uploadEcgDialog
+  leftButtonLabel="{{ 'Cancel' | translate }}"
+  (onLeftButtonSelect)="uploadEcgDialog.close()"
+  (onRightButtonSelect)="uploadFileToActivity()"
+  [rightButtonLabel]="'upload_and_sign' | translate"
+  [closeOnOutsideSelect]="false"
+>
+  <div class="sample-wrapper dialog">
+    <section class="sample-content">
+      <article class="sample-column">
+        <form class="input-group-form" [formGroup]="uploadEcgForm">
+          <div class="main-heading" style="padding-right: 250px;">
+            <h4 style="margin-top: 15px" class="sample-title" translate>verify_and_upload</h4>
+          </div>
+          <div class="column-holder">
+            <div class="columns row">
+              <div class="col-lg-12">
+                <div class="box textarea">
+                  <igx-input-group>
+                    <label igxLabel for="otp" translate>OTP</label>
+                    <input type="text" id="otp" required igxInput name="otp" formControlName="otp" />
+                    <igx-hint translate position="start" class="verify text-info">
+                      otp_clarification_text_email
+                    </igx-hint>
+                  </igx-input-group>
+                  <small
+                    *ngIf="uploadEcgForm.controls.otp.touched && uploadEcgForm.controls.otp.errors?.required"
+                    class="text-danger"
+                    translate
+                  >
+                    required_otp
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </article>
+    </section>
+  </div>
+</igx-dialog>

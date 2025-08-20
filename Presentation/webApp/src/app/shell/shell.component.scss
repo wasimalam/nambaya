@@ -1,0 +1,142 @@
+:host {
+  display: block;
+  height: calc(100% - 10px);
+}
+.igx-nav-drawer__item,
+.igx-nav-drawer__item--active {
+  margin: 0;
+  padding: 1rem;
+  width: auto;
+  height: auto;
+  transition: ease 0.5s all;
+  border-radius: 0;
+}
+
+.igx-nav-drawer__item:hover,
+.igx-nav-drawer__item--active:hover,
+.igx-nav-drawer__item:focus,
+.igx-nav-drawer__item--active:focus {
+  background: #8c5db8;
+}
+
+.igx-nav-drawer__item > igx-icon + span,
+.igx-nav-drawer__item--active > igx-icon + span {
+  color: #fff;
+  margin-left: 1rem;
+  font: 16px/18px nunito_sanssemibold;
+  letter-spacing: 0.19px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.nav-icon {
+  color: #fff;
+  font-size: 20px;
+  width: 35px;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 35px;
+
+  &.icon-doctor {
+    font-size: 25px;
+  }
+
+  &.icon-heart-problem {
+    font-size: 23px;
+    margin-left: 4px;
+  }
+
+  &.icon-Group-7414 {
+    font-size: 20px;
+    padding-left: 5px;
+  }
+
+  &.icon-Device {
+    font-size: 23px;
+    padding-left: 5px;
+  }
+
+  &.fa-mail-bulk,
+  &.fa-exclamation-triangle,
+  &.fa-envelope-open-text,
+  &.fa-file-signature {
+    font-size: 20px;
+    padding-left: 5px;
+  }
+
+  &.fa-user-md {
+    font-size: 23px;
+    padding-left: 5px;
+  }
+}
+
+.igx-icon,
+.igx-icon--inactive {
+  width: inherit;
+  height: inherit;
+}
+
+.material-icons-area {
+  height: inherit;
+  width: inherit;
+}
+.igx-nav-drawer__item {
+  position: relative;
+
+  &:hover {
+    .dropdown-holder {
+      display: block;
+      opacity: 1;
+    }
+  }
+
+  .dropdown-holder {
+    position: absolute;
+    right: -225px;
+    top: 0;
+    background: #8c5db8;
+    padding: 20px 30px 15px;
+    z-index: 99;
+    display: none;
+    opacity: 0;
+    width: 225px;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font: 15px/20px nunito_sansbold;
+      letter-spacing: 0.77px;
+      color: #fff;
+      text-transform: uppercase;
+
+      li {
+        &:focus {
+          outline: none;
+        }
+
+        &:first-child {
+          margin-bottom: 6px;
+        }
+
+        a {
+          font: 13px/20px nunito_sansregular;
+          letter-spacing: 0.19px;
+          color: #ffffff;
+          text-transform: uppercase;
+          padding: 5px 0;
+          display: block;
+
+          &:hover {
+            text-decoration: none;
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+}
+.igx-nav-drawer__aside--mini .igx-nav-drawer__item,
+.igx-nav-drawer__aside--mini .igx-nav-drawer__item--active {
+  justify-content: normal !important;
+}

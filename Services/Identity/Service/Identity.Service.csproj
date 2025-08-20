@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Identity.Service.csproj.vspscc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\BusinessObjects\Common.BusinessObjects.csproj" />
+    <ProjectReference Include="..\..\Common\Services\Common.Services.csproj" />
+    <ProjectReference Include="..\..\UserManagement\Contracts\UserManagement.Contracts.csproj" />
+    <ProjectReference Include="..\Contracts\Identity.Contracts.csproj" />
+    <ProjectReference Include="..\Repository\Identity.Repository.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.1" />    
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,228 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+<div class="main-heading">
+  <h4 translate class="sample-title" translate>
+    <span (click)="goBack()" class="icon-previous"></span> deactivated_patients
+  </h4>
+</div>
+<div class="column-holder">
+  <div class="" style="float: left">
+    <button
+      style="font-weight: normal"
+      translate
+      [routerLink]="[urlPrefix + '/dashboard']"
+      class="btn-primary"
+      igxButton="raised"
+      igxRipple
+    >
+      <span class="icon-Union-2"></span> &nbsp; Dashboard
+    </button>
+  </div>
+  <form class="input-group-form" [formGroup]="patientSearchForm" (ngSubmit)="applyFilters(true)">
+    <div class="search-area">
+      <div class="box">
+        <input
+          #PharmacyPatientID
+          data-description="Patient ID"
+          type="search"
+          class="form-control"
+          formControlName="PharmacyPatientID"
+          placeholder="{{ 'Patient ID' | translate }}"
+        />
+        <span class="icon-cheveron-down" id="chev" (click)="clickEvent($event)"></span>
+        <div class="dropdown-search" [ngClass]="{ active: toggleBtn }">
+          <div class="dropdown" (clickOutside)="onClickedOutside($event)">
+            <a (click)="toggleBtn = false" class="icon-cancel"></a>
+            <ul class="row">
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="firstName" translate>First Name</label>
+                  <input
+                    #firstName
+                    id="firstName"
+                    igxInput
+                    data-description="First Name"
+                    type="text"
+                    formControlName="firstName"
+                  />
+                </igx-input-group>
+              </li>
+
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="lastName" translate>Last Name</label>
+                  <input
+                    #lastName
+                    id="lastName"
+                    igxInput
+                    data-description="Last Name"
+                    type="text"
+                    formControlName="lastName"
+                  />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel translate for="email">Email</label>
+                  <input
+                    #email
+                    data-description="Email"
+                    id="email"
+                    igxInput
+                    type="text"
+                    formControlName="email"
+                    name="email"
+                  />
+                </igx-input-group>
+              </li>
+
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel translate for="phone">Mobile</label>
+                  <input
+                    #phone
+                    data-description="Phone"
+                    id="phone"
+                    igxInput
+                    type="text"
+                    formControlName="phone"
+                    name="phone"
+                  />
+                </igx-input-group>
+              </li>
+
+              <li class="col-lg-12">
+                <button class="btn btn-primary" translate>Search</button>
+                <button (click)="resetFilters()" translate type="button" class="btn btn-default">Reset</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <span class="icon-Path-1941" (click)="applyFilters(true)"></span>
+      </div>
+    </div>
+  </form>
+  <div class="tags-area" *ngIf="filterTags.length > 0">
+    <ul>
+      <li><span class="active-filter" translate>Active Filters: </span></li>
+      <li *ngFor="let tag of filterTags; index as i">
+        <span class="">{{ tag.Description | translate }}: {{ tag.Value | translate }}</span>
+        <a (click)="removeFilter(tag.Property)" class="icon-cancel-circle"></a>
+      </li>
+    </ul>
+  </div>
+  <div class="grid__wrapper">
+    <igx-grid
+      #grid1
+      [data]="data | async"
+      width="100%"
+      [height]="null"
+      [paging]="true"
+      [perPage]="perPage"
+      [emptyGridMessage]="'There are no records to display' | translate"
+      [paginationTemplate]="customPager"
+      [cellSelection]="'none'"
+      (onCellClick)="handleRowClick($event)"
+    >
+      <igx-column field="pharmacyPatientID">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate>Patient ID</a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+      </igx-column>
+
+      <igx-column field="name">
+        <ng-template igxHeader let-column>
+          <div>
+            <a translate> Name </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          {{ value }}
+        </ng-template>
+      </igx-column>
+      <igx-column field="caseIDString">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate>navigator_case_id</a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+      </igx-column>
+      <igx-column field="email">
+        <ng-template igxHeader let-column>
+          <div>
+            <a translate> Email </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          {{ value }}
+        </ng-template>
+      </igx-column>
+
+      <igx-column field="phone">
+        <ng-template igxHeader let-column>
+          <div>
+            <a translate> Mobile </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          {{ value }}
+        </ng-template>
+      </igx-column>
+
+      <igx-column [pinned]="true" field="id" header="{{ 'Action' | translate }}" width="100px">
+        <ng-template igxCell let-value let-cell="cell">
+          <div class="grid-actions">
+            <button title="{{ 'delete_patient' | translate }}" class="list-drop" (click)="confirmDelete(value)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </ng-template>
+      </igx-column>
+    </igx-grid>
+    <ng-template #customPager let-api>
+      <igx-paginator
+        #paginator
+        [totalRecords]="totalCount"
+        [(perPage)]="perPage"
+        [selectLabel]="'Records per page:' | translate"
+        [selectOptions]="selectOptions"
+        [displayDensity]="grid1.displayDensity"
+        (pageChange)="paginate($event)"
+        (perPageChange)="perPageChangeFn($event)"
+      >
+      </igx-paginator>
+    </ng-template>
+  </div>
+</div>
+<igx-dialog
+  #deleteConfirmDialog
+  title="{{ 'Confirmation' | translate }}"
+  leftButtonLabel="{{ 'Cancel' | translate }}"
+  (onLeftButtonSelect)="deleteConfirmDialog.close()"
+  rightButtonLabel="OK"
+  (onRightButtonSelect)="deleteDeactivatedPatient()"
+  (onClose)="onDialogClose()"
+  message="{{ 'sure_to_delete_patient' | translate }}"
+>
+</igx-dialog>

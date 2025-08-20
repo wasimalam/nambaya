@@ -1,0 +1,225 @@
+<div class="main-heading">
+  <h4 class="sample-title" translate><span (click)="goBack()" class="icon-previous"></span> Users</h4>
+</div>
+<div class="column-holder">
+  <div class="" style="float: left">
+    <button
+      style="font-weight: normal"
+      translate
+      [routerLink]="['/user/dashboard']"
+      class="btn-primary"
+      igxButton="raised"
+      igxRipple
+    >
+      <span class="icon-Union-2"></span> &nbsp; Dashboard
+    </button>
+  </div>
+  <form class="input-group-form" [formGroup]="userSearchForm" (ngSubmit)="applyFilters(true)">
+    <div class="search-area">
+      <div class="box">
+        <input
+          #name
+          data-description="Name"
+          class="form-control"
+          type="search"
+          placeholder="Name"
+          formControlName="name"
+        />
+        <span class="icon-cheveron-down" (click)="clickEvent($event)" id="chev"></span>
+        <div class="dropdown-search" [ngClass]="{ active: toggleBtn }">
+          <div class="dropdown" (clickOutside)="onClickedOutside($event)">
+            <a (click)="toggleBtn = false" class="icon-cancel"></a>
+            <ul class="row">
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="email" translate>Email</label>
+                  <input
+                    #email
+                    data-description="Email"
+                    igxInput
+                    name="email"
+                    id="email"
+                    type="text"
+                    formControlName="email"
+                  />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6">
+                <igx-select
+                  #isActive
+                  data-description="filter_active_label"
+                  name="isActive"
+                  id="isActive"
+                  formControlName="isActive"
+                >
+                  <igx-select-item [value]="true">
+                    {{ 'Active' | translate }}
+                  </igx-select-item>
+                  <igx-select-item [value]="false">
+                    {{ 'Inactive' | translate }}
+                  </igx-select-item>
+                  <label translate igxLabel for="isActive">filter_active_label</label>
+                </igx-select>
+              </li>
+              <li class="col-lg-6">
+                <igx-select
+                  #isLocked
+                  data-description="filter_locked_label"
+                  name="isLocked"
+                  id="isLocked"
+                  formControlName="isLocked"
+                >
+                  <igx-select-item [value]="true">
+                    {{ 'Locked' | translate }}
+                  </igx-select-item>
+                  <igx-select-item [value]="false">
+                    {{ 'unlocked' | translate }}
+                  </igx-select-item>
+                  <label translate igxLabel for="isLocked">filter_locked_label</label>
+                </igx-select>
+              </li>
+              <li class="col-lg-6" *ngIf="userRoles">
+                <igx-select
+                    #roleCode
+                    data-description="roleCode"
+                    name="roleCode"
+                    id="roleCode"
+                    formControlName="roleCode"
+                >
+                  <igx-select-item *ngFor="let role of userRoles" [value]="role.code">
+                    {{ 'userRoles.'+role.code | translate }}
+                  </igx-select-item>
+                  <label translate igxLabel for="roleCode">Role</label>
+                </igx-select>
+              </li>
+              <li class="col-lg-12">
+                <button class="btn btn-primary" translate>Search</button>
+                <button (click)="resetFilters()" type="button" class="btn btn-default" translate>Reset</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <span class="icon-Path-1941" (click)="applyFilters(true)"></span>
+      </div>
+    </div>
+  </form>
+  <div class="tags-area" *ngIf="filterTags.length > 0">
+    <ul>
+      <li><span class="active-filter" translate>Active Filters: </span></li>
+      <li *ngFor="let tag of filterTags; index as i">
+        <span *ngIf="tag.Property !== 'isActive' && tag.Property !== 'isLocked'  && tag.Property !== 'roleCode'" class=""
+          >{{ tag.Description | translate }}: {{ tag.Value | statusFilter | translate }}
+        </span>
+        <span *ngIf="tag.Property === 'isActive'" class=""
+          >{{ tag.Description | translate }}: <span translate>{{ tag.Value ? 'Active' : 'Inactive' }}</span>
+        </span>
+        <span *ngIf="tag.Property === 'isLocked'" class=""
+          >{{ tag.Description | translate }}: <span translate>{{ tag.Value ? 'Locked' : 'unlocked' }}</span>
+        </span>
+        <span *ngIf="tag.Property === 'roleCode'" class=""
+          >{{ tag.Description | translate }}: <span>{{ 'userRoles.'+tag.Value | translate}}</span>
+        </span>
+        <a (click)="removeFilter(tag.Property)" class="icon-cancel-circle"></a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="grid__wrapper">
+    <igx-grid
+      #userGrid
+      [data]="data | async"
+      width="100%"
+      [height]="null"
+      [paging]="true"
+      [paginationTemplate]="customPager"
+      [cellSelection]="'none'"
+      (onCellClick)="handleRowClick($event)"
+      [emptyGridMessage]="'There are no records to display' | translate"
+    >
+      [emptyGridMessage]="'There are no records to display' | translate" >
+      <igx-column field="name">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Name </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="role">
+        <ng-template igxHeader let-column>
+          <div>
+            <a translate> Role </a>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ 'userRoles.'+value | translate }}</ng-template>
+      </igx-column>
+      <igx-column field="email">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Email </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="isActive" width="150px">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Status </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value
+          ><span translate>{{ value ? 'Active' : 'Inactive' }}</span></ng-template
+        >
+      </igx-column>
+      <igx-column field="isLocked" width="150px">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Locked </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value
+          ><span translate>{{ value ? 'Locked' : 'unlocked' }}</span></ng-template
+        >
+      </igx-column>
+      <igx-column [pinned]="true" field="id" header="{{ 'Action' | translate }}" width="100px">
+        <ng-template igxCell let-value>
+          <div class="grid-actions">
+            <button title="{{ 'Edit User' | translate }}" class="list-drop" [routerLink]="['/user/user-edit', value]">
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+          </div>
+        </ng-template>
+      </igx-column>
+    </igx-grid>
+
+    <ng-template #customPager let-api>
+      <igx-paginator
+        #paginator
+        [totalRecords]="totalCount"
+        [(perPage)]="perPage"
+        [selectLabel]="'Records per page:' | translate"
+        [selectOptions]="selectOptions"
+        [displayDensity]="userGrid.displayDensity"
+        (pageChange)="paginate($event)"
+        (perPageChange)="perPageChangeFn($event)"
+      >
+      </igx-paginator>
+    </ng-template>
+  </div>
+</div>

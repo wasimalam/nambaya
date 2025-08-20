@@ -1,0 +1,438 @@
+<div class="main-blog">
+  <app-header (onNavClicked)="adjustNavBar($event)"></app-header>
+  <div class="content-wrap" igxLayout igxLayoutDir="row">
+    <igx-nav-drawer id="navigation" [pin]="true" [pinThreshold]="0" *ngIf="showNav">
+      <ng-template igxDrawer>
+        <nav>
+          <div igxDrawerItem igxRipple *ngIf="role == 'NambayaUser'
+          || role == 'StakeHolder' || role == 'PharmacyTrainer'">
+            <igx-icon fontSet="material"
+              ><span [routerLink]="['/user/dashboard']" class="nav-icon icon-Group-7414"></span
+            ></igx-icon>
+            <span [routerLink]="['/user/dashboard']" translate>Dashboard</span>
+          </div>
+
+          <div igxDrawerItem igxRipple *ngIf="role == 'Pharmacist' || role == 'Pharmacy'">
+            <igx-icon fontSet="material"
+              ><span [routerLink]="['/pharmacist/dashboard']" class="nav-icon icon-Group-7414"></span
+            ></igx-icon>
+            <span [routerLink]="['/pharmacist/dashboard']" translate>Dashboard</span>
+          </div>
+          <div igxDrawerItem igxRipple *ngIf="role == 'CentralGroupUser'">
+            <igx-icon fontSet="material"
+              ><span [routerLink]="['/center/dashboard']" class="nav-icon icon-Group-7414"></span
+            ></igx-icon>
+            <span [routerLink]="['/center/dashboard']" translate>Dashboard</span>
+          </div>
+
+          <div igxDrawerItem *ngIf="role == 'NambayaUser'">
+            <igx-icon fontSet="material"><span class="nav-icon icon-QT-icon"></span></igx-icon>
+            <span [routerLink]="['/user/user-list']" translate>Users</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Users</li>
+                <li><a [routerLink]="['/user/user-create']" translate>Add new</a></li>
+                <li><a [routerLink]="['/user/user-list']" translate>List</a></li>
+              </ul>
+            </div>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'NambayaUser'">
+            <igx-icon fontSet="material"><span class="nav-icon icon-center-group-user"></span></igx-icon>
+            <span [routerLink]="['/user/center/list']" translate>Central Group Users</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Central Group</li>
+                <li><a [routerLink]="['/user/center/create']" translate>Add new</a></li>
+                <li><a [routerLink]="['/user/center/list']" translate>List</a></li>
+              </ul>
+            </div>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'CentralGroupUser'">
+            <igx-icon fontSet="material"><span class="nav-icon icon-heart-problem"></span></igx-icon>
+            <span [routerLink]="['/center/patients']" translate>Patients</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Patients</li>
+                <li><a translate [routerLink]="['/center/patients']">Patient Cases</a></li>
+                <li><a translate [routerLink]="['/center/completedCases']">Completed Cases</a></li>
+                <li><a translate [routerLink]="['/center/dispatched-cases']">dispatched_cases</a></li>
+                <li><a translate [routerLink]="['/center/deactivated-patients']">deactivated_patients</a></li>
+              </ul>
+            </div>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'NambayaUser' || role == 'CentralGroupUser' || role == 'PharmacyTrainer'">
+            <igx-icon fontSet="material"><span class="nav-icon icon-Component-29--1"></span></igx-icon>
+            <span [routerLink]="[urlPrefix + '/pharmacy/list']" translate>Pharmacies</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Pharmacies</li>
+                <li><a translate [routerLink]="[urlPrefix + '/pharmacy/create']">Add new</a></li>
+                <li><a translate [routerLink]="[urlPrefix + '/pharmacy/list']">List</a></li>
+              </ul>
+            </div>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'NambayaUser' || role == 'CentralGroupUser'">
+            <igx-icon fontSet="material"><span class="nav-icon icon-heart-icon"></span></igx-icon>
+            <span [routerLink]="[urlPrefix + '/cardiologist/list']" translate>Cardiologist</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Cardiologist</li>
+                <li><a translate [routerLink]="[urlPrefix + '/cardiologist/create']">Add new</a></li>
+                <li><a translate [routerLink]="[urlPrefix + '/cardiologist/list']">List</a></li>
+              </ul>
+            </div>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'NambayaUser'">
+            <igx-icon fontSet="material"><span class="nav-icon fas fa-envelope-open-text"></span></igx-icon>
+            <span translate [routerLink]="['/user/template/list']">Templates</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Templates</li>
+                <li><a translate [routerLink]="['/user/template/create']">Add new</a></li>
+                <li><a translate [routerLink]="['/user/template/list']">List</a></li>
+              </ul>
+            </div>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'NambayaUser'">
+            <igx-icon fontSet="material"><span class="nav-icon fas fa-exclamation-triangle"></span></igx-icon>
+            <span [routerLink]="['/user/logs/list']" translate>Logs</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Logs</li>
+                <li><a [routerLink]="['/user/logs/list']" translate>List</a></li>
+              </ul>
+            </div>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'NambayaUser'">
+            <igx-icon fontSet="material"><span class="nav-icon fas fa-mail-bulk"></span></igx-icon>
+            <span [routerLink]="['/user/email-sms-logs/list']" translate>email-sms-logs</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>email-sms-logs</li>
+                <li><a [routerLink]="['/user/logs/list']" translate>List</a></li>
+              </ul>
+            </div>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'Pharmacist' || role == 'Pharmacy'">
+            <igx-icon fontSet="material"><span class="nav-icon icon-heart-problem"></span></igx-icon>
+            <span [routerLink]="['/pharmacist/patients']" translate>Patients</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Patients</li>
+                <li><a [routerLink]="['/pharmacist/patient/create']" translate>Add new</a></li>
+                <li><a [routerLink]="['/pharmacist/patients']" translate>List</a></li>
+              </ul>
+            </div>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'Cardiologist' || role == 'Nurse'">
+            <igx-icon fontSet="material"><span class="nav-icon icon-Group-7414"></span></igx-icon>
+            <span [routerLink]="['/cardiologist/dashboard']" translate>Dashboard</span>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'Cardiologist' || role == 'Nurse'">
+            <igx-icon fontSet="material"><span class="nav-icon icon-heart-problem"></span></igx-icon>
+            <span [routerLink]="['/cardiologist/patients/list']" translate>Patients</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Patients</li>
+                <li><a translate [routerLink]="['/cardiologist/patients/list']">all_cases</a></li>
+                <li><a translate [routerLink]="['/cardiologist/patients/list/assignedCases']">my_cases</a></li>
+                <li><a translate [routerLink]="['/cardiologist/patients/list/openCases']">open_cases</a></li>
+              </ul>
+            </div>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'Cardiologist'">
+            <igx-icon fontSet="material"><span class="nav-icon fas fa-file-signature"></span></igx-icon>
+            <span [routerLink]="['/cardiologist/signature/draw']" translate>Signature</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Signature</li>
+                <li><a translate [routerLink]="['/cardiologist/signature/draw']">Draw</a></li>
+                <li><a translate [routerLink]="['/cardiologist/signature/upload']">Upload</a></li>
+                <li><a translate [routerLink]="['/cardiologist/signature/preview']">Preview</a></li>
+              </ul>
+            </div>
+          </div>
+          <div igxDrawerItem *ngIf="role == 'Cardiologist'">
+            <igx-icon fontSet="material"><span class="nav-icon fas fa-user-md"></span></igx-icon>
+            <span [routerLink]="['/cardiologist/nurse/list']" translate>nurses</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Signature</li>
+                <li><a translate [routerLink]="['/cardiologist/nurse']">add_nurse</a></li>
+                <li><a translate [routerLink]="['/cardiologist/nurse/list']">my_nurses</a></li>
+              </ul>
+            </div>
+          </div>
+          <!--<div igxDrawerItem *ngIf="role == 'CentralGroupUser'">
+            <igx-icon fontSet="material"><span class="nav-icon icon-doctor"></span></igx-icon>
+            <span [routerLink]="[urlPrefix + '/doctors-list']" translate>doctors</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>doctors</li>
+                <li><a translate [routerLink]="[urlPrefix + '/doctor/create']">Add new</a></li>
+                <li><a translate [routerLink]="[urlPrefix + '/doctors-list']">List</a></li>
+              </ul>
+            </div>
+          </div>-->
+
+          <div igxDrawerItem *ngIf="role == 'Pharmacist' || role == 'Pharmacy'">
+            <igx-icon fontSet="material"><span class="nav-icon fas icon-Device"></span></igx-icon>
+            <span [routerLink]="['/pharmacist/device/list']" translate>Devices</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Devices</li>
+                <li><a translate [routerLink]="['/pharmacist/device/create']">Add new</a></li>
+                <li><a translate [routerLink]="['/pharmacist/device/list']">List</a></li>
+              </ul>
+            </div>
+          </div>
+          <!--<div igxDrawerItem *ngIf="role == 'Pharmacist' || role == 'Pharmacy'">
+            <igx-icon fontSet="material"><span class="nav-icon icon-doctor"></span></igx-icon>
+            <span [routerLink]="[urlPrefix + '/doctors-list']" translate>doctors</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>doctors</li>
+                <li><a translate [routerLink]="[urlPrefix + '/doctor/create']">Add new</a></li>
+                <li><a translate [routerLink]="[urlPrefix + '/doctors-list']">List</a></li>
+              </ul>
+            </div>
+          </div>-->
+          <!--<div igxDrawerItem *ngIf="role == 'Pharmacy'">
+            <igx-icon fontSet="material"><span class="nav-icon icon-Group-7423"></span></igx-icon>
+            <span [routerLink]="['/pharmacist/pharmacist-list']" translate>Pharmacists</span>
+            <div class="dropdown-holder">
+              <ul>
+                <li translate>Pharmacist</li>
+                <li><a translate [routerLink]="['/pharmacist/pharmacist-create']">Add new</a></li>
+                <li><a translate [routerLink]="['/pharmacist/pharmacist-list']">List</a></li>
+              </ul>
+            </div>
+          </div>-->
+        </nav>
+      </ng-template>
+
+      <ng-template igxDrawerMini>
+        <div igxDrawerItem *ngIf="role == 'Pharmacist' || role == 'Pharmacy'">
+          <igx-icon fontSet="material" [routerLink]="['/pharmacist/dashboard']"
+            ><span class="nav-icon icon-Group-7414"></span
+          ></igx-icon>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'Cardiologist' || role == 'Nurse'">
+          <igx-icon fontSet="material" [routerLink]="['/cardiologist/dashboard']"
+            ><span class="nav-icon icon-Group-7414"></span
+          ></igx-icon>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'NambayaUser' || role == 'StakeHolder' || role == 'PharmacyTrainer'">
+          <igx-icon fontSet="material" [routerLink]="['/user/dashboard']"
+            ><span class="nav-icon icon-Group-7414"></span
+          ></igx-icon>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'CentralGroupUser'">
+          <igx-icon fontSet="material" [routerLink]="['/center/dashboard']"
+            ><span class="nav-icon icon-Group-7414"></span
+          ></igx-icon>
+        </div>
+
+        <div igxDrawerItem *ngIf="role == 'NambayaUser'">
+          <igx-icon [routerLink]="['/user/user-list']" fontSet="material"
+            ><span class="nav-icon icon-QT-icon"></span>
+          </igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Users</li>
+              <li [routerLink]="['/user/user-create']"><a translate>Add new</a></li>
+              <li [routerLink]="['/user/user-list']"><a translate>List</a></li>
+            </ul>
+          </div>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'NambayaUser'">
+          <igx-icon fontSet="material" [routerLink]="['/user/center/list']"
+            ><span class="nav-icon icon-center-group-user"></span>
+          </igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Central Group</li>
+              <li translate [routerLink]="['/user/center/create']"><a translate>Add new </a></li>
+              <li translate [routerLink]="['/user/center/list']"><a translate>List</a></li>
+            </ul>
+          </div>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'CentralGroupUser'">
+          <igx-icon fontSet="material" [routerLink]="['/center/patients']"
+            ><span class="nav-icon icon-heart-problem"></span
+          ></igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Patient</li>
+              <li [routerLink]="['/center/patients']"><a translate>Patient Cases </a></li>
+              <li><a [routerLink]="['/center/completedCases']" translate>Completed Cases</a></li>
+              <li><a [routerLink]="['/center/dispatched-cases']" translate>dispatched_cases</a></li>
+              <li><a translate [routerLink]="['/center/deactivated-patients']">deactivated_patients</a></li>
+            </ul>
+          </div>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'NambayaUser' || role == 'CentralGroupUser'
+           || role == 'PharmacyTrainer'">
+          <igx-icon fontSet="material" [routerLink]="[urlPrefix + '/pharmacy/list']"
+            ><span class="nav-icon icon-Component-29--1"></span
+          ></igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Pharmacies</li>
+              <li [routerLink]="[urlPrefix + '/pharmacy/create']"><a translate> Add new </a></li>
+              <li [routerLink]="[urlPrefix + '/pharmacy/list']"><a translate> List </a></li>
+            </ul>
+          </div>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'NambayaUser' || role == 'CentralGroupUser'">
+          <igx-icon [routerLink]="[urlPrefix + '/cardiologist/list']" fontSet="material"
+            ><span class="nav-icon icon-heart-icon"></span
+          ></igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Cardiologist</li>
+              <li [routerLink]="[urlPrefix + '/cardiologist/create']"><a translate> Add new </a></li>
+              <li [routerLink]="[urlPrefix + '/cardiologist/list']"><a translate> List </a></li>
+            </ul>
+          </div>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'NambayaUser'">
+          <igx-icon fontSet="material" [routerLink]="['/user/template/list']"
+            ><span class="nav-icon fas fa-envelope-open-text"></span
+          ></igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Templates</li>
+              <li [routerLink]="['/user/template/create']"><a translate>Add new </a></li>
+              <li [routerLink]="['/user/template/list']"><a translate>List</a></li>
+            </ul>
+          </div>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'NambayaUser'">
+          <igx-icon [routerLink]="['/user/logs/list']" fontSet="material"
+            ><span class="nav-icon fas fa-exclamation-triangle"></span
+          ></igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Logs</li>
+              <li [routerLink]="['/user/logs/list']"><a translate>List</a></li>
+            </ul>
+          </div>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'NambayaUser'">
+          <igx-icon [routerLink]="['/user/email-sms-logs/list']" fontSet="material"
+            ><span class="nav-icon fas fa-mail-bulk"></span
+          ></igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>email-sms-logs</li>
+              <li [routerLink]="['/user/email-sms-logs/list']"><a translate>List</a></li>
+            </ul>
+          </div>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'Pharmacist' || role == 'Pharmacy'">
+          <igx-icon fontSet="material" [routerLink]="['/pharmacist/patients']"
+            ><span class="nav-icon icon-heart-problem"></span
+          ></igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Patients</li>
+              <li [routerLink]="['/pharmacist/patients']"><a translate>List </a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div igxDrawerItem *ngIf="role == 'Cardiologist' || role == 'Nurse'">
+          <igx-icon fontSet="material" [routerLink]="['/cardiologist/patients/list']">
+            <span class="nav-icon icon-heart-problem"></span>
+          </igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Patients</li>
+              <li [routerLink]="['/cardiologist/patients/list']"><a translate>all_cases </a></li>
+              <li [routerLink]="['/cardiologist/patients/list/assignedCases']"><a translate>my_cases </a></li>
+              <li [routerLink]="['/cardiologist/patients/list/openCases']"><a translate>open_cases </a></li>
+            </ul>
+          </div>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'Cardiologist'">
+          <igx-icon fontSet="material" [routerLink]="['/cardiologist/signature/draw']">
+            <span class="nav-icon fas fa-file-signature"></span>
+          </igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Signature</li>
+              <li [routerLink]="['/cardiologist/signature/draw']"><a translate>Draw </a></li>
+              <li [routerLink]="['/cardiologist/signature/upload']"><a translate>Upload </a></li>
+              <li [routerLink]="['/cardiologist/signature/preview']"><a translate>Preview </a></li>
+            </ul>
+          </div>
+        </div>
+        <div igxDrawerItem *ngIf="role == 'Cardiologist'">
+          <igx-icon fontSet="material" [routerLink]="['/cardiologist/nurse/list']">
+            <span class="nav-icon fas fa-user-md"></span>
+          </igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>nurses</li>
+              <li [routerLink]="['/cardiologist/nurse']"><a translate>add_nurse </a></li>
+              <li [routerLink]="['/cardiologist/nurse/list']"><a translate>my_nurses </a></li>
+            </ul>
+          </div>
+        </div>
+        <!--<div igxDrawerItem *ngIf="role == 'CentralGroupUser'">
+          <igx-icon [routerLink]="[urlPrefix + '/doctors-list']" fontSet="material"
+            ><span class="nav-icon icon-doctor"></span
+          ></igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>doctors</li>
+              <li [routerLink]="[urlPrefix + '/doctor/create']"><a translate> Add new </a></li>
+              <li [routerLink]="[urlPrefix + '/doctors-list']"><a translate> List </a></li>
+            </ul>
+          </div>
+        </div>-->
+
+        <div igxDrawerItem *ngIf="role == 'Pharmacist' || role == 'Pharmacy'">
+          <igx-icon fontSet="material" [routerLink]="['/pharmacist/device/list']"
+            ><span class="nav-icon fas icon-Device"></span
+          ></igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Devices</li>
+              <li [routerLink]="['/pharmacist/device/create']"><a translate> Add new </a></li>
+              <li [routerLink]="['/pharmacist/device/list']"><a translate> List </a></li>
+            </ul>
+          </div>
+        </div>
+        <!--<div igxDrawerItem *ngIf="role == 'Pharmacist' || role == 'Pharmacy'">
+          <igx-icon fontSet="material" [routerLink]="[urlPrefix + '/doctors-list']"
+            ><span class="nav-icon icon-doctor"></span
+          ></igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>doctors</li>
+              <li [routerLink]="[urlPrefix + '/doctor/create']"><a translate> Add new </a></li>
+              <li [routerLink]="[urlPrefix + '/doctors-list']"><a translate> List </a></li>
+            </ul>
+          </div>
+        </div>-->
+        <!--<div igxDrawerItem *ngIf="role == 'Pharmacy'">
+          <igx-icon fontSet="material" [routerLink]="['/pharmacist/pharmacist-list']">
+            <span class="nav-icon icon-Group-7423"></span>
+          </igx-icon>
+          <div class="dropdown-holder">
+            <ul>
+              <li translate>Pharmacists</li>
+              <li [routerLink]="['/pharmacist/pharmacist-create']"><a translate> Add new </a></li>
+              <li [routerLink]="['/pharmacist/pharmacist-list']"><a translate> List </a></li>
+            </ul>
+          </div>
+        </div>-->
+      </ng-template>
+    </igx-nav-drawer>
+    <main igxFlex [class.main-narrowed]="isMenuExpanded" [class.main-expanded]="!isMenuExpanded">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

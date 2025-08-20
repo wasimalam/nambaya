@@ -1,0 +1,242 @@
+@import "~igniteui-angular/lib/core/styles/themes/utilities";
+@import "~igniteui-angular/lib/core/styles/themes/index";
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+/*:host {
+  
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  padding: 24px 16px;
+  margin: 16px;
+  width: 400px;
+  max-height: 600px;
+  margin: 0 auto;
+  margin-top: 5%;
+}*/
+
+a {
+  cursor: pointer;
+}
+
+a.disabled {
+  color: gray;
+  cursor: not-allowed;
+  text-decoration: underline;
+}
+
+.igx-input-group,
+button {
+  margin-top: 32px;
+}
+
+app-loggedout {
+  display: block !important;
+  box-shadow: inherit !important;
+  padding: 20px 120px !important;
+  width: 100% !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+}
+button {
+  width: 100%;
+}
+.login-holder {
+  overflow: hidden;
+  max-width: 1600px;
+  margin: 0 auto;
+  .login-header {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 30px;
+    margin-top: 50px;
+    .logo {
+      .logo-area {
+        width: 16%;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 50px;
+        img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+      }
+      span {
+        font: 18px/24px nunito_sanslight;
+        color: #7b8a9d;
+        display: inline-block;
+        vertical-align: bottom;
+        position: relative;
+        &:after {
+          position: absolute;
+          content: "";
+          left: -25px;
+          top: 0;
+          height: 25px;
+          width: 1px;
+          background: #acb7c4;
+        }
+      }
+    }
+  }
+  .login-content {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    .image-area {
+      width: 60%;
+      flex: 1 1 60%;
+      min-height: 500px;
+      @media screen and (max-width: 1180px) {
+        display: none;
+      }
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        min-height: 500px;
+      }
+    }
+    .form-area {
+      width: 30%;
+      flex: 1 1 30%;
+      background: #fff;
+      position: relative;
+      .form {
+        position: absolute;
+        left: 50%;
+        top: 30%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        @media screen and (max-width: 1180px) {
+          position: inherit;
+          left: auto;
+          top: auto;
+          transform: inherit;
+          width: 50%;
+          margin: 0 auto;
+          padding: 40px 0;
+        }
+        @media screen and (max-width: 991px) {
+          width: 80%;
+        }
+      }
+      .form-box {
+        margin-bottom: 20px;
+      }
+      h1 {
+        font: 34px/46px nunito_sanslight;
+        color: #614194;
+        margin: 0 0 6px;
+        letter-spacing: 0.41px;
+      }
+      p {
+        font: 14px/20px nunito_sansregular;
+        color: #7b8a9d;
+      }
+      .btn-primary {
+        background: #614194;
+        border-radius: 4px;
+        font: 16px/28px nunito_sansregular;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        transition: ease 0.8s all;
+        &:hover {
+          background: #8c5db8;
+        }
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font: 14px/28px nunito_sansregular;
+        li {
+          width: 100%;
+          a {
+            color: #999;
+            text-decoration: none;
+            span {
+              color: #664090;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.lang-btn {
+  min-width: 3.5rem;
+  font-size: 12px;
+  border: none;
+  color: #614194;
+  max-width: 3.5rem;
+  float: right;
+  margin-top: -35px;
+}
+
+.sample-wrapper {
+  flex-wrap: nowrap;
+  display: flex;
+
+  igx-card {
+    max-width: 300px;
+    margin-left: 30px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+  }
+}
+.sample-wrapper igx-card {
+  max-width: 100%;
+  margin-left: 30px;
+  width: 100% !important;
+}
+.igx-card-header {
+  flex: none !important;
+}
+.dialog .sample-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.dialog .column-holder {
+  margin: 10px;
+  padding: 10px;
+}
+.dialog .column-holder .columns {
+  margin: 0px;
+}
+.igx-overlay__content--relative {
+  width: 70% !important;
+}
+.igx-dialog__window {
+  min-width: 70% !important;
+}
+.box igx-switch {
+  margin-top: 32px;
+}
+.box .selection {
+  margin-left: 10px;
+}
+.ingredients span {
+  display: block;
+}
+p.drug-additional-text {
+  margin-bottom: 10px;
+}
+.dropdownArea {
+  width: auto !important;
+}
+.igx-dialog__window {
+  min-width: 37rem !important;
+}
+
+.click-here {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}

@@ -1,0 +1,351 @@
+<div class="main-heading">
+  <h4 translate class="sample-title"><span (click)="goBack()" class="icon-previous"></span> {{ pageTitle }}</h4>
+</div>
+<div class="column-holder">
+  <div class="" style="float: left">
+    <button
+      style="font-weight: normal"
+      translate
+      [routerLink]="['/cardiologist/dashboard']"
+      class="btn-primary"
+      igxButton="raised"
+      igxRipple
+    >
+      <span class="icon-Union-2"></span> &nbsp; Dashboard
+    </button>
+  </div>
+  <form class="input-group-form" [formGroup]="patientSearchForm" (ngSubmit)="applyFilters(true)">
+    <div class="search-area">
+      <div class="box">
+        <input
+          #caseIDString
+          data-description="navigator_case_id"
+          type="search"
+          class="form-control"
+          formControlName="caseIDString"
+          placeholder="{{ 'navigator_case_id' | translate }}"
+        />
+        <span class="icon-cheveron-down" id="chev" (click)="clickEvent($event)"></span>
+        <div class="dropdown-search" [ngClass]="{ active: toggleBtn }">
+          <div class="dropdown" (clickOutside)="onClickedOutside($event)">
+            <a (click)="toggleBtn = false" class="icon-cancel"></a>
+            <ul class="row">
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel translate>First Name</label>
+                  <input #firstName igxInput data-description="First Name" type="text" formControlName="firstName" />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel translate>Last Name</label>
+                  <input #lastName igxInput data-description="Last Name" type="text" formControlName="lastName" />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel translate>Patient ID</label>
+                  <input
+                    #PharmacyPatientID
+                    igxInput
+                    data-description="Pharmacy Patient ID"
+                    type="text"
+                    formControlName="PharmacyPatientID"
+                  />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6">
+                <igx-select
+                  #genderID
+                  data-description="Gender"
+                  name="genderID"
+                  id="genderID"
+                  formControlName="genderID"
+                >
+                  <igx-select-item *ngFor="let gender of genders" [value]="gender.id">
+                    {{ gender.description | translate }}
+                  </igx-select-item>
+                  <label translate igxLabel for="genderID">Gender</label>
+                </igx-select>
+              </li>
+              <li *ngIf="filterParam != 'openCases'" class="col-lg-6">
+                <igx-select
+                  #statusID
+                  data-description="Status"
+                  name="statusID"
+                  id="statusID"
+                  formControlName="statusID"
+                >
+                  <igx-select-item *ngFor="let status of evaluationStatuses" [value]="status.value">
+                    <span translate>{{ status.value | evaluationStatus }}</span>
+                  </igx-select-item>
+                  <label igxLabel translate for="statusID">Status</label>
+                </igx-select>
+              </li>
+              <li class="col-lg-6">
+                <igx-select
+                  #quickResultID
+                  data-description="QE Status"
+                  name="quickResultID"
+                  id="quickResultID"
+                  formControlName="quickResultID"
+                >
+                  <igx-select-item *ngFor="let status of qeStatuses" [value]="status.id">
+                    {{ status.description | translate }}
+                  </igx-select-item>
+                  <label igxLabel translate for="quickResultID">QE Status</label>
+                </igx-select>
+              </li>
+
+              <li class="col-lg-12">
+                <button class="btn btn-primary" translate>Search</button>
+                <button (click)="resetFilters()" translate type="button" class="btn btn-default">Reset</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <span class="icon-Path-1941" (click)="applyFilters(true)"></span>
+      </div>
+    </div>
+  </form>
+  <div class="tags-area" *ngIf="filterTags.length > 0">
+    <ul>
+      <li><span class="active-filter" translate>Active Filters: </span></li>
+      <li *ngFor="let tag of filterTags; index as i">
+        <span class=""
+          >{{ tag.Description | translate }}:
+          {{ tag.Value | genderFilter | evaluationStatus | qeStatusFilter | translate }}</span
+        >
+        <a (click)="removeFilter(tag.Property)" class="icon-cancel-circle"></a>
+      </li>
+    </ul>
+  </div>
+  <div class="grid__wrapper">
+    <igx-grid
+      #grid1
+      [data]="data | async"
+      width="100%"
+      [height]="null"
+      [paging]="true"
+      [emptyGridMessage]="'There are no records to display' | translate"
+      [paginationTemplate]="customPager"
+      [cellSelection]="'none'"
+      (onCellClick)="handleRowClick($event)"
+    >
+      <igx-column field="pharmacyPatientID">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Patient Id </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+      </igx-column>
+      <igx-column field="caseIDString">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> navigator_case_id </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+      </igx-column>
+
+      <igx-column field="name">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Name </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          {{ value }}
+        </ng-template>
+      </igx-column>
+      <igx-column field="genderID">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Gender </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          {{ genderStatuses[value] | translate }}
+        </ng-template>
+      </igx-column>
+      <igx-column field="dateOfBirth">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Date of Birth </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          {{ value | age }}
+        </ng-template>
+      </igx-column>
+
+      <igx-column field="edfUploadDate">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Uploaded </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          {{ dateFormatter(value) }}
+        </ng-template>
+      </igx-column>
+
+      <igx-column field="statusID" width="180px">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Status </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          <span [class.red-case-status]="value === 656" [class.green-case-status]="value === 655">
+            {{ 'cardio_case_statuses.' + caseStatuses[value] | translate }}</span
+          >
+        </ng-template>
+      </igx-column>
+
+      <igx-column field="quickResultID">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> QE Status </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i
+              ><i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          <span
+            class="fas fa-circle"
+            [class.qe-green]="value === 511"
+            [class.qe-yellow]="value === 512"
+            [class.qe-orange]="value === 513"
+            [class.qe-red]="value === 514"
+            [class.qe-red-red]="value === 515"
+          ></span>
+          <span *ngIf="value === 515" class="fas fa-circle ml5 qe-red-red"></span>
+          <span
+            class="ml5"
+            [class.qe-green]="value === 511"
+            [class.qe-yellow]="value === 512"
+            [class.qe-orange]="value === 513"
+            [class.qe-red]="value === 514"
+            [class.qe-red-red]="value === 515"
+            >{{ 'qe_statuses.' + QEStatuses[value] | translate }}</span
+          >
+        </ng-template>
+      </igx-column>
+
+      <igx-column [pinned]="true" field="caseID" header="{{ 'Action' | translate }}">
+        <ng-template igxCell let-value let-cell="cell">
+          <button class="list-drop" id="{{ value }}" (click)="toggle(value, cell.rowIndex)">
+            <i class="fas fa-bars"></i>
+          </button>
+          <button
+            title="{{ 'View' | translate }}"
+            style="margin-left: 18px"
+            class="list-drop"
+            [routerLink]="['/cardiologist/patient/quick-evaluation', value]"
+          >
+            <i class="fas fa-eye"></i>
+          </button>
+          <a
+            *ngIf="filterParam === 'assignedCases'"
+            title="{{ 'open_navigator' | translate }}"
+            style="margin-left: 18px; text-decoration: none"
+            class="list-drop"
+            href="https://citrix-qtlife.nambaya-medical.de/Citrix/qtlifestoreWeb/"
+            target="_blank"
+          >
+            <i class="icon-Device"></i>
+          </a>
+        </ng-template>
+      </igx-column>
+    </igx-grid>
+    <ng-template #customPager let-api>
+      <igx-paginator
+        #paginator
+        [totalRecords]="totalCount"
+        [(perPage)]="perPage"
+        [selectLabel]="'Records per page:' | translate"
+        [selectOptions]="selectOptions"
+        [displayDensity]="grid1.displayDensity"
+        (pageChange)="paginate($event)"
+        (perPageChange)="perPageChangeFn($event)"
+      >
+      </igx-paginator>
+    </ng-template>
+  </div>
+</div>
+<button class="toggle-button" [hidden]="true" igxButton="raised" #button id="btn1"></button>
+<div class="sample-wrapper">
+  <article class="sample-column">
+    <div class="toggle-content add" igxToggle (onClosed)="onToggleClose()">
+      <section class="toggle-section">
+        <ul style="list-style: none;">
+          <li class="heading"><h2 translate>Patients</h2></li>
+          <li>
+            <a translate [routerLink]="['/cardiologist/patient/additional-medication', patientCaseId, patientId]"
+              >Medications</a
+            >
+          </li>
+          <li class="heading">
+            <h2 translate>{{ 'Reports_Assessment' | translate }}</h2>
+          </li>
+          <li *ngIf="patientStatusId >= 655">
+            <a [routerLink]="['/cardiologist/patient/quick-evaluation', patientCaseId]" translate>Quick Evaluation</a>
+          </li>
+          <li *ngIf="patientStatusId < 656">
+            <a
+              (click)="assignCaseToCardiologist(patientCaseId)"
+              style="cursor:pointer;"
+              [class.anchorDisabled]="isAssigningCase"
+              translate
+              >assign_case</a
+            >
+            &nbsp;&nbsp;<span *ngIf="isAssigningCase">
+              <i class="fas fa-spinner fa-spin"></i>
+            </span>
+          </li>
+          <li *ngIf="patientStatusId === 656">
+            <a [routerLink]="['/cardiologist/ecgupload', patientCaseId]" translate>Upload ECG Report</a>
+          </li>
+          <li *ngIf="patientStatusId === 657">
+            <a (click)="downloadFile()" style="cursor:pointer;" *ngIf="!isDownloadingFile" translate
+              >View Detailed Report
+            </a>
+            <span *ngIf="isDownloadingFile">
+              <i class="fas fa-spinner fa-spin"></i>
+            </span>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</div>

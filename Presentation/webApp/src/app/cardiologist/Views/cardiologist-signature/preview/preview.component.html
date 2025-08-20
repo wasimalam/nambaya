@@ -1,0 +1,84 @@
+<div class="sample-wrapper">
+  <section class="sample-content">
+    <article class="sample-column">
+      <app-loader [isLoading]="isLoading"></app-loader>
+      <div class="main-heading">
+        <h4 class="sample-title" translate><span (click)="goBack()" class="icon-previous"></span> manage_signature</h4>
+      </div>
+      <div class="column-holder">
+        <app-cardiologist-signature></app-cardiologist-signature>
+        <div class="column-holder" style="margin-top: 35px;margin-left: 0;">
+          <div class="row">
+            <div class="col-md-9 no-record" *ngIf="!isLoading && !fileDataString" translate="">no_signature_exists</div>
+            <div class="col-md-6" *ngIf="!isLoading && fileDataString" style="margin-right: -30px;">
+              <img width="215" height="125" src="{{ 'data:image/jpg;base64,' + fileDataString }}" />
+              <div class="row">
+                <div class="col-md-9" >
+                  <button
+                    (click)="generateDeleteSignatureOtp()"
+                    translate
+                    type="button"
+                    class="btn-delete"
+                    igxButton="raised"
+                    igxRipple
+                  >
+                    <span class="fas fa-trash-alt"></span>delete_signature
+                  </button>
+                  <div class="igx-input-group igx-input-group--comfortable">
+                    <div class="igx-input-group__hint">
+                      <igx-hint position="start">{{ 'delete_signature_data_info' | translate }}</igx-hint>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--</form>-->
+    </article>
+  </section>
+</div>
+<igx-dialog
+    #deleteSignatureDialog
+    leftButtonLabel="{{ 'Cancel' | translate }}"
+    (onLeftButtonSelect)="deleteSignatureDialog.close()"
+    (onRightButtonSelect)="deleteSignature()"
+    [rightButtonLabel]="'Delete' | translate"
+    [closeOnOutsideSelect]="false"
+>
+  <div class="sample-wrapper dialog">
+    <section class="sample-content">
+      <article class="sample-column">
+        <form class="input-group-form" [formGroup]="deleteSignatureForm">
+          <div class="main-heading" style="padding-right: 250px;">
+            <h4 style="margin-top: 15px" class="sample-title" translate>verify_and_delete</h4>
+          </div>
+          <div class="column-holder">
+            <div class="columns row">
+              <div class="col-lg-12">
+                <div class="box textarea">
+                  <igx-input-group>
+                    <label igxLabel for="otp" translate>OTP</label>
+                    <input type="text" id="otp" required igxInput name="otp" formControlName="otp" />
+                    <igx-hint translate position="start" class="verify text-info">
+                      otp_clarification_text_email
+                    </igx-hint>
+                  </igx-input-group>
+                  <small
+                    *ngIf="deleteSignatureForm.controls.otp.touched && deleteSignatureForm.controls.otp.errors?.required"
+                    class="text-danger"
+                    translate
+                  >
+                    required_otp
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </article>
+    </section>
+  </div>
+</igx-dialog>
+

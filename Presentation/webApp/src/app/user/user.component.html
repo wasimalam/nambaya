@@ -1,0 +1,268 @@
+<div class="main-heading">
+  <h4 translate class="sample-title"><span class="icon-previous"></span> Dashboard</h4>
+  <span class="date-dashboard">{{ currentDate }}</span>
+</div>
+<app-loader [isLoading]="gettingData"></app-loader>
+<div class="sample-wrapper user-dashboard" *ngIf="!gettingData">
+  <section class="sample-content">
+    <article class="sample-column">
+      <div class="layout-sample">
+        <div class="layout-box col-lg-12">
+          <div class="row" style="margin: 0;">
+            <div class="col-lg-3">
+              <div
+                class="layout-box__el tile-border"
+                igxFlex
+                [routerLink]="[roleCode === 'NambayaUser' ? '/user/user-list': '/user/dashboard']"
+                title="{{ 'Users' | translate }}"
+              >
+                <div class="row">
+                  <div class="col-lg-12 tile-title" translate>
+                    Users
+                  </div>
+                  <div class="row tile-data-area">
+                    <div class="col-lg-6">
+                      <span class="dashboard-ico d-user-icon"></span>
+                    </div>
+                    <div class="col-lg-6">
+                      <span class="data-area">
+                        {{ userStatsData ? userStatsData.totalUsers : '' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div
+                class="layout-box__el tile-border"
+                igxFlex
+                [routerLink]="[roleCode === 'NambayaUser' ? urlPrefix + '/pharmacy/list' : '/user/dashboard']"
+                title="{{ 'Pharmacies' | translate }}"
+              >
+                <div class="row">
+                  <div class="col-lg-12 tile-title" translate>
+                    Pharmacies
+                  </div>
+
+                  <div class="row  tile-data-area">
+                    <div class="col-lg-6">
+                      <span class="dashboard-ico d-pharmacy-icon"></span>
+                    </div>
+                    <div class="col-lg-6">
+                      <span class="data-area">
+                        {{ userStatsData ? userStatsData.totalPharmas : '' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div
+                class="layout-box__el tile-border"
+                igxFlex
+                [routerLink]="[roleCode === 'NambayaUser' ? urlPrefix + '/cardiologist/list': '/user/dashboard']"
+                title="{{ 'Cardiologists' | translate }}"
+              >
+                <div class="row">
+                  <div class="col-lg-12 tile-title" translate>
+                    Cardiologists
+                  </div>
+                  <div class="row tile-data-area">
+                    <div class="col-lg-6">
+                      <span class="dashboard-ico d-cardiologists-icon"></span>
+                    </div>
+                    <div class="col-lg-6">
+                      <span class="data-area">
+                        {{ userStatsData ? userStatsData.totalCardios : '' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div
+                class="layout-box__el tile-border"
+                igxFlex
+                [routerLink]="[roleCode === 'NambayaUser' ? '/user/center/list' : '/user/dashboard']"
+                title="{{ 'Central Group Users' | translate }}"
+              >
+                <div class="row">
+                  <div class="col-lg-12 tile-title" translate>
+                    Central Group Users
+                  </div>
+                  <div class="row tile-data-area">
+                    <div class="col-lg-6">
+                      <span class="dashboard-ico d-center-users-icon"></span>
+                    </div>
+                    <div class="col-lg-6">
+                      <span class="data-area">
+                        {{ userStatsData ? userStatsData.totalCenterUsers : '' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin: 0; width: 100%;">
+            <div class="col-lg-4 col-12 graphMain">
+              <div class="chart-area" #elementGoals style="max-height: 70%!important;">
+                <div class="">
+                  <div class="tile-chart-title" translate>
+                    Goals
+                  </div>
+                </div>
+                <ngx-charts-gauge
+                  [view]="[elementGoals.offsetWidth, 225]"
+                  class="charts-gauge-area"
+                  [scheme]="guagecolorScheme"
+                  [results]="gaugeData"
+                  [min]="0"
+                  [max]="100"
+                  [angleSpan]="360"
+                  [startAngle]="0"
+                  [legend]="true"
+                  [legendTitle]="legendTitle | translate"
+                  [valueFormatting]="goalValueFormatFn"
+                  [showAxis]="false"
+                  [units]="guageUnits"
+                  (select)="onSelect($event)"
+                >
+                  <ng-template #tooltipTemplate let-model="model">
+                    <span>{{ model.name }}</span>
+                  </ng-template>
+                </ngx-charts-gauge>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-12 graphMain">
+              <div #elementCasesCompleted class="chart-area" style="max-height: 70%!important;">
+                <div class="">
+                  <div class="tile-chart-title" translate>Completed Cases</div>
+                </div>
+                <ngx-charts-bar-vertical
+                  class="charts-gauge-area"
+                  [scheme]="colorScheme"
+                  [view]="[elementCasesCompleted.offsetWidth, 225]"
+                  [results]="monthlyCasesCompletedData"
+                  [gradient]="gradient"
+                  [xAxis]="showXAxis"
+                  [yAxis]="showYAxis"
+                  [legend]="showLegend"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxisLabel]="xAxisLabel"
+                  [yAxisLabel]="yAxisLabel"
+                  maxYAxisTickLength="10"
+                  (select)="onSelect($event)"
+                  [yAxisTickFormatting]="yAxisTickFormattingFn"
+                >
+                </ngx-charts-bar-vertical>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-12 graphMain">
+              <div #elementCasesStarted class="chart-area" style="max-height: 70%!important;">
+                <div class="">
+                  <div class="tile-chart-title" translate>Cases Started</div>
+                </div>
+                <ngx-charts-bar-vertical
+                  class="charts-gauge-area"
+                  [scheme]="colorScheme"
+                  [view]="[elementCasesStarted.offsetWidth, 225]"
+                  [results]="monthlyCasesStartedData"
+                  [gradient]="gradient"
+                  [xAxis]="showXAxis"
+                  [yAxis]="showYAxis"
+                  [legend]="showLegend"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxisLabel]="xAxisLabel"
+                  [yAxisLabel]="yAxisLabel"
+                  maxYAxisTickLength="10"
+                  (select)="onSelect($event)"
+                  [yAxisTickFormatting]="yAxisTickFormattingFn"
+                >
+                </ngx-charts-bar-vertical>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-12 graphMain" style="margin-top: -50px;">
+              <div #elementCasesDispatched class="chart-area" style="max-height: 70%!important;">
+                <div class="">
+                  <div class="tile-chart-title" translate>dispatched_cases</div>
+                </div>
+                <ngx-charts-bar-vertical
+                  class="charts-gauge-area"
+                  [scheme]="colorScheme"
+                  [results]="caseStatsData"
+                  [gradient]="gradient"
+                  [view]="[elementCasesDispatched.offsetWidth, 225]"
+                  [xAxis]="showXAxis"
+                  [yAxis]="showYAxis"
+                  [legend]="showLegend"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxisLabel]="xAxisLabel"
+                  [yAxisLabel]="yAxisLabel"
+                  maxYAxisTickLength="10"
+                  (select)="onSelect($event)"
+                  [yAxisTickFormatting]="yAxisTickFormattingFn"
+                >
+                </ngx-charts-bar-vertical>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-12 graphMain" style="margin-top: -50px;">
+              <div #elementCardioNotes class="chart-area" style="max-height: 70%!important;">
+                <div class="">
+                  <div class="tile-chart-title" translate>cardiologist_notes</div>
+                </div>
+                <ngx-charts-advanced-pie-chart
+                  [view]="[elementCardioNotes.offsetWidth, 225]"
+                  class="charts-gauge-area"
+                  [customColors]="notesCustomColorsFn"
+                  [label]="labelTotal | translate"
+                  [results]="cardiologistNotesData"
+                  [activeEntries]="cardiologistNotesData"
+                  [gradient]="false"
+                  (select)="onSelect($event)"
+                  (activate)="onActivate($event)"
+                  (deactivate)="onDeactivate($event)"
+                  maxYAxisTickLength="10"
+                >
+                </ngx-charts-advanced-pie-chart>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-12 graphMain" style="margin-top: -50px;">
+              <div #elementQEStatuses class="chart-area" style="max-height: 70%!important;">
+                <div class="">
+                  <div class="tile-chart-title" translate>qe_stats</div>
+                </div>
+                <ngx-charts-pie-chart
+                  [view]="[elementQEStatuses.offsetWidth, 225]"
+                  class="charts-gauge-area"
+                  [customColors]="qeCustomColorsFn"
+                  [results]="qeStatusData"
+                  [gradient]="true"
+                  [legend]="true"
+                  [legendPosition]="legendPosition"
+                  [legendTitle]="legendTitle | translate"
+                  [labels]="true"
+                  [doughnut]="isDoughnut"
+                  maxYAxisTickLength="10"
+                >
+                  <ng-template #tooltipTemplate let-model="model">
+                    <span>{{ model.name }}</span>
+                  </ng-template>
+                </ngx-charts-pie-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>

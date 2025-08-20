@@ -1,0 +1,30 @@
+.upload-holder {
+  border: 1px dashed #614194;
+  overflow: hidden;
+  text-align: center;
+  padding: 5px;
+  border-radius: 10px;
+  background: #f3f3f3;
+  height: 300px;
+  width: 537px !important;
+}
+.icon-cloud-upload {
+  display: block;
+  font-size: 60px;
+  color: #c33859;
+  margin-bottom: 30px;
+}
+
+.comment-wrapper {
+  border: 1px dashed #614194;
+  overflow: hidden;
+  padding: 30px;
+  border-radius: 10px;
+  background: #fff;
+}
+.igx-input-group__hint-item--start {
+  white-space: inherit !important;
+}
+.container-arrow {
+  margin: 0 0 10px 90px;
+}

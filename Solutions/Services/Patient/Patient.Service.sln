@@ -1,0 +1,109 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.API", "..\..\..\Services\Patient\API\Patient.API.csproj", "{ABEBCD88-320B-4009-9C40-61C3E4297ACD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Service", "..\..\..\Services\Patient\Service\Patient.Service.csproj", "{4F94D9CB-3055-41BB-8D3B-A5CB8CED610E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Repository", "..\..\..\Services\Patient\Repository\Patient.Repository.csproj", "{0BAE3A1A-6276-4ED2-AC7F-D1C0BA4D41F7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Contracts", "..\..\..\Services\Patient\Contracts\Patient.Contracts.csproj", "{0653FADF-CA15-44E3-9A7E-3FD65CD481E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B87F5DF5-526E-41BB-A183-565DC7FBA57A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.BusinessObjects", "..\..\..\Services\Common\BusinessObjects\Common.BusinessObjects.csproj", "{C29CE11E-7695-474D-B52A-3BA28E049270}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.DataAccess", "..\..\..\Services\Common\DataAccess\Common.DataAccess.csproj", "{652370AD-0A1B-4220-B54A-8277287CAAD4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "..\..\..\Services\Common\Infrastructure\Common.Infrastructure.csproj", "{B18A5414-5E04-479C-B5C4-77807BAD702E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Services", "..\..\..\Services\Common\Services\Common.Services.csproj", "{D4EC6300-AF61-4773-B436-88C843FA28FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABEBCD88-320B-4009-9C40-61C3E4297ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABEBCD88-320B-4009-9C40-61C3E4297ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABEBCD88-320B-4009-9C40-61C3E4297ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABEBCD88-320B-4009-9C40-61C3E4297ACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F94D9CB-3055-41BB-8D3B-A5CB8CED610E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F94D9CB-3055-41BB-8D3B-A5CB8CED610E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F94D9CB-3055-41BB-8D3B-A5CB8CED610E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F94D9CB-3055-41BB-8D3B-A5CB8CED610E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BAE3A1A-6276-4ED2-AC7F-D1C0BA4D41F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BAE3A1A-6276-4ED2-AC7F-D1C0BA4D41F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BAE3A1A-6276-4ED2-AC7F-D1C0BA4D41F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BAE3A1A-6276-4ED2-AC7F-D1C0BA4D41F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0653FADF-CA15-44E3-9A7E-3FD65CD481E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0653FADF-CA15-44E3-9A7E-3FD65CD481E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0653FADF-CA15-44E3-9A7E-3FD65CD481E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0653FADF-CA15-44E3-9A7E-3FD65CD481E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C29CE11E-7695-474D-B52A-3BA28E049270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C29CE11E-7695-474D-B52A-3BA28E049270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C29CE11E-7695-474D-B52A-3BA28E049270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C29CE11E-7695-474D-B52A-3BA28E049270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{652370AD-0A1B-4220-B54A-8277287CAAD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{652370AD-0A1B-4220-B54A-8277287CAAD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{652370AD-0A1B-4220-B54A-8277287CAAD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{652370AD-0A1B-4220-B54A-8277287CAAD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B18A5414-5E04-479C-B5C4-77807BAD702E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B18A5414-5E04-479C-B5C4-77807BAD702E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B18A5414-5E04-479C-B5C4-77807BAD702E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B18A5414-5E04-479C-B5C4-77807BAD702E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4EC6300-AF61-4773-B436-88C843FA28FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4EC6300-AF61-4773-B436-88C843FA28FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4EC6300-AF61-4773-B436-88C843FA28FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4EC6300-AF61-4773-B436-88C843FA28FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C29CE11E-7695-474D-B52A-3BA28E049270} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{652370AD-0A1B-4220-B54A-8277287CAAD4} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{B18A5414-5E04-479C-B5C4-77807BAD702E} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{D4EC6300-AF61-4773-B436-88C843FA28FC} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99FC034E-D1AA-4761-80C7-08B5C93A7968}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\..\\Services\\Patient\\Service\\Patient.Service.csproj
+		SccProjectName1 = ../../../Services/Patient/Service
+		SccLocalPath1 = ..\\..\\..\\Services\\Patient\\Service
+		SccProjectUniqueName2 = ..\\..\\..\\Services\\Patient\\Repository\\Patient.Repository.csproj
+		SccProjectName2 = ../../../Services/Patient/Repository
+		SccLocalPath2 = ..\\..\\..\\Services\\Patient\\Repository
+		SccProjectUniqueName3 = ..\\..\\..\\Services\\Patient\\Contracts\\Patient.Contracts.csproj
+		SccProjectName3 = ../../../Services/Patient/Contracts
+		SccLocalPath3 = ..\\..\\..\\Services\\Patient\\Contracts
+		SccProjectUniqueName4 = ..\\..\\..\\Services\\Patient\\API\\Patient.API.csproj
+		SccProjectName4 = ../../../Services/Patient/API
+		SccLocalPath4 = ..\\..\\..\\Services\\Patient\\API
+		SccProjectUniqueName5 = ..\\..\\..\\Services\\Common\\BusinessObjects\\Common.BusinessObjects.csproj
+		SccProjectTopLevelParentUniqueName5 = Patient.Service.sln
+		SccProjectName5 = ../../../Services/Common/BusinessObjects
+		SccLocalPath5 = ..\\..\\..\\Services\\Common\\BusinessObjects
+		SccProjectUniqueName6 = ..\\..\\..\\Services\\Common\\DataAccess\\Common.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName6 = Patient.Service.sln
+		SccProjectName6 = ../../../Services/Common/DataAccess
+		SccLocalPath6 = ..\\..\\..\\Services\\Common\\DataAccess
+		SccProjectUniqueName7 = ..\\..\\..\\Services\\Common\\Infrastructure\\Common.Infrastructure.csproj
+		SccProjectTopLevelParentUniqueName7 = Patient.Service.sln
+		SccProjectName7 = ../../../Services/Common/Infrastructure
+		SccLocalPath7 = ..\\..\\..\\Services\\Common\\Infrastructure
+		SccProjectUniqueName8 = ..\\..\\..\\Services\\Common\\Services\\Common.Services.csproj
+		SccProjectTopLevelParentUniqueName8 = Patient.Service.sln
+		SccProjectName8 = ../../../Services/Common/Services
+		SccLocalPath8 = ..\\..\\..\\Services\\Common\\Services
+	EndGlobalSection
+EndGlobal

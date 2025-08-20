@@ -1,0 +1,224 @@
+<div class="sample-wrapper">
+  <section class="sample-content">
+    <article class="sample-column">
+      <app-loader [isLoading]="isLoading"></app-loader>
+      <form class="input-group-form" (ngSubmit)="updateCenter()" [formGroup]="editCenterFrom">
+        <div class="main-heading">
+          <h4 translate class="sample-title">
+            <span (click)="goBack()" class="icon-previous"></span> edit_center_group_user
+          </h4>
+        </div>
+        <div class="column-holder">
+          <div class="columns add">
+            <div class="col-lg-12">
+              <div class="box">
+                <button translate class="btn-primary" igxButton="raised" igxRipple>
+                  <span class="icon-save"></span>Save
+                </button>
+                <button translate type="button" (click)="goBack()" class="btn-secandory" igxButton="raised" igxRipple>
+                  <span class="icon-highlight_remove"></span>Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>Basic</span>
+              <p translate>
+                having_an_up_to_date_email_address_attached_to_your_account
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box">
+                <igx-input-group>
+                  <label translate igxLabel for="firstName">First Name</label>
+                  <input igxInput name="firstName" id="firstName" type="text" required formControlName="firstName" />
+                </igx-input-group>
+                <small
+                  *ngIf="
+                    editCenterFrom.controls.firstName.touched && editCenterFrom.controls.firstName.errors?.required
+                  "
+                  class="text-danger"
+                  translate
+                  >First name is required
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    editCenterFrom.controls.firstName.touched &&
+                    editCenterFrom.controls.firstName.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_45_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel translate for="lastName">Last Name</label>
+                  <input igxInput name="lastName" id="lastName" type="text" required formControlName="lastName" />
+                </igx-input-group>
+                <small
+                  *ngIf="editCenterFrom.controls.lastName.touched && editCenterFrom.controls.lastName.errors?.required"
+                  class="text-danger"
+                  translate
+                  >Last name is required
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    editCenterFrom.controls.lastName.touched &&
+                    editCenterFrom.controls.lastName.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_45_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel translate for="email">Email address</label>
+                  <input igxInput name="email" id="email" type="email" required formControlName="email" readonly />
+                </igx-input-group>
+                <small
+                  *ngIf="editCenterFrom.controls.email.touched && editCenterFrom.controls.email.errors?.required"
+                  class="text-danger"
+                  translate
+                  >Email is required
+                </small>
+                <small
+                  *ngIf="editCenterFrom.controls.email.touched && editCenterFrom.controls.email.errors?.email"
+                  class="text-danger"
+                  translate
+                  >invalid_email_address
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    editCenterFrom.controls.email.touched && editCenterFrom.controls.email.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_80_characters_allowed
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>Contact Details</span>
+              <p translate>
+                please_add_your_phone_number_to_be_contacted_by_SMS
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box">
+                <igx-input-group>
+                  <label translate igxLabel for="phone">Mobile</label>
+                  <input type="text" id="phone" igxInput name="phone" formControlName="phone" />
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    editCenterFrom.controls.phone.touched &&
+                    editCenterFrom.controls.phone.errors?.invalidNumber &&
+                    !editCenterFrom.controls.phone.errors?.invalidMaxLength
+                  "
+                  translate
+                  >Phone number is not valid
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="editCenterFrom.controls.phone.touched && editCenterFrom.controls.phone.errors?.required"
+                  translate
+                  >Phone number is required
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    editCenterFrom.controls.phone.touched && editCenterFrom.controls.phone.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_20_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="street" name="street" type="text" formControlName="street" />
+                  <label igxLabel translate for="street">Street</label>
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    editCenterFrom.controls.street.touched && editCenterFrom.controls.street.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_200_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="address" name="address" type="text" formControlName="address" />
+                  <label igxLabel for="address" translate>City</label>
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    editCenterFrom.controls.address.touched && editCenterFrom.controls.address.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_200_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="zipCode" name="zipCode" type="text" formControlName="zipCode" />
+                  <label igxLabel for="zipCode" translate>Zip Code</label>
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    editCenterFrom.controls.zipCode.touched &&
+                    editCenterFrom.controls.zipCode.errors?.invalidNumber &&
+                    !editCenterFrom.controls.zipCode.errors?.invalidMaxLength
+                  "
+                  translate
+                >
+                  Zip Code is not a valid number
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    editCenterFrom.controls.zipCode.touched && editCenterFrom.controls.zipCode.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_5_characters_allowed
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>Status</span>
+              <p translate>Keep securing the system by ensuring user status.</p>
+            </div>
+            <div class="col-lg-3">
+              <div class="box" translate>
+                <igx-switch [checked]="true" name="isActive" id="isActive" formControlName="isActive"> </igx-switch>
+                {{ editCenterFrom.value.isActive ? ' Active' : ' Inactive' }}
+              </div>
+            </div>
+
+            <div class="col-lg-3">
+              <div class="box" translate>
+                <igx-switch [checked]="true" name="isLocked" id="isLocked" formControlName="isLocked"> </igx-switch>
+                {{ editCenterFrom.value.isLocked ? 'Locked' : 'unlocked' }}
+              </div>
+            </div>
+
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+        </div>
+      </form>
+    </article>
+  </section>
+</div>

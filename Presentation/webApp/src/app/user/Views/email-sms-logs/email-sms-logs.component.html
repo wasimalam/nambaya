@@ -1,0 +1,183 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+<div class="main-heading">
+  <h4 translate class="sample-title"><span (click)="goBack()" class="icon-previous"></span> email-sms-logs</h4>
+</div>
+<div class="column-holder">
+  <div class="" style="float: left">
+    <button
+      style="font-weight: normal"
+      translate
+      [routerLink]="[urlPrefix + '/dashboard']"
+      class="btn-primary"
+      igxButton="raised"
+      igxRipple
+    >
+      <span class="icon-Union-2"></span> &nbsp; Dashboard
+    </button>
+  </div>
+  <form class="input-group-form" [formGroup]="emailSMSSearchForm" (ngSubmit)="applyLogFilters(true)">
+    <div class="search-area">
+      <div class="box">
+        <input
+          #Subject
+          data-description="Subject"
+          class="form-control"
+          type="search"
+          placeholder="{{ 'Subject' | translate }}"
+          formControlName="Subject"
+        />
+        <span class="icon-cheveron-down" id="chev" (click)="clickEvent($event)"></span>
+        <div class="dropdown-search" [ngClass]="{ active: toggleBtn }">
+          <div class="dropdown" (clickOutside)="onClickedOutside($event)">
+            <a (click)="toggleBtn = false" class="icon-cancel"></a>
+            <ul class="row">
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="Recipient" translate>Recipient</label>
+                  <input
+                    #Recipient
+                    data-description="Recipient"
+                    igxInput
+                    name="Recipient"
+                    id="Recipient"
+                    type="email"
+                    formControlName="Recipient"
+                  />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="Message" translate>Message</label>
+                  <input
+                    #Message
+                    data-description="Message"
+                    igxInput
+                    name="Message"
+                    id="Message"
+                    type="text"
+                    formControlName="Message"
+                  />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6 timestamp">
+                <igx-date-picker
+                  #SentTime
+                  (valueChange)="validateDate($event)"
+                  data-description="SentDate"
+                  mask="dd.MM.y"
+                  mode="dropdown"
+                  locale="{{ currentLanguage }}"
+                  label="{{ 'SentDate' | translate }}"
+                  id="date-picker"
+                  [value]="date"
+                  [formatter]="formatter"
+                  formControlName="SentTime"
+                >
+                </igx-date-picker>
+                <small *ngIf="invalidDate" class="text-danger" translate>invalid_date </small>
+              </li>
+              <li class="col-lg-12">
+                <button class="btn btn-primary" translate>Search</button>
+                <button (click)="resetPharmacistFilters()" type="button" class="btn btn-default" translate>
+                  Reset
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <span class="icon-Path-1941" (click)="applyLogFilters(true)"></span>
+      </div>
+    </div>
+  </form>
+  <div class="tags-area" *ngIf="filterTags.length > 0">
+    <ul>
+      <li><span class="active-filter" translate>Active Filters: </span></li>
+      <li *ngFor="let tag of filterTags; index as i">
+        <span *ngIf="tag.Property === 'TimeStamp'" class=""
+          >{{ tag.Description | translate }}: {{ formatter(SentTime.value) }}</span
+        >
+        <span *ngIf="tag.Property !== 'TimeStamp'" class=""
+          >{{ tag.Description | translate }}: {{ tag.Value | translate }}</span
+        >
+        <a (click)="removeFilter(tag.Property)" class="icon-cancel-circle"></a>
+      </li>
+    </ul>
+  </div>
+  <div class="grid__wrapper">
+    <igx-grid
+      #emailSMSGrid
+      [data]="data | async"
+      [width]="'100%'"
+      [height]="null"
+      [paging]="true"
+      [perPage]="perPage"
+      [paginationTemplate]="customPager"
+      [cellSelection]="'none'"
+      [emptyGridMessage]="'There are no records to display' | translate"
+    >
+      <igx-column field="subject" [width]="'250px'">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Subject </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="recipient" [width]="'220px'">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Recipient </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="message">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Message </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>
+          <span [innerHTML]="formatHTMLString(value)"></span>
+        </ng-template>
+      </igx-column>
+      <igx-column field="timeStamp" [width]="'200px'">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> SentDate </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ dateFormatter(value) }}</ng-template>
+      </igx-column>
+    </igx-grid>
+    <ng-template #customPager let-api>
+      <igx-paginator
+        #paginator
+        [totalRecords]="totalCount"
+        [(perPage)]="perPage"
+        [selectLabel]="'Records per page:' | translate"
+        [selectOptions]="selectOptions"
+        [displayDensity]="emailSMSGrid.displayDensity"
+        (pageChange)="paginate($event)"
+        (perPageChange)="perPageChangeFn($event)"
+      >
+      </igx-paginator>
+    </ng-template>
+  </div>
+</div>

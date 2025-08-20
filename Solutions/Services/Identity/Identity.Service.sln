@@ -1,0 +1,111 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.API", "..\..\..\Services\Identity\API\Identity.API.csproj", "{114A9510-4784-4318-95D3-1E969F2F1F69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Contracts", "..\..\..\Services\Identity\Contracts\Identity.Contracts.csproj", "{EDBD7EF7-AEF6-47D2-B498-7436EAFD5686}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Repository", "..\..\..\Services\Identity\Repository\Identity.Repository.csproj", "{070AC030-3EFC-4758-ACE6-153501104029}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Service", "..\..\..\Services\Identity\Service\Identity.Service.csproj", "{496437AB-D6B3-4C6F-ADF1-96E1C0E54D0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E930357D-5885-40E8-A2E1-CC6B38C326C1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.DataAccess", "..\..\..\Services\Common\DataAccess\Common.DataAccess.csproj", "{F7859C16-1236-4DF2-8A0F-CE42B7078745}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.BusinessObjects", "..\..\..\Services\Common\BusinessObjects\Common.BusinessObjects.csproj", "{75A67A91-B85B-4796-941D-035013B8B5DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "..\..\..\Services\Common\Infrastructure\Common.Infrastructure.csproj", "{1DA5C321-116C-48CD-A5ED-26767374FD12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{50803C93-601A-48EB-BCF2-F5723DA8F185}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Contracts", "..\..\..\Services\UserManagement\Contracts\UserManagement.Contracts.csproj", "{B4DA9F5F-994F-4C5B-AE87-AF88DD45B324}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{114A9510-4784-4318-95D3-1E969F2F1F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{114A9510-4784-4318-95D3-1E969F2F1F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{114A9510-4784-4318-95D3-1E969F2F1F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{114A9510-4784-4318-95D3-1E969F2F1F69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDBD7EF7-AEF6-47D2-B498-7436EAFD5686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDBD7EF7-AEF6-47D2-B498-7436EAFD5686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDBD7EF7-AEF6-47D2-B498-7436EAFD5686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDBD7EF7-AEF6-47D2-B498-7436EAFD5686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{070AC030-3EFC-4758-ACE6-153501104029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070AC030-3EFC-4758-ACE6-153501104029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{070AC030-3EFC-4758-ACE6-153501104029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070AC030-3EFC-4758-ACE6-153501104029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496437AB-D6B3-4C6F-ADF1-96E1C0E54D0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496437AB-D6B3-4C6F-ADF1-96E1C0E54D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496437AB-D6B3-4C6F-ADF1-96E1C0E54D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496437AB-D6B3-4C6F-ADF1-96E1C0E54D0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7859C16-1236-4DF2-8A0F-CE42B7078745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7859C16-1236-4DF2-8A0F-CE42B7078745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7859C16-1236-4DF2-8A0F-CE42B7078745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7859C16-1236-4DF2-8A0F-CE42B7078745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75A67A91-B85B-4796-941D-035013B8B5DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75A67A91-B85B-4796-941D-035013B8B5DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75A67A91-B85B-4796-941D-035013B8B5DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75A67A91-B85B-4796-941D-035013B8B5DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DA5C321-116C-48CD-A5ED-26767374FD12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DA5C321-116C-48CD-A5ED-26767374FD12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DA5C321-116C-48CD-A5ED-26767374FD12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DA5C321-116C-48CD-A5ED-26767374FD12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4DA9F5F-994F-4C5B-AE87-AF88DD45B324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4DA9F5F-994F-4C5B-AE87-AF88DD45B324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4DA9F5F-994F-4C5B-AE87-AF88DD45B324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4DA9F5F-994F-4C5B-AE87-AF88DD45B324}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F7859C16-1236-4DF2-8A0F-CE42B7078745} = {E930357D-5885-40E8-A2E1-CC6B38C326C1}
+		{75A67A91-B85B-4796-941D-035013B8B5DA} = {E930357D-5885-40E8-A2E1-CC6B38C326C1}
+		{1DA5C321-116C-48CD-A5ED-26767374FD12} = {E930357D-5885-40E8-A2E1-CC6B38C326C1}
+		{B4DA9F5F-994F-4C5B-AE87-AF88DD45B324} = {50803C93-601A-48EB-BCF2-F5723DA8F185}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D723344B-11A1-4B42-94EA-B582329A42FD}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\..\\Services\\Identity\\API\\Identity.API.csproj
+		SccProjectName1 = ../../../Services/Identity/API
+		SccLocalPath1 = ..\\..\\..\\Services\\Identity\\API
+		SccProjectUniqueName2 = ..\\..\\..\\Services\\Identity\\Contracts\\Identity.Contracts.csproj
+		SccProjectName2 = ../../../Services/Identity/Contracts
+		SccLocalPath2 = ..\\..\\..\\Services\\Identity\\Contracts
+		SccProjectUniqueName3 = ..\\..\\..\\Services\\Identity\\Repository\\Identity.Repository.csproj
+		SccProjectName3 = ../../../Services/Identity/Repository
+		SccLocalPath3 = ..\\..\\..\\Services\\Identity\\Repository
+		SccProjectUniqueName4 = ..\\..\\..\\Services\\Identity\\Service\\Identity.Service.csproj
+		SccProjectName4 = ../../../Services/Identity/Service
+		SccLocalPath4 = ..\\..\\..\\Services\\Identity\\Service
+		SccProjectUniqueName5 = ..\\..\\..\\Services\\Common\\DataAccess\\Common.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName5 = Identity.Service.sln
+		SccProjectName5 = ../../../Services/Common/DataAccess
+		SccLocalPath5 = ..\\..\\..\\Services\\Common\\DataAccess
+		SccProjectUniqueName6 = ..\\..\\..\\Services\\Common\\BusinessObjects\\Common.BusinessObjects.csproj
+		SccProjectTopLevelParentUniqueName6 = Identity.Service.sln
+		SccProjectName6 = ../../../Services/Common/BusinessObjects
+		SccLocalPath6 = ..\\..\\..\\Services\\Common\\BusinessObjects
+		SccProjectUniqueName7 = ..\\..\\..\\Services\\Common\\Infrastructure\\Common.Infrastructure.csproj
+		SccProjectTopLevelParentUniqueName7 = Identity.Service.sln
+		SccProjectName7 = ../../../Services/Common/Infrastructure
+		SccLocalPath7 = ..\\..\\..\\Services\\Common\\Infrastructure
+		SccProjectUniqueName8 = ..\\..\\..\\Services\\UserManagement\\Contracts\\UserManagement.Contracts.csproj
+		SccProjectTopLevelParentUniqueName8 = Identity.Service.sln
+		SccProjectName8 = ../../../Services/UserManagement/Contracts
+		SccLocalPath8 = ..\\..\\..\\Services\\UserManagement\\Contracts
+	EndGlobalSection
+EndGlobal

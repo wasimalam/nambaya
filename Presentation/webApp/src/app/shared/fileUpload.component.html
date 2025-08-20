@@ -1,0 +1,82 @@
+<div *ngIf="isPharmacist" class="main-heading">
+  <h4 class="sample-title">
+    <span (click)="goToPatients()" class="icon-previous"></span>&nbsp;
+    <span *ngIf="caseObject">
+      {{ caseObject.firstName + ' ' + this.caseObject.lastName }}
+      <span class="separator"></span>
+      <span class="patient-id">{{ caseObject.pharmacyPatientID }}</span>
+    </span>
+  </h4>
+</div>
+<app-loader [isLoading]="isLoading"></app-loader>
+<div [class.main-bg]="isPharmacist">
+  <app-patient-wizard *ngIf="isPharmacist" [caseObject]="caseObject" [parentData]="parentData"></app-patient-wizard>
+  <div class="sample-wrapper">
+    <section class="sample-content">
+      <article class="sample-column">
+        <div class="column-holder">
+          <div class="columns row" style="border-bottom: none; margin-bottom: 0px">
+            <div class="col-lg-6" *ngIf="!caseFinalizedByPharmacist" style="padding-left: 0;">
+              <div class="center upload-holder" style="width: 100%">
+                <span class="icon-cloud-upload"></span>
+                <span translate>drop_edf_file_here</span>
+                <ngx-file-drop
+                  dropZoneLabel="Drop files here"
+                  (onFileDrop)="dropped($event)"
+                  (onFileOver)="fileOver($event)"
+                  (onFileLeave)="fileLeave($event)"
+                  [multiple]="false"
+                  style="height: 100%; width: 100%;"
+                >
+                  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                    <button translate class="btn-primary" igxButton="raised" igxRipple (click)="openFileSelector()">
+                      <i class="fas fa-file"></i> Select File
+                    </button>
+                  </ng-template>
+                </ngx-file-drop>
+              </div>
+              <div class="upload-table" style="margin-top: 30px" *ngIf="fileToUpload != null">
+                <table class="table table-borderless">
+                  <tbody class="upload-name-style">
+                    <tr *ngFor="let item of files; let i = index">
+                      <td style="text-align: left!important;">
+                        {{ item.relativePath }}
+                      </td>
+                      <td class="text-right">
+                        <button
+                          translate
+                          (click)="unAssignDevice()"
+                          igxButton="raised"
+                          style="color: white;margin-right: 5px;"
+                          [disabled]="disableButtons"
+                        >
+                          <i class="fas fa-spinner fa-spin" *ngIf="disableButtons"></i>
+                          <i class="fas fa-file-upload" *ngIf="!disableButtons"></i> &nbsp; Upload
+                        </button>
+                        <button translate (click)="cancelUpload()" igxButton="outlined" [disabled]="disableButtons">
+                          <i class="fas fa-times"></i> &nbsp; {{ 'Remove' | translate }}
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="uploading">
+                <div class="linear-container">
+                  <igx-linear-bar [striped]="false" [max]="100" [value]="progress" type="danger"></igx-linear-bar>
+                </div>
+              </div>
+              <div *ngIf="saving"><i class="fas fa-spinner fa-spin"></i> {{ 'encrypting_and_saving' | translate }}</div>
+            </div>
+            <div class="col-lg-6">
+              <div class="upload-table" *ngIf="isEDFExists" style="margin-top: 20px;">
+                <h5 style="color:#664090; font-size: 14px; font-weight: bold;" translate>existing_edf_file</h5>
+                <p>{{ existingFileData.fileName }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+</div>

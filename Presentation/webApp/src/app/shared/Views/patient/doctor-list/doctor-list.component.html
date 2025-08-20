@@ -1,0 +1,241 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+<div class="main-heading">
+  <h4 translate class="sample-title"><span (click)="goBack()" class="icon-previous"></span> doctors</h4>
+</div>
+<div class="column-holder">
+  <form class="input-group-form" [formGroup]="doctorSearchForm" (ngSubmit)="applyDoctorFilters(true)">
+    <div class="search-area">
+      <div class="box">
+        <input
+          #Name
+          data-description="Name"
+          class="form-control"
+          type="search"
+          placeholder="{{ 'Name' | translate }}"
+          formControlName="Name"
+        />
+        <span class="icon-cheveron-down" id="chev" (click)="clickEvent($event)"></span>
+        <div class="dropdown-search" [ngClass]="{ active: toggleBtn }">
+          <div class="dropdown" (clickOutside)="onClickedOutside($event)">
+            <a (click)="toggleBtn = false" class="icon-cancel"></a>
+            <ul class="row">
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="Email" translate>Email</label>
+                  <input
+                    #Email
+                    data-description="Email"
+                    igxInput
+                    name="Email"
+                    id="Email"
+                    type="email"
+                    formControlName="Email"
+                  />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="ZipCode" translate>Zip Code</label>
+                  <input
+                    #ZipCode
+                    data-description="Zip Code"
+                    igxInput
+                    name="ZipCode"
+                    id="ZipCode"
+                    type="text"
+                    formControlName="ZipCode"
+                  />
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  translate
+                  *ngIf="
+                    doctorSearchForm.controls.ZipCode.touched && doctorSearchForm.controls.ZipCode.errors?.invalidNumber
+                  "
+                >
+                  Zip Code is not a valid number
+                </small>
+              </li>
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="Phone" translate>Mobile</label>
+                  <input
+                    #Phone
+                    igxInput
+                    data-description="Phone"
+                    name="Phone"
+                    id="Phone"
+                    type="text"
+                    formControlName="Phone"
+                  />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-6">
+                <igx-input-group>
+                  <label igxLabel for="DoctorId" translate>Doctor ID</label>
+                  <input
+                    #DoctorId
+                    igxInput
+                    data-description="Doctor ID"
+                    name="DoctorId"
+                    id="DoctorId"
+                    type="text"
+                    formControlName="DoctorId"
+                  />
+                </igx-input-group>
+              </li>
+              <li class="col-lg-12">
+                <button class="btn btn-primary" translate>Search</button>
+                <button (click)="resetPharmacistFilters()" type="button" class="btn btn-default" translate>
+                  Reset
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <span class="icon-Path-1941" (click)="applyDoctorFilters(true)"></span>
+      </div>
+    </div>
+  </form>
+  <div class="tags-area" *ngIf="filterTags.length > 0">
+    <ul>
+      <li><span class="active-filter" translate>Active Filters: </span></li>
+      <li *ngFor="let tag of filterTags; index as i">
+        <span class="">{{ tag.Description | translate }}: {{ tag.Value | translate }}</span>
+        <a (click)="removeFilter(tag.Property)" class="icon-cancel-circle"></a>
+      </li>
+    </ul>
+  </div>
+  <div class="grid__wrapper">
+    <igx-grid
+      #doctorGrid
+      [data]="data | async"
+      width="100%"
+      [height]="null"
+      [paging]="true"
+      [perPage]="perPage"
+      [paginationTemplate]="customPager"
+      [cellSelection]="'none'"
+      (onCellClick)="handleRowClick($event)"
+      [emptyGridMessage]="'There are no records to display' | translate"
+    >
+      <igx-column field="name">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a> Name </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="doctorID">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Doctor ID </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="companyID">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> companyId </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="email">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Email </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="phone">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Mobile </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column field="zipCode" width="150px">
+        <ng-template igxHeader let-column>
+          <div class="mysortingArea" (click)="sort(column.field)">
+            <a translate> Zip Code </a>
+            <span style="float: right;">
+              <i class="fas fa-arrow-up" *ngIf="order === 'ASC' && columnName === column.field"></i>
+              <i class="fas fa-arrow-down" *ngIf="order === 'DESC' && columnName === column.field"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template igxCell let-value>{{ value }}</ng-template>
+      </igx-column>
+      <igx-column [pinned]="true" field="id" header="{{ 'Action' | translate }}" width="120px">
+        <ng-template igxCell let-value>
+          <div class="grid-actions">
+            <button
+              title="{{ 'edit_doctor' | translate }}"
+              class="list-drop"
+              [routerLink]="[urlPrefix + '/doctor/edit', value]"
+            >
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button
+              title="{{ 'delete_doctor' | translate }}"
+              class="list-drop"
+              (click)="confirmDelete(value)"
+              style="margin-left: 18px"
+            >
+              <i class="fas fa-user-minus"></i>
+            </button>
+          </div>
+        </ng-template>
+      </igx-column>
+    </igx-grid>
+    <ng-template #customPager let-api>
+      <igx-paginator
+        #paginator
+        [totalRecords]="totalCount"
+        [(perPage)]="perPage"
+        [selectLabel]="'Records per page:' | translate"
+        [selectOptions]="selectOptions"
+        [displayDensity]="doctorGrid.displayDensity"
+        (pageChange)="paginate($event)"
+        (perPageChange)="perPageChangeFn($event)"
+      >
+      </igx-paginator>
+    </ng-template>
+  </div>
+</div>
+<igx-dialog
+  #deleteConfirmDialog
+  title="{{ 'Confirmation' | translate }}"
+  leftButtonLabel="{{ 'Cancel' | translate }}"
+  (onLeftButtonSelect)="deleteConfirmDialog.close()"
+  rightButtonLabel="OK"
+  (onRightButtonSelect)="deleteDoctor()"
+  (onClose)="onDialogClose()"
+  message="{{ 'sure_to_delete_doctor' | translate }}"
+>
+</igx-dialog>

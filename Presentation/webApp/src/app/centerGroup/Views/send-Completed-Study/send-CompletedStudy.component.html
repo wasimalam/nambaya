@@ -1,0 +1,131 @@
+<div class="sample-wrapper">
+  <section class="sample-content">
+    <article class="sample-column">
+      <app-loader [isLoading]="isLoading"></app-loader>
+      <form class="input-group-form" [formGroup]="sendCompletedStudyForm">
+        <div class="main-heading">
+          <h4 translate class="sample-title">
+            <span (click)="goBack()" class="icon-previous"></span>&nbsp;<span translate>send_report_to_doctor</span>
+          </h4>
+        </div>
+        <div class="column-holder">
+          <div class="columns add">
+            <div class="col-lg-12">
+              <div class="box">
+                <button
+                  translate
+                  class="btn-primary"
+                  igxButton="raised"
+                  igxRipple
+                  (click)="caseDispatchDialog.open()"
+                  type="button"
+                >
+                  <span class="icon-save"></span>send
+                </button>
+                <button translate type="button" (click)="goBack()" class="btn-secandory" igxButton="raised" igxRipple>
+                  <span class="icon-highlight_remove"></span>Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="row m-0 mb-3">
+              <div class="col-lg-3">
+                <span class="subheadin" translate>dispatch_process</span>
+                <p translate>
+                  dispatch_process_details
+                </p>
+              </div>
+              <div class="col-lg-6">
+                <div class="box">
+                  <igx-checkbox
+                    translate
+                    name="isMedicationPlanAttached"
+                    formControlName="isMedicationPlanAttached"
+                    [disabled]="medicationPlan == undefined"
+                  >
+                    <p translate>will_dispatch_medication_plan</p>
+                  </igx-checkbox>
+                </div>
+
+                <div class="box">
+                  <igx-date-picker [value]="date" [formatter]="formatter">
+                    <ng-template
+                      igxDatePickerTemplate
+                      let-openDialog="openDialog"
+                      let-value="value"
+                      let-displayData="displayData"
+                    >
+                      <igx-input-group (click)="openDialog()">
+                        <igx-prefix>
+                          <igx-icon>event_note</igx-icon>
+                        </igx-prefix>
+                        <label igxLabel translate>dispatch_date</label>
+                        <input required readonly igxInput [value]="displayData" />
+                      </igx-input-group>
+                    </ng-template>
+                  </igx-date-picker>
+                </div>
+              </div>
+            </div>
+            <div class="row m-0">
+              <div class="col-lg-3">&nbsp;</div>
+              <div class="col-lg-6">
+                <div class="box" style="color: #614194;">
+                  <a
+                    *ngIf="medicationPlan && !isDownloadingMedicationFile"
+                    (click)="downloadMedicationFile()"
+                    href="javascript:void(0)"
+                    class="switch-button"
+                  >
+                    <span class="fas fa-arrow-down"></span>
+                    <span class="download-text">{{ 'download_medication_analysis' | translate }}</span>
+                  </a>
+                  <div>
+                    <igx-circular-bar
+                      *ngIf="isDownloadingMedicationFile"
+                      [animate]="false"
+                      [indeterminate]="true"
+                      [textVisibility]="false"
+                    ></igx-circular-bar>
+                    <span *ngIf="isDownloadingMedicationFile" class="please-wait">{{ 'please_wait' | translate }}</span>
+                  </div>
+                  <span style="margin : 0 10px" *ngIf="medicationPlan"></span>
+
+                  <a
+                    *ngIf="!isDownloadingdetailedFile"
+                    (click)="downloadDetailedEvaluationReport()"
+                    href="javascript:void(0)"
+                    class="switch-button"
+                  >
+                    <span class="fas fa-arrow-down"></span>
+                    <span class="download-text">{{ 'download_detailed_report' | translate }}</span>
+                  </a>
+                  <div>
+                    <igx-circular-bar
+                      *ngIf="isDownloadingdetailedFile"
+                      [animate]="false"
+                      [indeterminate]="true"
+                      [textVisibility]="false"
+                    ></igx-circular-bar>
+                    <span *ngIf="isDownloadingdetailedFile" class="please-wait">{{ 'please_wait' | translate }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </article>
+  </section>
+</div>
+<igx-dialog
+  #caseDispatchDialog
+  title="{{ 'Confirmation' | translate }}"
+  leftButtonLabel="{{ 'Cancel' | translate }}"
+  (onLeftButtonSelect)="caseDispatchDialog.close()"
+  rightButtonLabel="OK"
+  (onRightButtonSelect)="dispatchCaseDetails()"
+  message="{{ 'sure_to_dispatch_case' | translate }}"
+>
+</igx-dialog>

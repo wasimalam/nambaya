@@ -1,0 +1,22 @@
+.btn-delete {
+  background: #fff;
+  color: #ccc;
+  border: 1px solid #ccc;
+  font-weight: 400;
+
+  span {
+    font-size: 16px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 18px;
+  }
+
+  &:hover {
+    background: #cc3855;
+    color: #fff;
+  }
+}
+.igx-input-group__hint-item--start {
+  white-space: inherit !important;
+}

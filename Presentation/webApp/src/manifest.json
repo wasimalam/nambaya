@@ -1,0 +1,21 @@
+{
+  "name": "Nambaya",
+  "short_name": "Nambaya",
+  "theme_color": "#488aff",
+  "background_color": "#1b75bc",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/nambaya-logo.png",
+      "sizes": "512x350",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/nambaya-logo.png",
+      "sizes": "192x131",
+      "type": "image/png"
+    }
+  ]
+}

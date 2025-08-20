@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\bin\**" />
+    <Compile Remove="Models\obj\**" />
+    <EmbeddedResource Remove="Models\bin\**" />
+    <EmbeddedResource Remove="Models\obj\**" />
+    <None Remove="Models\bin\**" />
+    <None Remove="Models\obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pharmacist.Contracts.csproj.vspscc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\BusinessObjects\Common.BusinessObjects.csproj" />
+    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Patient\Contracts\Patient.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

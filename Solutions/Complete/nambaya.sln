@@ -1,0 +1,615 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B87F5DF5-526E-41BB-A183-565DC7FBA57A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.BusinessObjects", "..\..\Services\Common\BusinessObjects\Common.BusinessObjects.csproj", "{A57C5D5A-FC5A-40A3-9193-9E43EDD33D76}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.DataAccess", "..\..\Services\Common\DataAccess\Common.DataAccess.csproj", "{7C0AA01D-3AEF-45B8-A678-63DCA9FAE2FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "..\..\Services\Common\Infrastructure\Common.Infrastructure.csproj", "{583C1B3C-0B6D-4BFE-901A-F6B9904C00C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Services", "..\..\Services\Common\Services\Common.Services.csproj", "{463715DC-F68B-43B7-8DCB-F9A7E68822FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cardiologist", "Cardiologist", "{441BD65A-02AD-44F7-ACC7-11F15DF74B55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CentralGroup", "CentralGroup", "{15F98806-AE16-44F0-B562-405FDADECE56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileSharing", "FileSharing", "{1377A04A-2266-497D-8CF9-AECD945C74E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{D17DC9FB-7348-4845-A69C-493D28A7ED31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NambayaUser", "NambayaUser", "{549CA753-83C7-4975-988D-FF84B3831D11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patient", "Patient", "{E7A5332A-4DCB-4C13-A83D-1B1A099D8B11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pharmacist", "Pharmacist", "{46B1AC38-9542-405D-B6BC-4AEB96E77FDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserManagement", "UserManagement", "{29C8DD88-0EF2-4B9C-ADBD-D6AD7701DA4D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiologist.API", "..\..\Services\Cardiologist\API\Cardiologist.API.csproj", "{327F5178-6D80-4BD9-BA69-0657873B5A79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiologist.Contracts", "..\..\Services\Cardiologist\Contracts\Cardiologist.Contracts.csproj", "{2B2930CA-54FA-4B5C-AAE0-79925BAFA4AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiologist.Repository", "..\..\Services\Cardiologist\Repository\Cardiologist.Repository.csproj", "{D1C94B2A-B051-4683-BFA5-450CD7986A3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiologist.Service", "..\..\Services\Cardiologist\Service\Cardiologist.Service.csproj", "{5013F2D4-6C54-4F5D-988C-4940A5952264}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CentralGroup.API", "..\..\Services\CentralGroup\API\CentralGroup.API.csproj", "{BB9A61B7-41EA-4101-83C5-D9643033B668}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CentralGroup.Contracts", "..\..\Services\CentralGroup\Contracts\CentralGroup.Contracts.csproj", "{CFF502AE-7D61-4EBD-9289-EFC4FF730AE0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CentralGroup.Repository", "..\..\Services\CentralGroup\Repository\CentralGroup.Repository.csproj", "{20A5D845-F23D-4CB5-B986-B793DA9D705D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CentralGroup.Service", "..\..\Services\CentralGroup\Service\CentralGroup.Service.csproj", "{23F1E609-E480-47C4-AE5E-3DC4157FE735}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSharing.API", "..\..\Services\FileSharing\API\FileSharing.API.csproj", "{435DC1D8-28FD-49F7-AC6B-57AB65960ED7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSharing.Contracts", "..\..\Services\FileSharing\Contracts\FileSharing.Contracts.csproj", "{2FF2D2F3-D903-40DE-A91A-00188F226BC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSharing.Wrapper.IDgard", "..\..\Services\FileSharing\Wrapper\IDgard\FileSharing.Wrapper.IDgard.csproj", "{D4D42F03-F112-4477-BF06-ECF4C8B88DAC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrapper", "Wrapper", "{F66E0E88-D2F1-40E2-A8A5-977693883DCA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSharing.Service", "..\..\Services\FileSharing\Service\FileSharing.Service.csproj", "{2495C079-0CAC-457A-BEF3-3EAC4DA2FD96}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Service", "..\..\Services\Identity\Service\Identity.Service.csproj", "{8265E4C8-05F3-4D30-9A64-A1994FB256ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Contracts", "..\..\Services\Identity\Contracts\Identity.Contracts.csproj", "{FC8AA984-AC47-49A9-BA2D-602B03432E05}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.API", "..\..\Services\Identity\API\Identity.API.csproj", "{C637942F-98BB-4683-A4C8-8C2C7776955E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Repository", "..\..\Services\Identity\Repository\Identity.Repository.csproj", "{FDFD6BF4-9894-4587-B42D-280182FC80F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NambayaUser.Service", "..\..\Services\NambayaUser\Service\NambayaUser.Service.csproj", "{2007FBF4-AC58-4A8D-A65A-A9C6CDDA9F00}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NambayaUser.Repository", "..\..\Services\NambayaUser\Repository\NambayaUser.Repository.csproj", "{0F95E739-DA71-4C6E-A500-C9FB675A7BF0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NambayaUser.Contracts", "..\..\Services\NambayaUser\Contracts\NambayaUser.Contracts.csproj", "{128AB8EF-803D-4286-98A1-63C1135D0D2C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NambayaUser.API", "..\..\Services\NambayaUser\API\NambayaUser.API.csproj", "{EC13C664-3BB3-4CC8-AC76-F805B5B77050}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.API", "..\..\Services\Patient\API\Patient.API.csproj", "{88EA103C-03B1-4DC6-95D0-A65C532897C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Contracts", "..\..\Services\Patient\Contracts\Patient.Contracts.csproj", "{B1E26928-B3A5-4EEB-B318-8C84E85A7662}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Repository", "..\..\Services\Patient\Repository\Patient.Repository.csproj", "{CDC254E4-C97C-4003-80B1-02371832C2CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Service", "..\..\Services\Patient\Service\Patient.Service.csproj", "{FCBC69D9-B303-492F-AEFF-184A61B712B2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pharmacist.Service", "..\..\Services\Pharmacist\Service\Pharmacist.Service.csproj", "{D8A61A8D-53C1-4070-8BDD-37A3AD8870E3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pharmacist.Repository", "..\..\Services\Pharmacist\Repository\Pharmacist.Repository.csproj", "{D2C5F6B2-094A-465B-A723-ADC9FBAA18D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pharmacist.Contracts", "..\..\Services\Pharmacist\Contracts\Pharmacist.Contracts.csproj", "{9B99E059-41C7-4165-8CE2-7E64FBDF9175}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pharmacist.API", "..\..\Services\Pharmacist\API\Pharmacist.API.csproj", "{6694682C-6247-4CB5-B027-DAFF1C7AD2C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Service", "..\..\Services\UserManagement\Service\UserManagement.Service.csproj", "{A6A464EF-97E3-46E2-A642-82F5A4AB56AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Repository", "..\..\Services\UserManagement\Repository\UserManagement.Repository.csproj", "{E4EDC0B1-0D72-4F9D-A970-48B69A9CF37F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Contracts", "..\..\Services\UserManagement\Contracts\UserManagement.Contracts.csproj", "{468CCA05-D5F9-4A79-8984-C5E2F6963B9A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.API", "..\..\Services\UserManagement\API\UserManagement.API.csproj", "{D579A457-D2A5-4233-99A5-53D6BA9D7E96}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notification", "{084E4C0F-1884-46E5-BB06-815418100400}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification.API", "..\..\Services\Notification\API\Notification.API.csproj", "{1B88DD79-643C-4F0C-A981-04FF6F8EC705}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NavigatorWorker", "NavigatorWorker", "{5C7E4259-53B7-4AD8-9A38-193E3C33102C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Navigator.Worker", "..\..\Services\Navigator.Worker\Navigator.Worker\Navigator.Worker.csproj", "{549700B9-FBB7-4449-89D0-E2DDBC240C38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Navigator.Service", "..\..\Services\Navigator.Worker\Navigator.Service\Navigator.Service.csproj", "{8219670E-CC38-4329-9DE0-302EC32C97F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Navigator.Contracts", "..\..\Services\Navigator.Worker\Navigator.Contracts\Navigator.Contracts.csproj", "{6C365F39-CCDB-4493-BE39-493C06025FDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{6232DDD7-A4E8-4535-8837-5C7A27A40E48}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logging.API", "..\..\Services\Logging\API\Logging.API.csproj", "{6DF5F787-2922-4CAF-8A75-CD8E38338746}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logging.Contracts", "..\..\Services\Logging\Contracts\Logging.Contracts.csproj", "{177CCEBA-B5F8-44B9-8494-EDD16A84C970}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logging.Repository", "..\..\Services\Logging\Repository\Logging.Repository.csproj", "{43EC7B50-0749-480D-9503-010727C30318}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logging.Service", "..\..\Services\Logging\Service\Logging.Service.csproj", "{248D71AD-9C2A-4381-AEDA-489A0583A412}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Interfaces", "..\..\Services\Common\Interfaces\Common.Interfaces.csproj", "{64A4F2FF-6D60-45A6-92BB-32E5FC20D2EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Navigator.Worker.Mock", "..\..\Services\Navigator.Worker\Navigator.Worker.Mock\Navigator.Worker.Mock.csproj", "{1EE2036F-E319-4D4A-A8EB-4761F766F3F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backup", "Backup", "{F6BB06CB-420C-40F5-ABFD-B0089AC16A02}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBMaintenance", "..\..\Services\Backup\DBMaintenance\DBMaintenance.csproj", "{BB75592E-8BAE-429F-B5BC-E887C02A1971}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSharing.Wrapper.S3", "..\..\Services\FileSharing\Wrapper\S3\FileSharing.Wrapper.S3.csproj", "{9D066A54-1415-4453-8BEC-F9E053D57F92}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dlls", "Dlls", "{4B19D55F-C334-4741-B2A4-2D360CEBB942}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Services\Dlls\iTextSharp.LGPLv2.Core.dll = ..\..\Services\Dlls\iTextSharp.LGPLv2.Core.dll
+		..\..\Services\Dlls\Minio.dll = ..\..\Services\Dlls\Minio.dll
+		..\..\Services\Dlls\System.Reactive.dll = ..\..\Services\Dlls\System.Reactive.dll
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "S3Maintenance", "..\..\Services\Backup\S3Maintenance\S3Maintenance.csproj", "{29C07C99-4024-4A9F-AAA8-038BB83C0A0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nambaya.AEGnordNotifier", "..\..\Services\Nambaya.AEGnordNotifier\Nambaya.AEGnordNotifier.csproj", "{0EC8CBE3-5664-46F2-8EAE-DFD780FD01B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nambay.AEGnordNotifier", "Nambay.AEGnordNotifier", "{E8C056CF-B4C4-41E5-B888-F8C50840A5C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A57C5D5A-FC5A-40A3-9193-9E43EDD33D76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A57C5D5A-FC5A-40A3-9193-9E43EDD33D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A57C5D5A-FC5A-40A3-9193-9E43EDD33D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A57C5D5A-FC5A-40A3-9193-9E43EDD33D76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C0AA01D-3AEF-45B8-A678-63DCA9FAE2FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C0AA01D-3AEF-45B8-A678-63DCA9FAE2FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C0AA01D-3AEF-45B8-A678-63DCA9FAE2FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C0AA01D-3AEF-45B8-A678-63DCA9FAE2FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{583C1B3C-0B6D-4BFE-901A-F6B9904C00C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{583C1B3C-0B6D-4BFE-901A-F6B9904C00C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{583C1B3C-0B6D-4BFE-901A-F6B9904C00C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{583C1B3C-0B6D-4BFE-901A-F6B9904C00C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{463715DC-F68B-43B7-8DCB-F9A7E68822FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{463715DC-F68B-43B7-8DCB-F9A7E68822FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{463715DC-F68B-43B7-8DCB-F9A7E68822FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{463715DC-F68B-43B7-8DCB-F9A7E68822FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{327F5178-6D80-4BD9-BA69-0657873B5A79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327F5178-6D80-4BD9-BA69-0657873B5A79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327F5178-6D80-4BD9-BA69-0657873B5A79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327F5178-6D80-4BD9-BA69-0657873B5A79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B2930CA-54FA-4B5C-AAE0-79925BAFA4AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B2930CA-54FA-4B5C-AAE0-79925BAFA4AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B2930CA-54FA-4B5C-AAE0-79925BAFA4AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B2930CA-54FA-4B5C-AAE0-79925BAFA4AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1C94B2A-B051-4683-BFA5-450CD7986A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1C94B2A-B051-4683-BFA5-450CD7986A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1C94B2A-B051-4683-BFA5-450CD7986A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1C94B2A-B051-4683-BFA5-450CD7986A3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5013F2D4-6C54-4F5D-988C-4940A5952264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5013F2D4-6C54-4F5D-988C-4940A5952264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5013F2D4-6C54-4F5D-988C-4940A5952264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5013F2D4-6C54-4F5D-988C-4940A5952264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB9A61B7-41EA-4101-83C5-D9643033B668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB9A61B7-41EA-4101-83C5-D9643033B668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB9A61B7-41EA-4101-83C5-D9643033B668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB9A61B7-41EA-4101-83C5-D9643033B668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF502AE-7D61-4EBD-9289-EFC4FF730AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF502AE-7D61-4EBD-9289-EFC4FF730AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF502AE-7D61-4EBD-9289-EFC4FF730AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF502AE-7D61-4EBD-9289-EFC4FF730AE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20A5D845-F23D-4CB5-B986-B793DA9D705D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20A5D845-F23D-4CB5-B986-B793DA9D705D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20A5D845-F23D-4CB5-B986-B793DA9D705D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20A5D845-F23D-4CB5-B986-B793DA9D705D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F1E609-E480-47C4-AE5E-3DC4157FE735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F1E609-E480-47C4-AE5E-3DC4157FE735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F1E609-E480-47C4-AE5E-3DC4157FE735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F1E609-E480-47C4-AE5E-3DC4157FE735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{435DC1D8-28FD-49F7-AC6B-57AB65960ED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{435DC1D8-28FD-49F7-AC6B-57AB65960ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{435DC1D8-28FD-49F7-AC6B-57AB65960ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{435DC1D8-28FD-49F7-AC6B-57AB65960ED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF2D2F3-D903-40DE-A91A-00188F226BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF2D2F3-D903-40DE-A91A-00188F226BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF2D2F3-D903-40DE-A91A-00188F226BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF2D2F3-D903-40DE-A91A-00188F226BC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4D42F03-F112-4477-BF06-ECF4C8B88DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4D42F03-F112-4477-BF06-ECF4C8B88DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4D42F03-F112-4477-BF06-ECF4C8B88DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4D42F03-F112-4477-BF06-ECF4C8B88DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2495C079-0CAC-457A-BEF3-3EAC4DA2FD96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2495C079-0CAC-457A-BEF3-3EAC4DA2FD96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2495C079-0CAC-457A-BEF3-3EAC4DA2FD96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2495C079-0CAC-457A-BEF3-3EAC4DA2FD96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8265E4C8-05F3-4D30-9A64-A1994FB256ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8265E4C8-05F3-4D30-9A64-A1994FB256ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8265E4C8-05F3-4D30-9A64-A1994FB256ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8265E4C8-05F3-4D30-9A64-A1994FB256ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC8AA984-AC47-49A9-BA2D-602B03432E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC8AA984-AC47-49A9-BA2D-602B03432E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC8AA984-AC47-49A9-BA2D-602B03432E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC8AA984-AC47-49A9-BA2D-602B03432E05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C637942F-98BB-4683-A4C8-8C2C7776955E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C637942F-98BB-4683-A4C8-8C2C7776955E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C637942F-98BB-4683-A4C8-8C2C7776955E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C637942F-98BB-4683-A4C8-8C2C7776955E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDFD6BF4-9894-4587-B42D-280182FC80F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDFD6BF4-9894-4587-B42D-280182FC80F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDFD6BF4-9894-4587-B42D-280182FC80F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDFD6BF4-9894-4587-B42D-280182FC80F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2007FBF4-AC58-4A8D-A65A-A9C6CDDA9F00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2007FBF4-AC58-4A8D-A65A-A9C6CDDA9F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2007FBF4-AC58-4A8D-A65A-A9C6CDDA9F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2007FBF4-AC58-4A8D-A65A-A9C6CDDA9F00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F95E739-DA71-4C6E-A500-C9FB675A7BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F95E739-DA71-4C6E-A500-C9FB675A7BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F95E739-DA71-4C6E-A500-C9FB675A7BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F95E739-DA71-4C6E-A500-C9FB675A7BF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{128AB8EF-803D-4286-98A1-63C1135D0D2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{128AB8EF-803D-4286-98A1-63C1135D0D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{128AB8EF-803D-4286-98A1-63C1135D0D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{128AB8EF-803D-4286-98A1-63C1135D0D2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC13C664-3BB3-4CC8-AC76-F805B5B77050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC13C664-3BB3-4CC8-AC76-F805B5B77050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC13C664-3BB3-4CC8-AC76-F805B5B77050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC13C664-3BB3-4CC8-AC76-F805B5B77050}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88EA103C-03B1-4DC6-95D0-A65C532897C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88EA103C-03B1-4DC6-95D0-A65C532897C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88EA103C-03B1-4DC6-95D0-A65C532897C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88EA103C-03B1-4DC6-95D0-A65C532897C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E26928-B3A5-4EEB-B318-8C84E85A7662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E26928-B3A5-4EEB-B318-8C84E85A7662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E26928-B3A5-4EEB-B318-8C84E85A7662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E26928-B3A5-4EEB-B318-8C84E85A7662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC254E4-C97C-4003-80B1-02371832C2CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC254E4-C97C-4003-80B1-02371832C2CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC254E4-C97C-4003-80B1-02371832C2CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC254E4-C97C-4003-80B1-02371832C2CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCBC69D9-B303-492F-AEFF-184A61B712B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBC69D9-B303-492F-AEFF-184A61B712B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBC69D9-B303-492F-AEFF-184A61B712B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBC69D9-B303-492F-AEFF-184A61B712B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8A61A8D-53C1-4070-8BDD-37A3AD8870E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8A61A8D-53C1-4070-8BDD-37A3AD8870E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8A61A8D-53C1-4070-8BDD-37A3AD8870E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8A61A8D-53C1-4070-8BDD-37A3AD8870E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2C5F6B2-094A-465B-A723-ADC9FBAA18D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2C5F6B2-094A-465B-A723-ADC9FBAA18D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2C5F6B2-094A-465B-A723-ADC9FBAA18D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2C5F6B2-094A-465B-A723-ADC9FBAA18D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B99E059-41C7-4165-8CE2-7E64FBDF9175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B99E059-41C7-4165-8CE2-7E64FBDF9175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B99E059-41C7-4165-8CE2-7E64FBDF9175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B99E059-41C7-4165-8CE2-7E64FBDF9175}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6694682C-6247-4CB5-B027-DAFF1C7AD2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6694682C-6247-4CB5-B027-DAFF1C7AD2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6694682C-6247-4CB5-B027-DAFF1C7AD2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6694682C-6247-4CB5-B027-DAFF1C7AD2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6A464EF-97E3-46E2-A642-82F5A4AB56AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6A464EF-97E3-46E2-A642-82F5A4AB56AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6A464EF-97E3-46E2-A642-82F5A4AB56AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6A464EF-97E3-46E2-A642-82F5A4AB56AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4EDC0B1-0D72-4F9D-A970-48B69A9CF37F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4EDC0B1-0D72-4F9D-A970-48B69A9CF37F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4EDC0B1-0D72-4F9D-A970-48B69A9CF37F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4EDC0B1-0D72-4F9D-A970-48B69A9CF37F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{468CCA05-D5F9-4A79-8984-C5E2F6963B9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{468CCA05-D5F9-4A79-8984-C5E2F6963B9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{468CCA05-D5F9-4A79-8984-C5E2F6963B9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{468CCA05-D5F9-4A79-8984-C5E2F6963B9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D579A457-D2A5-4233-99A5-53D6BA9D7E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D579A457-D2A5-4233-99A5-53D6BA9D7E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D579A457-D2A5-4233-99A5-53D6BA9D7E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D579A457-D2A5-4233-99A5-53D6BA9D7E96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B88DD79-643C-4F0C-A981-04FF6F8EC705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B88DD79-643C-4F0C-A981-04FF6F8EC705}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B88DD79-643C-4F0C-A981-04FF6F8EC705}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B88DD79-643C-4F0C-A981-04FF6F8EC705}.Release|Any CPU.Build.0 = Release|Any CPU
+		{549700B9-FBB7-4449-89D0-E2DDBC240C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{549700B9-FBB7-4449-89D0-E2DDBC240C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{549700B9-FBB7-4449-89D0-E2DDBC240C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{549700B9-FBB7-4449-89D0-E2DDBC240C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8219670E-CC38-4329-9DE0-302EC32C97F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8219670E-CC38-4329-9DE0-302EC32C97F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8219670E-CC38-4329-9DE0-302EC32C97F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8219670E-CC38-4329-9DE0-302EC32C97F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C365F39-CCDB-4493-BE39-493C06025FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C365F39-CCDB-4493-BE39-493C06025FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C365F39-CCDB-4493-BE39-493C06025FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C365F39-CCDB-4493-BE39-493C06025FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DF5F787-2922-4CAF-8A75-CD8E38338746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DF5F787-2922-4CAF-8A75-CD8E38338746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DF5F787-2922-4CAF-8A75-CD8E38338746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DF5F787-2922-4CAF-8A75-CD8E38338746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{177CCEBA-B5F8-44B9-8494-EDD16A84C970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{177CCEBA-B5F8-44B9-8494-EDD16A84C970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{177CCEBA-B5F8-44B9-8494-EDD16A84C970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{177CCEBA-B5F8-44B9-8494-EDD16A84C970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43EC7B50-0749-480D-9503-010727C30318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43EC7B50-0749-480D-9503-010727C30318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43EC7B50-0749-480D-9503-010727C30318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43EC7B50-0749-480D-9503-010727C30318}.Release|Any CPU.Build.0 = Release|Any CPU
+		{248D71AD-9C2A-4381-AEDA-489A0583A412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{248D71AD-9C2A-4381-AEDA-489A0583A412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{248D71AD-9C2A-4381-AEDA-489A0583A412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{248D71AD-9C2A-4381-AEDA-489A0583A412}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64A4F2FF-6D60-45A6-92BB-32E5FC20D2EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64A4F2FF-6D60-45A6-92BB-32E5FC20D2EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64A4F2FF-6D60-45A6-92BB-32E5FC20D2EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64A4F2FF-6D60-45A6-92BB-32E5FC20D2EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EE2036F-E319-4D4A-A8EB-4761F766F3F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EE2036F-E319-4D4A-A8EB-4761F766F3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EE2036F-E319-4D4A-A8EB-4761F766F3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EE2036F-E319-4D4A-A8EB-4761F766F3F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB75592E-8BAE-429F-B5BC-E887C02A1971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB75592E-8BAE-429F-B5BC-E887C02A1971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB75592E-8BAE-429F-B5BC-E887C02A1971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB75592E-8BAE-429F-B5BC-E887C02A1971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D066A54-1415-4453-8BEC-F9E053D57F92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D066A54-1415-4453-8BEC-F9E053D57F92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D066A54-1415-4453-8BEC-F9E053D57F92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D066A54-1415-4453-8BEC-F9E053D57F92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29C07C99-4024-4A9F-AAA8-038BB83C0A0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29C07C99-4024-4A9F-AAA8-038BB83C0A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29C07C99-4024-4A9F-AAA8-038BB83C0A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29C07C99-4024-4A9F-AAA8-038BB83C0A0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC8CBE3-5664-46F2-8EAE-DFD780FD01B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC8CBE3-5664-46F2-8EAE-DFD780FD01B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC8CBE3-5664-46F2-8EAE-DFD780FD01B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC8CBE3-5664-46F2-8EAE-DFD780FD01B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A57C5D5A-FC5A-40A3-9193-9E43EDD33D76} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{7C0AA01D-3AEF-45B8-A678-63DCA9FAE2FC} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{583C1B3C-0B6D-4BFE-901A-F6B9904C00C2} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{463715DC-F68B-43B7-8DCB-F9A7E68822FA} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{327F5178-6D80-4BD9-BA69-0657873B5A79} = {441BD65A-02AD-44F7-ACC7-11F15DF74B55}
+		{2B2930CA-54FA-4B5C-AAE0-79925BAFA4AA} = {441BD65A-02AD-44F7-ACC7-11F15DF74B55}
+		{D1C94B2A-B051-4683-BFA5-450CD7986A3E} = {441BD65A-02AD-44F7-ACC7-11F15DF74B55}
+		{5013F2D4-6C54-4F5D-988C-4940A5952264} = {441BD65A-02AD-44F7-ACC7-11F15DF74B55}
+		{BB9A61B7-41EA-4101-83C5-D9643033B668} = {15F98806-AE16-44F0-B562-405FDADECE56}
+		{CFF502AE-7D61-4EBD-9289-EFC4FF730AE0} = {15F98806-AE16-44F0-B562-405FDADECE56}
+		{20A5D845-F23D-4CB5-B986-B793DA9D705D} = {15F98806-AE16-44F0-B562-405FDADECE56}
+		{23F1E609-E480-47C4-AE5E-3DC4157FE735} = {15F98806-AE16-44F0-B562-405FDADECE56}
+		{435DC1D8-28FD-49F7-AC6B-57AB65960ED7} = {1377A04A-2266-497D-8CF9-AECD945C74E6}
+		{2FF2D2F3-D903-40DE-A91A-00188F226BC6} = {1377A04A-2266-497D-8CF9-AECD945C74E6}
+		{D4D42F03-F112-4477-BF06-ECF4C8B88DAC} = {F66E0E88-D2F1-40E2-A8A5-977693883DCA}
+		{F66E0E88-D2F1-40E2-A8A5-977693883DCA} = {1377A04A-2266-497D-8CF9-AECD945C74E6}
+		{2495C079-0CAC-457A-BEF3-3EAC4DA2FD96} = {1377A04A-2266-497D-8CF9-AECD945C74E6}
+		{8265E4C8-05F3-4D30-9A64-A1994FB256ED} = {D17DC9FB-7348-4845-A69C-493D28A7ED31}
+		{FC8AA984-AC47-49A9-BA2D-602B03432E05} = {D17DC9FB-7348-4845-A69C-493D28A7ED31}
+		{C637942F-98BB-4683-A4C8-8C2C7776955E} = {D17DC9FB-7348-4845-A69C-493D28A7ED31}
+		{FDFD6BF4-9894-4587-B42D-280182FC80F4} = {D17DC9FB-7348-4845-A69C-493D28A7ED31}
+		{2007FBF4-AC58-4A8D-A65A-A9C6CDDA9F00} = {549CA753-83C7-4975-988D-FF84B3831D11}
+		{0F95E739-DA71-4C6E-A500-C9FB675A7BF0} = {549CA753-83C7-4975-988D-FF84B3831D11}
+		{128AB8EF-803D-4286-98A1-63C1135D0D2C} = {549CA753-83C7-4975-988D-FF84B3831D11}
+		{EC13C664-3BB3-4CC8-AC76-F805B5B77050} = {549CA753-83C7-4975-988D-FF84B3831D11}
+		{88EA103C-03B1-4DC6-95D0-A65C532897C7} = {E7A5332A-4DCB-4C13-A83D-1B1A099D8B11}
+		{B1E26928-B3A5-4EEB-B318-8C84E85A7662} = {E7A5332A-4DCB-4C13-A83D-1B1A099D8B11}
+		{CDC254E4-C97C-4003-80B1-02371832C2CB} = {E7A5332A-4DCB-4C13-A83D-1B1A099D8B11}
+		{FCBC69D9-B303-492F-AEFF-184A61B712B2} = {E7A5332A-4DCB-4C13-A83D-1B1A099D8B11}
+		{D8A61A8D-53C1-4070-8BDD-37A3AD8870E3} = {46B1AC38-9542-405D-B6BC-4AEB96E77FDA}
+		{D2C5F6B2-094A-465B-A723-ADC9FBAA18D0} = {46B1AC38-9542-405D-B6BC-4AEB96E77FDA}
+		{9B99E059-41C7-4165-8CE2-7E64FBDF9175} = {46B1AC38-9542-405D-B6BC-4AEB96E77FDA}
+		{6694682C-6247-4CB5-B027-DAFF1C7AD2C9} = {46B1AC38-9542-405D-B6BC-4AEB96E77FDA}
+		{A6A464EF-97E3-46E2-A642-82F5A4AB56AD} = {29C8DD88-0EF2-4B9C-ADBD-D6AD7701DA4D}
+		{E4EDC0B1-0D72-4F9D-A970-48B69A9CF37F} = {29C8DD88-0EF2-4B9C-ADBD-D6AD7701DA4D}
+		{468CCA05-D5F9-4A79-8984-C5E2F6963B9A} = {29C8DD88-0EF2-4B9C-ADBD-D6AD7701DA4D}
+		{D579A457-D2A5-4233-99A5-53D6BA9D7E96} = {29C8DD88-0EF2-4B9C-ADBD-D6AD7701DA4D}
+		{1B88DD79-643C-4F0C-A981-04FF6F8EC705} = {084E4C0F-1884-46E5-BB06-815418100400}
+		{549700B9-FBB7-4449-89D0-E2DDBC240C38} = {5C7E4259-53B7-4AD8-9A38-193E3C33102C}
+		{8219670E-CC38-4329-9DE0-302EC32C97F8} = {5C7E4259-53B7-4AD8-9A38-193E3C33102C}
+		{6C365F39-CCDB-4493-BE39-493C06025FDB} = {5C7E4259-53B7-4AD8-9A38-193E3C33102C}
+		{6DF5F787-2922-4CAF-8A75-CD8E38338746} = {6232DDD7-A4E8-4535-8837-5C7A27A40E48}
+		{177CCEBA-B5F8-44B9-8494-EDD16A84C970} = {6232DDD7-A4E8-4535-8837-5C7A27A40E48}
+		{43EC7B50-0749-480D-9503-010727C30318} = {6232DDD7-A4E8-4535-8837-5C7A27A40E48}
+		{248D71AD-9C2A-4381-AEDA-489A0583A412} = {6232DDD7-A4E8-4535-8837-5C7A27A40E48}
+		{64A4F2FF-6D60-45A6-92BB-32E5FC20D2EC} = {B87F5DF5-526E-41BB-A183-565DC7FBA57A}
+		{1EE2036F-E319-4D4A-A8EB-4761F766F3F3} = {5C7E4259-53B7-4AD8-9A38-193E3C33102C}
+		{BB75592E-8BAE-429F-B5BC-E887C02A1971} = {F6BB06CB-420C-40F5-ABFD-B0089AC16A02}
+		{9D066A54-1415-4453-8BEC-F9E053D57F92} = {F66E0E88-D2F1-40E2-A8A5-977693883DCA}
+		{29C07C99-4024-4A9F-AAA8-038BB83C0A0E} = {F6BB06CB-420C-40F5-ABFD-B0089AC16A02}
+		{0EC8CBE3-5664-46F2-8EAE-DFD780FD01B1} = {E8C056CF-B4C4-41E5-B888-F8C50840A5C7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99FC034E-D1AA-4761-80C7-08B5C93A7968}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 51
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.ssidecisions.com/tfs/projects2017
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Services\\Common\\BusinessObjects\\Common.BusinessObjects.csproj
+		SccProjectTopLevelParentUniqueName1 = nambaya.sln
+		SccProjectName1 = ../../Services/Common/BusinessObjects
+		SccLocalPath1 = ..\\..\\Services\\Common\\BusinessObjects
+		SccProjectUniqueName2 = ..\\..\\Services\\Common\\DataAccess\\Common.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName2 = nambaya.sln
+		SccProjectName2 = ../../Services/Common/DataAccess
+		SccLocalPath2 = ..\\..\\Services\\Common\\DataAccess
+		SccProjectUniqueName3 = ..\\..\\Services\\Common\\Infrastructure\\Common.Infrastructure.csproj
+		SccProjectTopLevelParentUniqueName3 = nambaya.sln
+		SccProjectName3 = ../../Services/Common/Infrastructure
+		SccLocalPath3 = ..\\..\\Services\\Common\\Infrastructure
+		SccProjectUniqueName4 = ..\\..\\Services\\Common\\Services\\Common.Services.csproj
+		SccProjectTopLevelParentUniqueName4 = nambaya.sln
+		SccProjectName4 = ../../Services/Common/Services
+		SccLocalPath4 = ..\\..\\Services\\Common\\Services
+		SccProjectUniqueName5 = ..\\..\\Services\\Cardiologist\\API\\Cardiologist.API.csproj
+		SccProjectTopLevelParentUniqueName5 = nambaya.sln
+		SccProjectName5 = ../../Services/Cardiologist/API
+		SccLocalPath5 = ..\\..\\Services\\Cardiologist\\API
+		SccProjectUniqueName6 = ..\\..\\Services\\Cardiologist\\Contracts\\Cardiologist.Contracts.csproj
+		SccProjectTopLevelParentUniqueName6 = nambaya.sln
+		SccProjectName6 = ../../Services/Cardiologist/Contracts
+		SccLocalPath6 = ..\\..\\Services\\Cardiologist\\Contracts
+		SccProjectUniqueName7 = ..\\..\\Services\\Cardiologist\\Repository\\Cardiologist.Repository.csproj
+		SccProjectTopLevelParentUniqueName7 = nambaya.sln
+		SccProjectName7 = ../../Services/Cardiologist/Repository
+		SccLocalPath7 = ..\\..\\Services\\Cardiologist\\Repository
+		SccProjectUniqueName8 = ..\\..\\Services\\Cardiologist\\Service\\Cardiologist.Service.csproj
+		SccProjectTopLevelParentUniqueName8 = nambaya.sln
+		SccProjectName8 = ../../Services/Cardiologist/Service
+		SccLocalPath8 = ..\\..\\Services\\Cardiologist\\Service
+		SccProjectUniqueName9 = ..\\..\\Services\\CentralGroup\\API\\CentralGroup.API.csproj
+		SccProjectTopLevelParentUniqueName9 = nambaya.sln
+		SccProjectName9 = ../../Services/CentralGroup/API
+		SccLocalPath9 = ..\\..\\Services\\CentralGroup\\API
+		SccProjectUniqueName10 = ..\\..\\Services\\CentralGroup\\Contracts\\CentralGroup.Contracts.csproj
+		SccProjectTopLevelParentUniqueName10 = nambaya.sln
+		SccProjectName10 = ../../Services/CentralGroup/Contracts
+		SccLocalPath10 = ..\\..\\Services\\CentralGroup\\Contracts
+		SccProjectUniqueName11 = ..\\..\\Services\\CentralGroup\\Repository\\CentralGroup.Repository.csproj
+		SccProjectTopLevelParentUniqueName11 = nambaya.sln
+		SccProjectName11 = ../../Services/CentralGroup/Repository
+		SccLocalPath11 = ..\\..\\Services\\CentralGroup\\Repository
+		SccProjectUniqueName12 = ..\\..\\Services\\CentralGroup\\Service\\CentralGroup.Service.csproj
+		SccProjectTopLevelParentUniqueName12 = nambaya.sln
+		SccProjectName12 = ../../Services/CentralGroup/Service
+		SccLocalPath12 = ..\\..\\Services\\CentralGroup\\Service
+		SccProjectUniqueName13 = ..\\..\\Services\\FileSharing\\API\\FileSharing.API.csproj
+		SccProjectTopLevelParentUniqueName13 = nambaya.sln
+		SccProjectName13 = ../../Services/FileSharing/API
+		SccLocalPath13 = ..\\..\\Services\\FileSharing\\API
+		SccProjectUniqueName14 = ..\\..\\Services\\FileSharing\\Contracts\\FileSharing.Contracts.csproj
+		SccProjectTopLevelParentUniqueName14 = nambaya.sln
+		SccProjectName14 = ../../Services/FileSharing/Contracts
+		SccLocalPath14 = ..\\..\\Services\\FileSharing\\Contracts
+		SccProjectUniqueName15 = ..\\..\\Services\\FileSharing\\Wrapper\\IDgard\\FileSharing.Wrapper.IDgard.csproj
+		SccProjectTopLevelParentUniqueName15 = nambaya.sln
+		SccProjectName15 = ../../Services/FileSharing/Wrapper/IDgard
+		SccLocalPath15 = ..\\..\\Services\\FileSharing\\Wrapper\\IDgard
+		SccProjectUniqueName16 = ..\\..\\Services\\FileSharing\\Service\\FileSharing.Service.csproj
+		SccProjectTopLevelParentUniqueName16 = nambaya.sln
+		SccProjectName16 = ../../Services/FileSharing/Service
+		SccLocalPath16 = ..\\..\\Services\\FileSharing\\Service
+		SccProjectUniqueName17 = ..\\..\\Services\\Identity\\Service\\Identity.Service.csproj
+		SccProjectTopLevelParentUniqueName17 = nambaya.sln
+		SccProjectName17 = ../../Services/Identity/Service
+		SccLocalPath17 = ..\\..\\Services\\Identity\\Service
+		SccProjectUniqueName18 = ..\\..\\Services\\Identity\\Contracts\\Identity.Contracts.csproj
+		SccProjectTopLevelParentUniqueName18 = nambaya.sln
+		SccProjectName18 = ../../Services/Identity/Contracts
+		SccLocalPath18 = ..\\..\\Services\\Identity\\Contracts
+		SccProjectUniqueName19 = ..\\..\\Services\\Identity\\API\\Identity.API.csproj
+		SccProjectTopLevelParentUniqueName19 = nambaya.sln
+		SccProjectName19 = ../../Services/Identity/API
+		SccLocalPath19 = ..\\..\\Services\\Identity\\API
+		SccProjectUniqueName20 = ..\\..\\Services\\Identity\\Repository\\Identity.Repository.csproj
+		SccProjectTopLevelParentUniqueName20 = nambaya.sln
+		SccProjectName20 = ../../Services/Identity/Repository
+		SccLocalPath20 = ..\\..\\Services\\Identity\\Repository
+		SccProjectUniqueName21 = ..\\..\\Services\\NambayaUser\\Service\\NambayaUser.Service.csproj
+		SccProjectTopLevelParentUniqueName21 = nambaya.sln
+		SccProjectName21 = ../../Services/NambayaUser/Service
+		SccLocalPath21 = ..\\..\\Services\\NambayaUser\\Service
+		SccProjectUniqueName22 = ..\\..\\Services\\NambayaUser\\Repository\\NambayaUser.Repository.csproj
+		SccProjectTopLevelParentUniqueName22 = nambaya.sln
+		SccProjectName22 = ../../Services/NambayaUser/Repository
+		SccLocalPath22 = ..\\..\\Services\\NambayaUser\\Repository
+		SccProjectUniqueName23 = ..\\..\\Services\\NambayaUser\\Contracts\\NambayaUser.Contracts.csproj
+		SccProjectTopLevelParentUniqueName23 = nambaya.sln
+		SccProjectName23 = ../../Services/NambayaUser/Contracts
+		SccLocalPath23 = ..\\..\\Services\\NambayaUser\\Contracts
+		SccProjectUniqueName24 = ..\\..\\Services\\NambayaUser\\API\\NambayaUser.API.csproj
+		SccProjectTopLevelParentUniqueName24 = nambaya.sln
+		SccProjectName24 = ../../Services/NambayaUser/API
+		SccLocalPath24 = ..\\..\\Services\\NambayaUser\\API
+		SccProjectUniqueName25 = ..\\..\\Services\\Patient\\API\\Patient.API.csproj
+		SccProjectTopLevelParentUniqueName25 = nambaya.sln
+		SccProjectName25 = ../../Services/Patient/API
+		SccLocalPath25 = ..\\..\\Services\\Patient\\API
+		SccProjectUniqueName26 = ..\\..\\Services\\Patient\\Contracts\\Patient.Contracts.csproj
+		SccProjectTopLevelParentUniqueName26 = nambaya.sln
+		SccProjectName26 = ../../Services/Patient/Contracts
+		SccLocalPath26 = ..\\..\\Services\\Patient\\Contracts
+		SccProjectUniqueName27 = ..\\..\\Services\\Patient\\Repository\\Patient.Repository.csproj
+		SccProjectTopLevelParentUniqueName27 = nambaya.sln
+		SccProjectName27 = ../../Services/Patient/Repository
+		SccLocalPath27 = ..\\..\\Services\\Patient\\Repository
+		SccProjectUniqueName28 = ..\\..\\Services\\Patient\\Service\\Patient.Service.csproj
+		SccProjectTopLevelParentUniqueName28 = nambaya.sln
+		SccProjectName28 = ../../Services/Patient/Service
+		SccLocalPath28 = ..\\..\\Services\\Patient\\Service
+		SccProjectUniqueName29 = ..\\..\\Services\\Pharmacist\\Service\\Pharmacist.Service.csproj
+		SccProjectTopLevelParentUniqueName29 = nambaya.sln
+		SccProjectName29 = ../../Services/Pharmacist/Service
+		SccLocalPath29 = ..\\..\\Services\\Pharmacist\\Service
+		SccProjectUniqueName30 = ..\\..\\Services\\Pharmacist\\Repository\\Pharmacist.Repository.csproj
+		SccProjectTopLevelParentUniqueName30 = nambaya.sln
+		SccProjectName30 = ../../Services/Pharmacist/Repository
+		SccLocalPath30 = ..\\..\\Services\\Pharmacist\\Repository
+		SccProjectUniqueName31 = ..\\..\\Services\\Pharmacist\\Contracts\\Pharmacist.Contracts.csproj
+		SccProjectTopLevelParentUniqueName31 = nambaya.sln
+		SccProjectName31 = ../../Services/Pharmacist/Contracts
+		SccLocalPath31 = ..\\..\\Services\\Pharmacist\\Contracts
+		SccProjectUniqueName32 = ..\\..\\Services\\Pharmacist\\API\\Pharmacist.API.csproj
+		SccProjectTopLevelParentUniqueName32 = nambaya.sln
+		SccProjectName32 = ../../Services/Pharmacist/API
+		SccLocalPath32 = ..\\..\\Services\\Pharmacist\\API
+		SccProjectUniqueName33 = ..\\..\\Services\\UserManagement\\Service\\UserManagement.Service.csproj
+		SccProjectTopLevelParentUniqueName33 = nambaya.sln
+		SccProjectName33 = ../../Services/UserManagement/Service
+		SccLocalPath33 = ..\\..\\Services\\UserManagement\\Service
+		SccProjectUniqueName34 = ..\\..\\Services\\UserManagement\\Repository\\UserManagement.Repository.csproj
+		SccProjectTopLevelParentUniqueName34 = nambaya.sln
+		SccProjectName34 = ../../Services/UserManagement/Repository
+		SccLocalPath34 = ..\\..\\Services\\UserManagement\\Repository
+		SccProjectUniqueName35 = ..\\..\\Services\\UserManagement\\Contracts\\UserManagement.Contracts.csproj
+		SccProjectTopLevelParentUniqueName35 = nambaya.sln
+		SccProjectName35 = ../../Services/UserManagement/Contracts
+		SccLocalPath35 = ..\\..\\Services\\UserManagement\\Contracts
+		SccProjectUniqueName36 = ..\\..\\Services\\UserManagement\\API\\UserManagement.API.csproj
+		SccProjectTopLevelParentUniqueName36 = nambaya.sln
+		SccProjectName36 = ../../Services/UserManagement/API
+		SccLocalPath36 = ..\\..\\Services\\UserManagement\\API
+		SccProjectUniqueName37 = ..\\..\\Services\\Notification\\API\\Notification.API.csproj
+		SccProjectTopLevelParentUniqueName37 = nambaya.sln
+		SccProjectName37 = ../../Services/Notification/API
+		SccLocalPath37 = ..\\..\\Services\\Notification\\API
+		SccProjectUniqueName38 = ..\\..\\Services\\Navigator.Worker\\Navigator.Worker\\Navigator.Worker.csproj
+		SccProjectTopLevelParentUniqueName38 = nambaya.sln
+		SccProjectName38 = ../../Services/Navigator.Worker/Navigator.Worker
+		SccLocalPath38 = ..\\..\\Services\\Navigator.Worker\\Navigator.Worker
+		SccProjectUniqueName39 = ..\\..\\Services\\Navigator.Worker\\Navigator.Service\\Navigator.Service.csproj
+		SccProjectTopLevelParentUniqueName39 = nambaya.sln
+		SccProjectName39 = ../../Services/Navigator.Worker/Navigator.Service
+		SccLocalPath39 = ..\\..\\Services\\Navigator.Worker\\Navigator.Service
+		SccProjectUniqueName40 = ..\\..\\Services\\Navigator.Worker\\Navigator.Contracts\\Navigator.Contracts.csproj
+		SccProjectTopLevelParentUniqueName40 = nambaya.sln
+		SccProjectName40 = ../../Services/Navigator.Worker/Navigator.Contracts
+		SccLocalPath40 = ..\\..\\Services\\Navigator.Worker\\Navigator.Contracts
+		SccProjectUniqueName41 = ..\\..\\Services\\Logging\\API\\Logging.API.csproj
+		SccProjectTopLevelParentUniqueName41 = nambaya.sln
+		SccProjectName41 = ../../Services/Logging/API
+		SccLocalPath41 = ..\\..\\Services\\Logging\\API
+		SccProjectUniqueName42 = ..\\..\\Services\\Logging\\Contracts\\Logging.Contracts.csproj
+		SccProjectTopLevelParentUniqueName42 = nambaya.sln
+		SccProjectName42 = ../../Services/Logging/Contracts
+		SccLocalPath42 = ..\\..\\Services\\Logging\\Contracts
+		SccProjectUniqueName43 = ..\\..\\Services\\Logging\\Repository\\Logging.Repository.csproj
+		SccProjectTopLevelParentUniqueName43 = nambaya.sln
+		SccProjectName43 = ../../Services/Logging/Repository
+		SccLocalPath43 = ..\\..\\Services\\Logging\\Repository
+		SccProjectUniqueName44 = ..\\..\\Services\\Logging\\Service\\Logging.Service.csproj
+		SccProjectTopLevelParentUniqueName44 = nambaya.sln
+		SccProjectName44 = ../../Services/Logging/Service
+		SccLocalPath44 = ..\\..\\Services\\Logging\\Service
+		SccProjectUniqueName45 = ..\\..\\Services\\Common\\Interfaces\\Common.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName45 = nambaya.sln
+		SccProjectName45 = ../../Services/Common/Interfaces
+		SccLocalPath45 = ..\\..\\Services\\Common\\Interfaces
+		SccProjectUniqueName46 = ..\\..\\Services\\Navigator.Worker\\Navigator.Worker.Mock\\Navigator.Worker.Mock.csproj
+		SccProjectTopLevelParentUniqueName46 = nambaya.sln
+		SccProjectName46 = ../../Services/Navigator.Worker/Navigator.Worker.Mock
+		SccLocalPath46 = ..\\..\\Services\\Navigator.Worker\\Navigator.Worker.Mock
+		SccProjectUniqueName47 = ..\\..\\Services\\Backup\\DBMaintenance\\DBMaintenance.csproj
+		SccProjectTopLevelParentUniqueName47 = nambaya.sln
+		SccProjectName47 = ../../Services/Backup/DBMaintenance
+		SccLocalPath47 = ..\\..\\Services\\Backup\\DBMaintenance
+		SccProjectUniqueName48 = ..\\..\\Services\\FileSharing\\Wrapper\\S3\\FileSharing.Wrapper.S3.csproj
+		SccProjectTopLevelParentUniqueName48 = nambaya.sln
+		SccProjectName48 = ../../Services/FileSharing/Wrapper/S3
+		SccLocalPath48 = ..\\..\\Services\\FileSharing\\Wrapper\\S3
+		SccProjectUniqueName49 = ..\\..\\Services\\Backup\\S3Maintenance\\S3Maintenance.csproj
+		SccProjectTopLevelParentUniqueName49 = nambaya.sln
+		SccProjectName49 = ../../Services/Backup/S3Maintenance
+		SccLocalPath49 = ..\\..\\Services\\Backup\\S3Maintenance
+		SccProjectUniqueName50 = ..\\..\\Services\\Nambaya.AEGnordNotifier\\Nambaya.AEGnordNotifier.csproj
+		SccProjectTopLevelParentUniqueName50 = nambaya.sln
+		SccProjectName50 = ../../Services/Nambaya.AEGnordNotifier
+		SccLocalPath50 = ..\\..\\Services\\Nambaya.AEGnordNotifier
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,232 @@
+<div *ngIf="!isPharmacist && !isCardiologist" class="main-heading">
+  <h4 class="sample-title" translate><span (click)="goToPatients()" class="icon-previous"></span> Quick Evaluation</h4>
+</div>
+<div *ngIf="isPharmacist || isCardiologist" class="main-heading">
+  <h4 class="sample-title">
+    <span (click)="goToPatients()" class="icon-previous"></span>&nbsp;
+    <span *ngIf="caseObject">
+      {{ caseObject.firstName + ' ' + this.caseObject.lastName }}
+      <span class="separator"></span>
+      <span *ngIf="isPharmacist" class="patient-id">{{ caseObject.pharmacyPatientID }}</span>
+      <span *ngIf="isCardiologist" class="patient-id">{{ caseObject.caseIDString }}</span>
+    </span>
+  </h4>
+</div>
+<app-loader [isLoading]="isLoading"></app-loader>
+<div [class.main-bg]="isPharmacist || isCardiologist">
+  <app-patient-wizard *ngIf="isPharmacist" [caseObject]="caseObject" [parentData]="parentData"></app-patient-wizard>
+  <app-cardio-wizard *ngIf="isCardiologist" [caseObject]="caseObject" [parentData]="parentData"></app-cardio-wizard>
+  <div class="sample-wrapper">
+    <section class="sample-content">
+      <article class="sample-column">
+        <form class="input-group-form" (ngSubmit)="updateQuickEvaluation()" [formGroup]="quickEvaluationForm">
+          <div class="column-holder">
+            <div
+              class="columns add"
+              *ngIf="isCardiologist && caseObject && caseObject.statusID < caseStatuses.DE_LOCKED"
+            >
+              <div class="col-lg-12 row">
+                <div class="box box-wizard">
+                  <button
+                    translate
+                    type="button"
+                    (click)="openAssignCaseDialog()"
+                    class="btn-secandory save-close-button"
+                    igxButton="raised"
+                    igxRipple
+                  >
+                    <span class="fas fa-clipboard-check"></span>assign_case
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="columns add" *ngIf="isPharmacist && !caseFinalizedByPharmacist">
+              <div class="col-lg-12 row">
+                <div class="box box-wizard">
+                  <button
+                    *ngIf="isPharmacist"
+                    [class.skip-disabled]="caseFinalizedByPharmacist"
+                    [disabled]="caseFinalizedByPharmacist || gettingImages"
+                    type="button"
+                    (click)="openCaseConfirmDialog()"
+                    translate
+                    class="btn-secandory save-close-button"
+                    igxButton="raised"
+                    igxRipple
+                  >
+                    <span class="fas fa-save"></span> Complete
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="row offset-3">
+              <div class="col-lg-11" style="padding-left: 0;">
+                <div *ngIf="executingQE">
+                  <div class="linear-container">
+                    <igx-linear-bar [striped]="false" [max]="100" [value]="progress" type="danger"></igx-linear-bar>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="columns row">
+              <div class="col-lg-3" style="padding-left: 0;">
+                <span class="subheadin" translate>Patient Quick Evaluation</span>
+                <p *ngIf="isCardiologist" translate>cardio_heading_quick_evaluation_for_health</p>
+                <p *ngIf="!isCardiologist" translate>pharma_heading_quick_evaluation_for_health</p>
+              </div>
+              <div class="col-lg-9">
+                <div class="row" style="padding-bottom: 20px;">
+                  <div class="col-md-3" *ngIf="gettingImages" style="display: inline-flex">
+                    <p class="image-loader">
+                      <i class="fas fa-spinner fa-spin"></i> {{ gettingImagesLabel | translate }}
+                    </p>
+                  </div>
+                  <div class="qe-img-holder" *ngIf="!gettingImages">
+                    <img
+                      class="img-data-getting"
+                      (click)="openImageInNewTab(images[0])"
+                      src="{{ 'data:image/jpg;base64,' + images[0] }}"
+                    />
+                  </div>
+                  <div class="row" style="display: inline-block; min-width: 30%">
+                    <div class="col-md-12" *ngIf="!caseObject">
+                      <div class="timeline-wrapper">
+                        <div class="animated-background"></div>
+                        <div class="animated-background" style="width: 90%"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="caseObject && caseObject.statusID >= caseStatuses.QE_COMPLETED">
+                      <div class="box textual-info" *ngIf="quickEvaluationData && quickEvaluationData.hours">
+                        <label igxLabel>{{ 'Duration' | translate }}:</label><br />
+                        <p>
+                          {{ quickEvaluationData.hours }} {{ 'Hours' | translate }} {{ quickEvaluationData.minutes }}
+                          {{ 'Minutes' | translate }}
+                        </p>
+                        <div *ngIf="quickEvaluationData && quickEvaluationData.notes">
+                          <label igxLabel translate>{{ 'Notes' | translate }}:</label><br />
+                          <p>{{ quickEvaluationData.notes }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="caseObject && caseObject.statusID <= caseStatuses.QE_IN_QUEUE">
+                      <igx-input-group>
+                        <label igxLabel for="hours" translate>Hours</label>
+                        <input igxInput name="hours" id="hours" required type="number" formControlName="hours" />
+                        <igx-hint position="start">Ex.: 1 ~ 48</igx-hint>
+                      </igx-input-group>
+                      <small
+                        translate
+                        class="text-danger"
+                        *ngIf="
+                          quickEvaluationForm.controls.hours.touched &&
+                          quickEvaluationForm.controls.hours.errors?.required
+                        "
+                        >required_hours
+                      </small>
+                      <igx-input-group>
+                        <label igxLabel for="minutes" translate>Minutes</label>
+                        <input igxInput name="minutes" id="minutes" required type="number" formControlName="minutes" />
+                        <igx-hint position="start">Ex.: 0 ~ 60</igx-hint>
+                      </igx-input-group>
+                      <small
+                        translate
+                        class="text-danger"
+                        *ngIf="
+                          quickEvaluationForm.controls.minutes.touched &&
+                          quickEvaluationForm.controls.minutes.errors?.required
+                        "
+                      >
+                        required_minutes
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <small translate class="text-danger qeOption" [hidden]="quickResultId !== null">
+                  please_choose_an_option
+                </small>
+
+                <div class="grid-360">
+                  <igx-grid
+                    [rowSelectable]="true"
+                    [primaryKey]="'id'"
+                    [displayDensity]="'comfortable'"
+                    #qeTableGrid
+                    [data]="qeTableData"
+                    width="100%"
+                    [height]="null"
+                    [paging]="false"
+                    [cellSelection]="'none'"
+                    [rowSelection]="'single'"
+                    (onRowSelectionChange)="handleRowSelection($event)"
+                  >
+                    <!--(onCellClick)="handleRowClick($event)"-->
+                    <igx-column field="id" width="150px">
+                      <ng-template igxHeader let-column>
+                        <div><a translate> quick_eval_table.results </a></div>
+                      </ng-template>
+                      <ng-template igxCell let-value>
+                        <span class="ml5">{{ 'qe_statuses.' + QEStatuses[value] | translate }}</span>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="range" width="100px">
+                      <ng-template igxHeader let-column>
+                        <div><a translate> quick_eval_table.range </a></div>
+                      </ng-template>
+                      <ng-template igxCell let-value>{{ value }}</ng-template>
+                    </igx-column>
+                    <igx-column field="proposition" width="150px">
+                      <ng-template igxHeader let-column>
+                        <div><a translate> quick_eval_table.proposition </a></div>
+                      </ng-template>
+                      <ng-template igxCell let-value translate>{{ value | translate }}</ng-template>
+                    </igx-column>
+                    <igx-column field="implications">
+                      <ng-template igxHeader let-column>
+                        <div><a translate> quick_eval_table.implications </a></div>
+                      </ng-template>
+                      <ng-template igxCell let-value translate>{{ value | translate }}</ng-template>
+                    </igx-column>
+                    <ng-template igxRowSelector let-rowContext>
+                      <div class="row-selector igx-grid__cbx-selection igx-grid__cbx-padding">
+                        <span
+                          class="fas fa-circle"
+                          [class.qe-green]="rowContext.rowID === 511"
+                          [class.qe-yellow]="rowContext.rowID === 512"
+                          [class.qe-orange]="rowContext.rowID === 513"
+                          [class.qe-red]="rowContext.rowID === 514"
+                          [class.qe-red-red]="rowContext.rowID === 515"
+                        ></span>
+                        <span *ngIf="rowContext.rowID === 515" class="fas fa-circle ml5 qe-red-red"></span>
+                      </div>
+                    </ng-template>
+                  </igx-grid>
+                </div>
+              </div>
+              <div
+                class="col-lg-5 offset-lg-3 offset-md-0"
+                *ngIf="caseObject && caseObject.statusID <= caseStatuses.QE_IN_QUEUE"
+              >
+                <div class="box textarea">
+                  <igx-input-group>
+                    <label igxLabel for="notes" translate>Notes</label>
+                    <textarea igxInput name="notes" id="notes" type="text" formControlName="notes"></textarea>
+                  </igx-input-group>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </article>
+    </section>
+  </div>
+  <igx-dialog
+    #caseConfirmDialog
+    title="{{ 'Confirmation' | translate }}"
+    leftButtonLabel="{{ 'Cancel' | translate }}"
+    (onLeftButtonSelect)="caseConfirmDialog.close()"
+    rightButtonLabel="OK"
+    (onRightButtonSelect)="updateQuickEvaluation()"
+    message="{{ 'sure_to_save_case' | translate }}"
+  >
+  </igx-dialog>
+</div>

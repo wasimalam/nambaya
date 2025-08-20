@@ -1,0 +1,20 @@
+.fa {
+  vertical-align: middle;
+}
+.loader-background {
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  opacity: 0.4;
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.theme-loader-icon {
+  position: fixed;
+  top: 50%;
+  left: 49%;
+  z-index: 999;
+}

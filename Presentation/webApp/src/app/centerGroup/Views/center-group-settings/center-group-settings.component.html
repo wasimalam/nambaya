@@ -1,0 +1,127 @@
+<div class="sample-wrapper">
+  <section class="sample-content">
+    <article class="sample-column">
+      <form class="input-group-form" (ngSubmit)="updateCenterGroupSettings()" [formGroup]="centerGroupSettingsForm">
+        <div class="main-heading">
+          <h4 translate class="sample-title"><span (click)="goBack()" class="icon-previous"></span> Settings</h4>
+        </div>
+        <app-loader [isLoading]="isLoading"></app-loader>
+        <div class="column-holder">
+          <div class="columns add">
+            <div class="col-lg-12 row">
+              <div class="box">
+                <button translate class="btn-primary" igxButton="raised" igxRipple>
+                  <span class="icon-save"></span>Save
+                </button>
+                <button translate type="button" (click)="goBack()" class="btn-secandory" igxButton="raised" igxRipple>
+                  <span class="icon-highlight_remove"></span>Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span translate class="subheadin">Basic</span>
+              <p translate>
+                Your preferences are important to connect
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box">
+                <igx-select #selectLanguage name="languageCode" id="languageCode" formControlName="languageCode">
+                  <igx-select-item *ngFor="let language of languages" [value]="language.code">
+                    {{ language.code | translate }}
+                  </igx-select-item>
+                  <label translate igxLabel for="languageCode">Language</label>
+                </igx-select>
+                <small
+                  translate
+                  [hidden]="
+                    centerGroupSettingsForm.controls.languageCode.valid ||
+                    centerGroupSettingsForm.controls.languageCode.untouched
+                  "
+                  class="text-danger"
+                >
+                  Language is required
+                </small>
+              </div>
+              <div class="box">
+                <igx-select #select2FOption name="option2F" id="option2F" formControlName="option2F" [value]="">
+                  <igx-select-item *ngFor="let option2F of options2F" [value]="option2F.id">
+                    {{ option2F.code | translate }}
+                  </igx-select-item>
+                  <label translate igxLabel for="option2F">Notification Type</label>
+                </igx-select>
+                <small
+                  translate
+                  [hidden]="
+                    centerGroupSettingsForm.controls.option2F.valid ||
+                    centerGroupSettingsForm.controls.option2F.untouched
+                  "
+                  class="text-danger"
+                >
+                  2F option is required
+                </small>
+              </div>
+              <div class="box">
+                <igx-select name="dateFormat" id="dateFormat" formControlName="dateFormat" [value]="">
+                  <igx-select-item *ngFor="let dateFormat of dateFormats" [value]="dateFormat.value">
+                    {{ dateFormat.text }}
+                  </igx-select-item>
+                  <label igxLabel for="dateFormat" translate>Date Format</label>
+                </igx-select>
+                <small
+                  translate
+                  [hidden]="
+                    centerGroupSettingsForm.controls.dateFormat.valid ||
+                    centerGroupSettingsForm.controls.dateFormat.untouched
+                  "
+                  class="text-danger"
+                >
+                  Date Format is required
+                </small>
+              </div>
+              <div class="box">
+                <igx-select name="timeFormat" id="timeFormat" formControlName="timeFormat" [value]="">
+                  <igx-select-item *ngFor="let timeFormat of timeFormats" [value]="timeFormat.value">
+                    {{ timeFormat.text }}
+                  </igx-select-item>
+                  <label igxLabel for="timeFormat" translate>Time Format</label>
+                </igx-select>
+                <small
+                  translate
+                  [hidden]="
+                    centerGroupSettingsForm.controls.timeFormat.valid ||
+                    centerGroupSettingsForm.controls.timeFormat.untouched
+                  "
+                  class="text-danger"
+                >
+                  Time Format is required
+                </small>
+              </div>
+              <div class="box">
+                <igx-select #TimeZone name="timeZone" id="timeZone" formControlName="timeZone" [value]="">
+                  <igx-select-item *ngFor="let timeZone of timeZones" [value]="timeZone.utc[0]">
+                    {{ timeZone.text }}
+                  </igx-select-item>
+                  <label igxLabel for="timeZone" translate>Time Zone</label>
+                </igx-select>
+                <small
+                  translate
+                  [hidden]="
+                    centerGroupSettingsForm.controls.timeZone.valid ||
+                    centerGroupSettingsForm.controls.timeZone.untouched
+                  "
+                  class="text-danger"
+                >
+                  Time zone is required
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">&nbsp;</div>
+        </div>
+      </form>
+    </article>
+  </section>
+</div>

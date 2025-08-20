@@ -1,0 +1,312 @@
+<div class="sample-wrapper">
+  <section class="sample-content">
+    <article class="sample-column">
+      <form class="input-group-form" (ngSubmit)="updateCardiologistSettings()" [formGroup]="cardiologistAccountsForm">
+        <div class="main-heading">
+          <h4 translate class="sample-title">
+            <span (click)="goBack()" class="icon-previous"></span> Account Settings
+          </h4>
+        </div>
+        <app-loader [isLoading]="isLoading"></app-loader>
+        <div class="column-holder">
+          <div class="columns add">
+            <div class="col-lg-12 row">
+              <div class="box">
+                <button translate class="btn-primary" igxButton="raised" igxRipple>
+                  <span class="icon-save"></span>Save
+                </button>
+                <button type="button" translate (click)="goBack()" class="btn-secandory" igxButton="raised" igxRipple>
+                  <span class="icon-highlight_remove"></span>Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span translate class="subheadin">Basic</span>
+              <p translate>
+                having_an_up_to_date_email_address_attached_to_your_account
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box">
+                <igx-input-group>
+                  <label translate igxLabel for="firstName">First Name</label>
+                  <input igxInput name="firstName" id="firstName" type="text" required formControlName="firstName"/>
+                </igx-input-group>
+                <small
+                  *ngIf="
+                    cardiologistAccountsForm.controls.firstName.touched &&
+                    cardiologistAccountsForm.controls.firstName.errors?.required
+                  "
+                  class="text-danger"
+                  translate
+                >First name is required
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    cardiologistAccountsForm.controls.firstName.touched &&
+                    cardiologistAccountsForm.controls.firstName.errors?.invalidMaxLength
+                  "
+                  translate
+                >max_80_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel translate for="lastName">Last Name</label>
+                  <input igxInput name="lastName" id="lastName" type="text" required formControlName="lastName"/>
+                </igx-input-group>
+                <small
+                  *ngIf="
+                    cardiologistAccountsForm.controls.lastName.touched &&
+                    cardiologistAccountsForm.controls.lastName.errors?.required
+                  "
+                  class="text-danger"
+                  translate
+                >Last name is required
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    cardiologistAccountsForm.controls.lastName.touched &&
+                    cardiologistAccountsForm.controls.lastName.errors?.invalidMaxLength
+                  "
+                  translate
+                >max_80_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel translate for="email">Email address</label>
+                  <input igxInput name="email" id="email" type="email" readonly required formControlName="email"/>
+                </igx-input-group>
+                <small
+                  *ngIf="
+                    cardiologistAccountsForm.controls.email.touched &&
+                    cardiologistAccountsForm.controls.email.errors?.required
+                  "
+                  class="text-danger"
+                  translate
+                >Email is required
+                </small>
+                <small
+                  *ngIf="
+                    cardiologistAccountsForm.controls.email.touched &&
+                    cardiologistAccountsForm.controls.email.errors?.email &&
+                    !cardiologistAccountsForm.controls.email.errors?.invalidMaxLength
+                  "
+                  class="text-danger"
+                  translate
+                >invalid_email_address
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    cardiologistAccountsForm.controls.email.touched &&
+                    cardiologistAccountsForm.controls.email.errors?.invalidMaxLength
+                  "
+                  translate
+                >max_80_characters_allowed
+                </small>
+              </div>
+              <div class="box" *ngIf="roleCode === 'Cardiologist'">
+                <igx-input-group>
+                  <label igxLabel for="doctorID" translate>Doctor ID</label>
+                  <input igxInput name="doctorID" id="doctorID" type="text" required formControlName="doctorID"/>
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    cardiologistAccountsForm.controls.doctorID.touched &&
+                    cardiologistAccountsForm.controls.doctorID.errors?.invalidNumber &&
+                    !cardiologistAccountsForm.controls.doctorID.errors?.invalidMaxLength
+                  "
+                  translate
+                >Doctor Id is not a valid number
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    cardiologistAccountsForm.controls.doctorID.touched &&
+                    cardiologistAccountsForm.controls.doctorID.errors?.invalidMaxLength
+                  "
+                  translate
+                >max_12_characters_allowed
+                </small>
+                <small
+                  *ngIf="
+                    cardiologistAccountsForm.controls.doctorID.touched &&
+                    cardiologistAccountsForm.controls.doctorID.errors?.required
+                  "
+                  class="text-danger"
+                  translate
+                >Doctor Id is required
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel for="companyID" translate>clinic_no</label>
+                  <input igxInput name="companyID" id="companyID" required type="text" formControlName="companyID"/>
+                </igx-input-group>
+                <small
+                  translate
+                  [hidden]="
+                    cardiologistAccountsForm.controls.companyID.valid ||
+                    cardiologistAccountsForm.controls.companyID.untouched
+                  "
+                  class="text-danger"
+                  translate
+                >clinic_number_required
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>Contact Details</span>
+              <p translate>
+                please_add_your_phone_number_to_be_contacted_by_SMS
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box">
+                <ngx-intl-tel-input
+                  #phoneControl
+                  [cssClass]="'custom'"
+                  [preferredCountries]="preferredCountries"
+                  [enableAutoCountrySelect]="true"
+                  [enablePlaceholder]="true"
+                  [searchCountryFlag]="true"
+                  [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                  [selectFirstCountry]="false"
+                  [selectedCountryISO]="CountryISO.Germany"
+                  [maxLength]="15"
+                  [phoneValidation]="true"
+                  [separateDialCode]="separateDialCode"
+                  name="phone"
+                  formControlName="phone">
+                </ngx-intl-tel-input>
+                <igx-hint translate position="start" class="verify text-info" *ngIf="isDisplayVerifyLink">
+                  phone_number_not_verified &nbsp;
+                  <a [routerLink]="[]" class="bottm-anchor-text" (click)="generatePhoneVerificationOtp()" translate>
+                    verify_phone_now
+                  </a>
+                </igx-hint>
+                <small
+                  class="text-danger"
+                  *ngIf="this.cardiologistAccountsForm.controls.phone.status === 'INVALID'"
+                  translate
+                >Phone number is not valid
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="street" name="street" type="text" formControlName="street"/>
+                  <label translate igxLabel for="street">Street</label>
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    cardiologistAccountsForm.controls.street.touched &&
+                    cardiologistAccountsForm.controls.street.errors?.invalidMaxLength
+                  "
+                  translate
+                >max_200_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="address" name="address" type="text" formControlName="address"/>
+                  <label igxLabel translate for="address">City</label>
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    cardiologistAccountsForm.controls.address.touched &&
+                    cardiologistAccountsForm.controls.address.errors?.invalidMaxLength
+                  "
+                  translate
+                >max_200_characters_allowed
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="zipCode" name="zipCode" type="text" formControlName="zipCode"/>
+                  <label igxLabel translate for="zipCode">Zip Code</label>
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    cardiologistAccountsForm.controls.zipCode.touched &&
+                    cardiologistAccountsForm.controls.zipCode.errors?.invalidNumber &&
+                    !cardiologistAccountsForm.controls.zipCode.errors?.invalidMaxLength
+                  "
+                  translate
+                >
+                  Zip Code is not a valid number
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    cardiologistAccountsForm.controls.zipCode.touched &&
+                    cardiologistAccountsForm.controls.zipCode.errors?.invalidMaxLength
+                  "
+                  translate
+                >max_5_characters_allowed
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+        </div>
+      </form>
+    </article>
+  </section>
+</div>
+<igx-dialog
+    #phoneVerificationDialog
+    leftButtonLabel="{{ 'later' | translate }}"
+    (onLeftButtonSelect)="phoneVerificationDialog.close()"
+    (onRightButtonSelect)="verifyPhone()"
+    [rightButtonLabel]="'verify' | translate"
+    [closeOnOutsideSelect]="true"
+>
+  <div class="sample-wrapper dialog">
+    <section class="sample-content">
+      <article class="sample-column">
+        <form class="input-group-form" [formGroup]="phoneVerificationForm">
+          <div class="main-heading" style="padding-right: 250px;">
+            <h4 style="margin-top: 15px" class="sample-title" translate>verify_phone</h4>
+          </div>
+          <div class="column-holder">
+            <div class="columns row">
+              <div class="col-lg-12">
+                <div class="box textarea">
+                  <igx-input-group>
+                    <label igxLabel for="otp" translate>OTP</label>
+                    <input type="text" id="otp" required igxInput name="otp" formControlName="otp"/>
+                    <igx-hint translate position="start" class="verify text-info">
+                      otp_clarification_text
+                    </igx-hint>
+                  </igx-input-group>
+                  <small
+                    *ngIf="
+                      phoneVerificationForm.controls.otp.touched && phoneVerificationForm.controls.otp.errors?.required
+                    "
+                    class="text-danger"
+                    translate
+                  >
+                    required_otp
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </article>
+    </section>
+  </div>
+</igx-dialog>

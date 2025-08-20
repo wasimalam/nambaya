@@ -1,0 +1,113 @@
+<div class="login-holder">
+  <div class="login-header">
+    <div class="logo">
+      <a (click)="goToHome()"
+        class="logo-area"><img src="assets/images/logo.png"/></a>
+      <span translate>Know your numbers...for a better tomorrow </span>
+    </div>
+    <button (click)="toggleLanguage()" igxButton="outlined" class="lang-btn">{{ alternateLanguage }}</button>
+  </div>
+  <div class="login-content">
+    <div class="image-area">
+      <img src="assets/images/login-lady-gradient-cycle.png" />
+    </div>
+    <div class="form-area" *ngIf="!showOtpForm">
+      <div class="form">
+        <h1 translate>{{ pageName }}</h1>
+        <p style="margin-top: 0;" translate>Welcome to Nambaya! <br /></p>
+        <form
+          autocomplete="off"
+          *ngIf="showLogin"
+          class="input-group-form"
+          [formGroup]="loginForm"
+          (ngSubmit)="login()"
+        >
+          <div class="form-box">
+            <igx-input-group>
+              <label igxLabel autocomplete="off" for="email" translate>Email address</label>
+              <input igxInput id="email" name="email" type="email" formControlName="email" required />
+            </igx-input-group>
+          </div>
+          <div class="form-box">
+            <igx-input-group>
+              <label igxLabel for="password" translate>Password</label>
+              <input
+                autocomplete="off"
+                igxInput
+                id="password"
+                name="password"
+                type="{{ passwordFieldType }}"
+                formControlName="password"
+              />
+              <igx-suffix (click)="showPassword()">
+                <i class="fas fa-eye" *ngIf="passwordFieldType == 'password'"></i
+                ><i class="fas fa-eye-slash" *ngIf="passwordFieldType == 'text'"></i>
+              </igx-suffix>
+            </igx-input-group>
+          </div>
+          <div class="form-box">
+            <button
+              class="btn-primary"
+              igxButton="raised"
+              type="submit"
+              igxRipple
+              [disabled]="!loginForm.valid || isLoading"
+              translate
+            >
+              Login
+            </button>
+          </div>
+        </form>
+        <div class="form-box">
+          <ul>
+            <li><a (click)="navigateToForgetPassword()" translate style="cursor:pointer">Forgot Password?</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-area" *ngIf="showOtpForm">
+      <div class="form">
+        <h1 translate>{{ pageName }}</h1>
+        <p translate>
+          An OTP is sent to your {{ mode == 'email' ? 'Email' : 'Mobile' }}. Please check and enter in below box. <br />
+        </p>
+        <form class="input-group-form" [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+          <div class="form-box">
+            <igx-input-group>
+              <label igxLabel for="otp" translate>OTP</label>
+              <input igxInput id="otp" name="otp" type="{{ passwordFieldType }}" formControlName="otp" required />
+              <igx-suffix (click)="showPassword()">
+                <i class="fas fa-eye" *ngIf="passwordFieldType == 'password'"></i
+                ><i class="fas fa-eye-slash" *ngIf="passwordFieldType == 'text'"></i>
+              </igx-suffix>
+            </igx-input-group>
+          </div>
+          <div class="form-box">
+            <ul>
+              <li>
+                <a [hidden]="isAllowedToSendAgain">
+                  <countdown #timer [config]="config" (event)="onTimerFinished($event)"></countdown>
+                </a>
+                <a [hidden]="!isAllowedToSendAgain" (click)="sendAgain()" translate> Resend</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="form-box">
+            <button
+              class="btn-primary"
+              igxButton="raised"
+              type="submit"
+              igxRipple
+              [disabled]="!otpForm.valid || isLoading"
+              translate
+            >
+              Verify
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

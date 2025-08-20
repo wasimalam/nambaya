@@ -1,0 +1,25 @@
+<igx-tabs #tabs1 tabsType="fixed">
+  <igx-tab-item
+    label="{{'Draw' | translate}}"
+    routerLink="/cardiologist/signature/draw"
+    routerLinkActive
+    #rla1="routerLinkActive"
+    [isSelected]="rla1.isActive"
+  ></igx-tab-item>
+
+  <igx-tab-item
+    label="{{'Upload' | translate}}"
+    routerLink="/cardiologist/signature/upload"
+    routerLinkActive
+    #rla2="routerLinkActive"
+    [isSelected]="rla2.isActive"
+  ></igx-tab-item>
+
+  <igx-tab-item
+    label="{{'Preview' | translate}}"
+    routerLink="/cardiologist/signature/preview"
+    routerLinkActive
+    #rla3="routerLinkActive"
+    [isSelected]="rla3.isActive"
+  ></igx-tab-item>
+</igx-tabs>

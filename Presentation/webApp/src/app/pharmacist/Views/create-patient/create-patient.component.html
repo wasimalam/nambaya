@@ -1,0 +1,519 @@
+<div class="sample-wrapper">
+  <section class="sample-content">
+    <article class="sample-column">
+      <app-loader [isLoading]="isLoading"></app-loader>
+      <form class="input-group-form" (ngSubmit)="createNewPatient()" [formGroup]="patientsCreateForm">
+        <div class="main-heading">
+          <h4 class="sample-title" translate><span (click)="goBack()" class="icon-previous"></span> Add Patient</h4>
+        </div>
+        <div class="column-holder">
+          <div class="columns add">
+            <div class="col-lg-12">
+              <div class="box">
+                <button translate class="btn-primary" igxButton="raised" igxRipple>
+                  <span class="icon-save"></span>Save
+                </button>
+                <button type="button" translate (click)="goBack()" class="btn-secandory" igxButton="raised" igxRipple>
+                  <span class="icon-highlight_remove"></span>Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>Personal Information</span>
+              <p translate>
+                Enroll patient by respecting their privacy
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box">
+                <igx-input-group>
+                  <label translate igxLabel for="FirstName">First Name</label>
+                  <input igxInput name="FirstName" id="FirstName" type="text" required formControlName="FirstName" />
+                </igx-input-group>
+                <small
+                  translate
+                  [hidden]="
+                    patientsCreateForm.controls.FirstName.valid || patientsCreateForm.controls.FirstName.untouched
+                  "
+                  class="text-danger"
+                  >First name is required
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel for="LastName" translate>Last Name</label>
+                  <input igxInput name="LastName" id="LastName" type="text" required formControlName="LastName" />
+                </igx-input-group>
+                <small
+                  translate
+                  [hidden]="
+                    patientsCreateForm.controls.LastName.valid || patientsCreateForm.controls.LastName.untouched
+                  "
+                  class="text-danger"
+                  >Last name is required
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel for="Email" translate>Email address</label>
+                  <input igxInput name="Email" id="Email" type="email" formControlName="Email" />
+                </igx-input-group>
+                <small
+                  [hidden]="patientsCreateForm.controls.Email.valid || patientsCreateForm.controls.Email.untouched"
+                  class="text-danger"
+                  translate
+                >
+                  Email address is not valid
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <igx-prefix>
+                    <span>{{ pharmacyIdPrefix }}-</span>
+                  </igx-prefix>
+                  <label igxLabel for="PharmacyPatientID" translate>Patient ID</label>
+                  <input
+                    igxInput
+                    name="PharmacyPatientID"
+                    id="PharmacyPatientID"
+                    type="text"
+                    formControlName="PharmacyPatientID"
+                  />
+                </igx-input-group>
+                <small
+                  *ngIf="
+                    patientsCreateForm.controls.PharmacyPatientID.touched &&
+                    patientsCreateForm.controls.PharmacyPatientID.errors?.required
+                  "
+                  class="text-danger"
+                  translate
+                  >Patient ID is required
+                </small>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    patientsCreateForm.controls.PharmacyPatientID.touched &&
+                    patientsCreateForm.controls.PharmacyPatientID.errors?.invalidMaxLength
+                  "
+                  translate
+                  >max_20_characters_allowed
+                </small>
+              </div>
+              <div class="box dob">
+                <igx-date-picker
+                  (valueChange)="validateDate($event)"
+                  mask="dd.MM.y"
+                  mode="dropdown"
+                  locale="{{ currentLanguage }}"
+                  label="{{ 'Date of Birth' | translate }}"
+                  id="date-picker"
+                  [value]="date"
+                  [formatter]="formatter"
+                  formControlName="dateOfBirth"
+                >
+                </igx-date-picker>
+                <small *ngIf="invalidDate" class="text-danger" translate>invalid_dob </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <label translate igxLabel for="InsuranceNumber">Insurance Number</label>
+                  <input
+                    igxInput
+                    name="InsuranceNumber"
+                    id="InsuranceNumber"
+                    type="text"
+                    formControlName="InsuranceNumber"
+                  />
+                </igx-input-group>
+              </div>
+              <div class="box">
+                <igx-select
+                  *ngIf="genderOptions | async"
+                  #select
+                  name="GenderID"
+                  id="GenderID"
+                  formControlName="GenderID"
+                >
+                  <igx-select-item *ngFor="let gender of genderOptions | async" [value]="gender.id">
+                    {{ gender.description | translate }}
+                  </igx-select-item>
+                  <label igxLabel for="GenderID" translate>Gender</label>
+                </igx-select>
+                <small
+                  [hidden]="
+                    patientsCreateForm.controls.GenderID.valid || patientsCreateForm.controls.GenderID.untouched
+                  "
+                  class="text-danger"
+                  translate
+                >
+                  Gender is required
+                </small>
+              </div>
+              <div class="box" *ngIf="doctors">
+                <igx-combo
+                  #withValueKey
+                  name="doctorId"
+                  id="doctorId"
+                  formControlName="doctorId"
+                  [data]="doctors"
+                  [(ngModel)]="doctorSelected"
+                  displayKey="displayData"
+                  valueKey="id"
+                  placeholder="{{ 'doctors' | translate }}"
+                  (onSelectionChange)="singleSelection($event)"
+                  searchPlaceholder="{{ 'search_doctor' | translate }}"
+                >
+                  <ng-template igxComboEmpty>
+                    <div>
+                      <span *ngIf="doctors.length > 0" translate>doctor_not_found</span>
+                      <div class="">
+                        <a
+                          translate
+                          [routerLink]="[]"
+                          (click)="openDoctorDialog()"
+                          class="bottm-anchor-text"
+                          style="color: #614194;"
+                        >
+                          <span *ngIf="doctors.length > 0" translate class="fas fa-plus"></span>
+                          &nbsp; Add new
+                        </a>
+                      </div>
+                      <span *ngIf="doctors.length < 1" translate>list_is_empty</span>
+                    </div>
+                  </ng-template>
+                </igx-combo>
+                <small
+                  translate
+                  class="text-danger"
+                  [hidden]="
+                    patientsCreateForm.controls.doctorId.valid || patientsCreateForm.controls.doctorId.untouched
+                  "
+                >
+                  select_valid_doctor
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="columns row">
+            <div class="col-lg-3">
+              <span class="subheadin" translate>City</span>
+              <p translate>
+                Address information should be used to connect patient for feedback or dispatching information
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="box">
+                <igx-input-group>
+                  <label igxLabel for="Phone" translate>Mobile</label>
+                  <input type="text" id="Phone" igxInput name="Phone" formControlName="Phone" />
+                </igx-input-group>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="Street" name="Street" type="text" formControlName="Street" />
+                  <label igxLabel for="Street" translate>Street</label>
+                </igx-input-group>
+                <small
+                  [hidden]="patientsCreateForm.controls.Street.valid || patientsCreateForm.controls.Street.untouched"
+                  class="text-danger"
+                  translate
+                >
+                  Street is required
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="Address" name="Address" type="text" formControlName="Address" />
+                  <label igxLabel for="Address" translate>City</label>
+                </igx-input-group>
+                <small
+                  [hidden]="patientsCreateForm.controls.Address.valid || patientsCreateForm.controls.Address.untouched"
+                  class="text-danger"
+                  translate
+                >
+                  Address is required
+                </small>
+              </div>
+              <div class="box">
+                <igx-input-group>
+                  <input igxInput id="zipCode" name="zipCode" type="text" formControlName="zipCode" />
+                  <label igxLabel for="zipCode" translate>Zip Code</label>
+                </igx-input-group>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    patientsCreateForm.controls.zipCode.touched &&
+                    patientsCreateForm.controls.zipCode.errors?.invalidNumber
+                  "
+                  translate
+                >
+                  Zip Code is not a valid number
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+        </div>
+      </form>
+    </article>
+  </section>
+  <igx-dialog
+    class="create-patient"
+    #doctorDialog
+    leftButtonLabel="{{ 'Cancel' | translate }}"
+    (onLeftButtonSelect)="doctorDialog.close()"
+    (onRightButtonSelect)="createNewDoctor()"
+    [rightButtonLabel]="'Save' | translate"
+    [closeOnOutsideSelect]="true"
+  >
+    <div class="sample-wrapper dialog" style="min-width: 900px;">
+      <section class="sample-content">
+        <article class="sample-column">
+          <form class="input-group-form" [formGroup]="doctorCreateForm">
+            <div class="main-heading" style="padding: 20px; overflow: hidden;">
+              <h4 style="margin-bottom: 0;" class="sample-title" translate>add_doctor</h4>
+            </div>
+            <div class="column-holder" style="padding: 0;">
+              <div class="columns row" style="padding-bottom: 0;">
+                <div class="col-lg-6">
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="firstName" translate>First Name</label>
+                      <input
+                        igxInput
+                        name="firstName"
+                        id="firstName"
+                        type="text"
+                        required
+                        formControlName="firstName"
+                      />
+                    </igx-input-group>
+                    <small
+                      *ngIf="
+                        doctorCreateForm.controls.firstName.touched &&
+                        doctorCreateForm.controls.firstName.errors?.required
+                      "
+                      class="text-danger"
+                      translate
+                      >First name is required
+                    </small>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.firstName.touched &&
+                        doctorCreateForm.controls.firstName.errors?.invalidMaxLength
+                      "
+                      translate
+                      >max_80_characters_allowed
+                    </small>
+                  </div>
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="lastName" translate>Last Name</label>
+                      <input igxInput name="lastName" id="lastName" type="text" required formControlName="lastName" />
+                    </igx-input-group>
+                    <small
+                      *ngIf="
+                        doctorCreateForm.controls.lastName.touched &&
+                        doctorCreateForm.controls.lastName.errors?.required
+                      "
+                      class="text-danger"
+                      translate
+                      >Last name is required
+                    </small>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.lastName.touched &&
+                        doctorCreateForm.controls.lastName.errors?.invalidMaxLength
+                      "
+                      translate
+                      >max_80_characters_allowed
+                    </small>
+                  </div>
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="doctorId" translate>Doctor ID</label>
+                      <input igxInput name="doctorId" id="doctorId" type="text" formControlName="doctorId" />
+                    </igx-input-group>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.doctorId.touched &&
+                        doctorCreateForm.controls.doctorId.errors?.invalidNumber &&
+                        !doctorCreateForm.controls.doctorId.errors?.invalidMaxLength
+                      "
+                      translate
+                      >Doctor Id is not a valid number
+                    </small>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.doctorId.touched &&
+                        doctorCreateForm.controls.doctorId.errors?.invalidMaxLength
+                      "
+                      translate
+                      >max_9_characters_allowed
+                    </small>
+                  </div>
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="companyId" translate>companyId</label>
+                      <input
+                        igxInput
+                        name="companyId"
+                        id="companyId"
+                        type="text"
+                        required
+                        formControlName="companyId"
+                      />
+                    </igx-input-group>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.companyId.touched &&
+                        doctorCreateForm.controls.companyId.errors?.invalidNumber &&
+                        !doctorCreateForm.controls.companyId.errors?.invalidMaxLength
+                      "
+                      translate
+                      >invalid_company_id
+                    </small>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.companyId.touched &&
+                        doctorCreateForm.controls.companyId.errors?.invalidMaxLength
+                      "
+                      translate
+                      >max_7_characters_allowed
+                    </small>
+                    <small
+                      *ngIf="
+                        doctorCreateForm.controls.companyId.touched &&
+                        doctorCreateForm.controls.companyId.errors?.required
+                      "
+                      class="text-danger"
+                      translate
+                      >company_id_required
+                    </small>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="email" translate>Email address</label>
+                      <input igxInput name="email" id="email" type="email" formControlName="email" />
+                    </igx-input-group>
+                    <small
+                      *ngIf="
+                        doctorCreateForm.controls.email.touched &&
+                        doctorCreateForm.controls.email.errors?.email &&
+                        !doctorCreateForm.controls.email.errors?.invalidMaxLength
+                      "
+                      class="text-danger"
+                      translate
+                      >invalid_email_address
+                    </small>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.email.touched &&
+                        doctorCreateForm.controls.email.errors?.invalidMaxLength
+                      "
+                      translate
+                      >max_80_characters_allowed
+                    </small>
+                  </div>
+                  <div class="box">
+                    <igx-input-group>
+                      <label igxLabel for="phone" translate>Mobile</label>
+                      <input type="text" id="phone" igxInput name="phone" formControlName="phone" />
+                    </igx-input-group>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.phone.touched &&
+                        doctorCreateForm.controls.phone.errors?.invalidNumber &&
+                        !doctorCreateForm.controls.phone.errors?.invalidMaxLength
+                      "
+                      translate
+                      >Phone number is not valid
+                    </small>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.phone.touched &&
+                        doctorCreateForm.controls.phone.errors?.invalidMaxLength
+                      "
+                      translate
+                      >max_20_characters_allowed
+                    </small>
+                  </div>
+                  <div class="box">
+                    <igx-input-group>
+                      <input igxInput id="street" name="street" type="text" formControlName="street" />
+                      <label igxLabel for="street" translate>Street</label>
+                    </igx-input-group>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.street.touched &&
+                        doctorCreateForm.controls.street.errors?.invalidMaxLength
+                      "
+                      translate
+                      >max_200_characters_allowed
+                    </small>
+                  </div>
+                  <div class="box">
+                    <igx-input-group>
+                      <input igxInput id="address" name="address" type="text" formControlName="address" />
+                      <label igxLabel for="address" translate>City</label>
+                    </igx-input-group>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.address.touched &&
+                        doctorCreateForm.controls.address.errors?.invalidMaxLength
+                      "
+                      translate
+                      >max_200_characters_allowed
+                    </small>
+                  </div>
+                  <div class="box">
+                    <igx-input-group>
+                      <input igxInput id="zipCode" name="zipCode" type="text" formControlName="zipCode" />
+                      <label igxLabel for="zipCode" translate>Zip Code</label>
+                    </igx-input-group>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.zipCode.touched &&
+                        doctorCreateForm.controls.zipCode.errors?.invalidNumber &&
+                        !doctorCreateForm.controls.zipCode.errors?.invalidMaxLength
+                      "
+                      translate
+                    >
+                      Zip Code is not a valid number
+                    </small>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        doctorCreateForm.controls.zipCode.touched &&
+                        doctorCreateForm.controls.zipCode.errors?.invalidMaxLength
+                      "
+                      translate
+                      >max_5_characters_allowed
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </article>
+      </section>
+    </div>
+  </igx-dialog>
+</div>

@@ -1,0 +1,521 @@
+@font-face {
+  font-family: "nunito_sansblack";
+  src: url("fonts/nunitosans-black-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-black-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sansblack_italic";
+  src: url("fonts/nunitosans-blackitalic-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-blackitalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sansbold";
+  src: url("fonts/nunitosans-bold-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sansbold_italic";
+  src: url("fonts/nunitosans-bolditalic-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-bolditalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sansextrabold";
+  src: url("fonts/nunitosans-extrabold-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-extrabold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sansextrabold_italic";
+  src: url("fonts/nunitosans-extrabolditalic-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-extrabolditalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sansextralight";
+  src: url("fonts/nunitosans-extralight-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-extralight-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sansextralight_italic";
+  src: url("fonts/nunitosans-extralightitalic-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-extralightitalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sansitalic";
+  src: url("fonts/nunitosans-italic-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-italic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sanslight";
+  src: url("fonts/nunitosans-light-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-light-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sanslight_italic";
+  src: url("fonts/nunitosans-lightitalic-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-lightitalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sansregular";
+  src: url("fonts/nunitosans-regular-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sanssemibold";
+  src: url("fonts/nunitosans-semibold-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-semibold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nunito_sanssemibold_italic";
+  src: url("fonts/nunitosans-semibolditalic-webfont.woff2") format("woff2"),
+    url("fonts/nunitosans-semibolditalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "icomoon";
+  src: url("fonts/icomoon.eot?5wiodm");
+  src: url("fonts/icomoon.eot?5wiodm#iefix") format("embedded-opentype"),
+    url("fonts/icomoon.ttf?5wiodm") format("truetype"),
+    url("fonts/icomoon.woff?5wiodm") format("woff"),
+    url("fonts/icomoon.svg?5wiodm#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "icomoon" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-User:before {
+  content: "\e922";
+  color: #664090;
+}
+
+.icon-user-key:before {
+  content: "\e923";
+}
+
+.icon-center-group-user:before {
+  content: "\e92a";
+}
+
+#navigation .icon-user-key:before {
+  content: "\e923";
+}
+
+.icon-heart-b:before {
+  content: "\e924";
+}
+
+.icon-RX:before {
+  content: "\e925";
+}
+#navigation .icon-RX:before {
+  content: "\e925";
+}
+.icon-Component-28--1:before {
+  content: "\e926";
+}
+
+.icon-Component-29--1:before {
+  content: "\e927";
+}
+
+.icon-heart-icon:before {
+  content: "\e928";
+}
+
+.icon-QT-icon:before {
+  content: "\e929";
+}
+
+.icon-User:before {
+  content: "\e922";
+}
+
+.icon-user-key:before {
+  content: "\e923";
+}
+
+.icon-heart-b:before {
+  content: "\e924";
+}
+
+.icon-RX:before {
+  content: "\e925";
+}
+
+.icon-medication:before {
+  content: "\e920";
+}
+
+.icon-ekg-m:before {
+  content: "\e921";
+}
+
+.icon-EKG:before {
+  content: "\e91c";
+}
+
+.icon-finish-flag:before {
+  content: "\e91d";
+}
+
+.icon-Pill:before {
+  content: "\e91e";
+}
+
+.icon-doctor:before {
+  content: "\e91b";
+}
+
+.icon-Pending-Eval:before {
+  content: "\e917";
+}
+
+.icon-Device:before {
+  content: "\e918";
+}
+
+.icon-Create:before {
+  content: "\e919";
+}
+
+.icon-List:before {
+  content: "\e91a";
+}
+
+.icon-save:before {
+  content: "\e90b";
+}
+
+.icon-previous:before {
+  content: "\e90c";
+}
+
+.icon-Path-1941:before {
+  content: "\e90d";
+}
+
+.icon-Group-2288:before {
+  content: "\e90e";
+}
+
+.icon-Union-2:before {
+  content: "\e90f";
+}
+
+.icon-heartbeat:before {
+  content: "\e910";
+}
+
+.icon-Group-7423:before {
+  content: "\e911";
+}
+
+.icon-pharmacy-1:before {
+  content: "\e912";
+}
+
+.icon-Group-7414:before {
+  content: "\e913";
+}
+
+.icon-heart-problem:before {
+  content: "\e916";
+}
+
+.icon-cancel:before {
+  content: "\e915";
+}
+
+.icon-checkered-flag:before {
+  content: "\e91f";
+}
+
+.icon-remove_red_eyevisibility:before {
+  content: "\e900";
+}
+
+.icon-first_page:before {
+  content: "\e901";
+}
+
+.icon-last_page:before {
+  content: "\e902";
+}
+
+.icon-arrow_back_ios:before {
+  content: "\e903";
+}
+
+.icon-arrow_forward_ios:before {
+  content: "\e904";
+}
+
+.icon-highlight_remove:before {
+  content: "\e90a";
+}
+
+.icon-visibility_off:before {
+  content: "\e905";
+}
+
+.icon-clearclose:before {
+  content: "\e914";
+}
+
+.icon-cheveron-down:before {
+  content: "\e906";
+}
+
+.icon-cheveron-left:before {
+  content: "\e907";
+}
+
+.icon-cheveron-right:before {
+  content: "\e908";
+}
+
+.icon-cheveron-up:before {
+  content: "\e909";
+}
+
+.icon-cancel-circle:before {
+  content: "\ea0d";
+}
+
+.icon-users:before {
+  content: "\e972";
+}
+
+.icon-cross:before {
+  content: "\ea0f";
+}
+
+.icon-cloud-upload:before {
+  content: "\f0ee";
+}
+
+.icon-flag-checkered:before {
+  content: "\f11e";
+}
+
+body {
+  font-family: "nunito_sansregular" !important;
+  background: #eff1f5;
+}
+body,
+html {
+  height: 100%;
+}
+.row {
+   margin: 0px !important;
+}
+ .sample-wrapper {
+   padding-bottom: 60px;
+}
+ .sample-wrapper .home-image {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   padding: 50px 15px 20px 15px;
+}
+ .sample-wrapper .home-image img {
+   max-width: 450px;
+}
+ .sample-wrapper .home-image p {
+   font-size: 18px;
+   line-height: 25px;
+   letter-spacing: 0px;
+   color: #929292;
+   margin-bottom: 20px;
+   text-align: center;
+   margin-top: 10px;
+}
+ .sample-wrapper .home-image h1 {
+   font-size: 22px;
+   line-height: 30px;
+   letter-spacing: 0px;
+   color: #929292;
+   margin-bottom: 10px;
+}
+ .sample-wrapper .card-area {
+   max-width: 1080px;
+   margin: 0 auto;
+}
+
+ .sample-wrapper .card-area  a.more-details {
+   color: #664090;
+   font-size: 15px;
+   line-height: 23px;
+   font-family: "nunito_sansbold";
+   background: transparent;
+   text-align: right;
+   justify-content: flex-end;
+   padding: 15px;
+   text-decoration: none;
+}
+ .sample-wrapper .card-area .nambaya-logo {
+   margin-bottom: 20px;
+}
+.card {
+  display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 5px 0 rgb(0 0 0 / 26%), 0 2px 2px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 8%);
+    overflow: hidden;
+    border-radius: 4px;
+    background: #fff;
+    transition: box-shadow .3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: 1px solid transparent;
+  padding: 1em; 
+  min-width: 100%;
+  } 
+  .card:hover{
+    box-shadow: 0 5px 5px -3px rgb(0 0 0 / 26%), 0 8px 10px 1px rgb(0 0 0 / 12%), 0 3px 14px 2px rgb(0 0 0 / 8%);
+  }   
+  .card-body {
+        padding: 15px 0 0;
+  }
+  .card-footer {
+    text-align: right;
+    justify-content: flex-end;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+  }
+ .sample-wrapper .card-area {
+   justify-content: center;
+   align-items: center;
+   display: flex;
+   flex: none;
+}
+ .sample-wrapper .card-area .img-holder {
+   justify-content: center;
+   align-items: center;
+   height: 110px;
+   display: flex;
+}
+ .sample-wrapper .card-area img {
+   display: block;
+   width: 100%;
+   height: auto;
+}
+ .sample-wrapper .card-area {
+   width: 100%;
+}
+ .sample-wrapper .card-area {
+   font-size: 15px;
+   line-height: 23px;
+}
+ .sample-wrapper .card-area p {
+   margin-top: 0;
+   color: #929292;
+   margin-bottom: 0;
+}
+ .sample-wrapper .card-area ul {
+   margin: 0 0 0 15px;
+   padding: 0;
+   list-style: none;
+}
+ .sample-wrapper .card-area ul li {
+   margin-bottom: 10px;
+}
+ .sample-wrapper .card-area ul li.user {
+   padding-left: 6px;
+}
+ .sample-wrapper .card-area ul li.user .icon-User {
+   margin-right: 30px;
+}
+ .sample-wrapper .card-area ul li .text {
+   display: inline-block;
+   vertical-align: middle;
+}
+ .sample-wrapper .card-area ul li .iconList {
+   margin-right: 25px;
+   display: inline-block;
+   vertical-align: middle;
+   line-height: 25px;
+   font-size: 30px;
+   color: #664090;
+}
+ .sample-wrapper .card-area ul li .iconList.icon-User {
+   font-size: 20px;
+}
+.bottm-anchor-text {
+    text-align: center;
+    color: #664090;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+.bottm-anchor-text:hover {
+    text-decoration: none;
+    color: #000;
+}
+ @media screen and (max-wdth: 768px) {
+   .nambaya-logo {
+     width: 100%;
+     height: auto;
+     display: block;
+  }
+   .sample-wrapper .home-image img.nambaya-logo {
+     width: 100% !important;
+  }
+}
+ 

@@ -1,0 +1,104 @@
+<div *ngIf="!isPharmacist" class="main-heading">
+  <h4 class="sample-title" translate><span (click)="goBack()" class="icon-previous"></span> Edit Patient</h4>
+</div>
+<div *ngIf="isPharmacist" class="main-heading">
+  <h4 class="sample-title">
+    <span (click)="goBack()" class="icon-previous"></span>&nbsp;
+    <span *ngIf="caseObject">
+      {{ caseObject.firstName + ' ' + this.caseObject.lastName }}
+      <span class="separator"></span>
+      <span class="patient-id">{{ caseObject.pharmacyPatientID }}</span>
+    </span>
+  </h4>
+</div>
+<app-loader [isLoading]="isLoading"></app-loader>
+<div [class.main-bg]="isPharmacist">
+  <app-patient-wizard *ngIf="isPharmacist" [caseObject]="caseObject" [parentData]="parentData"></app-patient-wizard>
+  <div class="sample-wrapper">
+    <section class="sample-content">
+      <article class="sample-column">
+        <form class="input-group-form" [formGroup]="patientsEditForm">
+          <div class="column-holder">
+            <div class="columns row">
+              <div class="col-lg-3" style="padding-left: 0;">
+                <span class="subheadin" translate>Personal Information</span>
+              </div>
+              <div class="col-lg-4">
+                <div class="box">
+                  <igx-input-group>
+                    <label translate igxLabel for="firstName">First Name</label>
+                    <input igxInput name="firstName" id="firstName" type="text" formControlName="firstName" />
+                  </igx-input-group>
+                </div>
+                <div class="box">
+                  <igx-input-group>
+                    <label igxLabel for="lastName" translate>Last Name</label>
+                    <input igxInput name="lastName" id="lastName" type="text" formControlName="lastName" />
+                  </igx-input-group>
+                </div>
+                <div class="box">
+                  <igx-input-group>
+                    <label igxLabel translate for="pharmacyPatientID">Patient ID</label>
+                    <input
+                      igxInput
+                      name="pharmacyPatientID"
+                      id="pharmacyPatientID"
+                      type="text"
+                      formControlName="pharmacyPatientID"
+                    />
+                  </igx-input-group>
+                </div>
+                <div class="box">
+                  <igx-input-group>
+                    <label igxLabel for="dateOfBirth" translate>Date of Birth</label>
+                    <input igxInput name="dateOfBirth" id="dateOfBirth" type="text" formControlName="dateOfBirth" />
+                  </igx-input-group>
+                </div>
+                <div class="box">
+                  <igx-input-group>
+                    <label igxLabel translate for="insuranceNumber">Insurance Number</label>
+                    <input
+                      igxInput
+                      name="insuranceNumber"
+                      id="insuranceNumber"
+                      type="text"
+                      formControlName="insuranceNumber"
+                    />
+                  </igx-input-group>
+                </div>
+                <div class="box">
+                  <igx-input-group>
+                    <label igxLabel for="GenderID" translate>Gender</label>
+                    <input
+                      igxInput
+                      name="GenderID"
+                      id="GenderID"
+                      type="text"
+                      [(ngModel)]="genderSelected"
+                      formControlName="genderID"
+                      [value]="genderSelected | translate"
+                      translate
+                    />
+                  </igx-input-group>
+                </div>
+                <div class="box">
+                  <igx-input-group>
+                    <label igxLabel for="email" translate>Email address</label>
+                    <input igxInput name="email" id="email" type="email" formControlName="email" />
+                  </igx-input-group>
+                </div>
+                <div class="box">
+                  <igx-input-group>
+                    <label translate igxLabel for="phone">Mobile</label>
+                    <input type="text" id="phone" igxInput name="phone" formControlName="phone" />
+                  </igx-input-group>
+                </div>
+              </div>
+              <div class="col-lg-5">&nbsp;</div>
+            </div>
+          </div>
+        </form>
+      </article>
+    </section>
+  </div>
+</div>

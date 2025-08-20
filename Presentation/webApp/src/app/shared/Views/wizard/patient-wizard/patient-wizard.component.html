@@ -1,0 +1,89 @@
+<app-loader [isLoading]="isLoadinginWizard"></app-loader>
+<div class="wizerd-area">
+  <div class="slide-nav">
+    <ul class="tab-slider btn-next-pre">
+      <li
+        class="line"
+        [class.w52p]="caseObject && caseObject.statusID >= caseStatuses.CASE_STARTED"
+        [class.w90p]="caseObject && caseObject.statusID >= caseStatuses.DEVICE_ALLOCATED"
+      ></li>
+      <li style="min-width: 105px;" class="upload-patient wizard-heading">
+        <a class="measure">
+          <span translate>Measurement</span>
+        </a>
+      </li>
+      <li
+        class="upload-patient"
+        [class.active]="parentData.stepNumber === patientWizardSteps.PATIENT_DETAILS"
+        [class.done-area]="parentData.stepNumber > patientWizardSteps.PATIENT_DETAILS"
+      >
+        <a routerLink="{{ wizardDataContext.editPatientStepURL }}">
+          <span *ngIf="parentData.stepNumber > patientWizardSteps.PATIENT_DETAILS" class=""></span>
+          <span class="fas fa-file-signature"></span><span translate>Patient Details</span>
+        </a>
+      </li>
+      <li
+        class="upload-patient"
+        [class.active]="parentData.stepNumber === patientWizardSteps.MEDICATIONS"
+        [class.done-area]="parentData.stepNumber > patientWizardSteps.MEDICATIONS"
+      >
+        <a routerLink="{{ wizardDataContext.medicationStepURL }}">
+          <span *ngIf="parentData.stepNumber > patientWizardSteps.MEDICATIONS" class=""></span
+          ><span class="fas icon-Pill"></span><span translate>Medications</span>
+        </a>
+      </li>
+      <li
+        class="upload-patient"
+        [class.active]="parentData.stepNumber === patientWizardSteps.DEVICE_ASSIGNMENT"
+        [class.done-area]="parentData.stepNumber > patientWizardSteps.DEVICE_ASSIGNMENT"
+      >
+        <a routerLink="{{ wizardDataContext.deviceStepURL }}">
+          <span *ngIf="parentData.stepNumber > patientWizardSteps.DEVICE_ASSIGNMENT" class=""></span
+          ><span class="fas icon-Device"></span><span translate>Assign Device</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="tab-slider btn-next-pre feedback-area">
+      <li
+        class="line"
+        [class.w48p]="caseObject && caseObject.statusID >= caseStatuses.QE_IN_QUEUE"
+        [class.w90p]="caseObject && caseObject.statusID >= caseStatuses.QE_COMPLETED"
+      ></li>
+      <li class="upload-patient wizard-heading">
+        <a class="feedback">
+          <span translate>Feedback</span>
+        </a>
+      </li>
+      <li
+        class="upload-patient"
+        [class.active]="parentData.stepNumber === patientWizardSteps.UPLOAD_EDF"
+        [class.done-area]="parentData.stepNumber > patientWizardSteps.UPLOAD_EDF"
+      >
+        <a routerLink="{{ wizardDataContext.edfStepURL }}">
+          <span *ngIf="parentData.stepNumber > patientWizardSteps.UPLOAD_EDF" class=""></span
+          ><span class="fas icon-EKG"></span><span translate>Upload EDF</span>
+        </a>
+      </li>
+      <li
+        class="upload-patient"
+        [class.active]="parentData.stepNumber === patientWizardSteps.QUICK_EVALUATION"
+        [class.done-area]="parentData.stepNumber > patientWizardSteps.QUICK_EVALUATION"
+      >
+        <a routerLink="{{ wizardDataContext.qeStepURL }}"
+          ><span class="fas icon-flag-checkered"></span> <span translate>Quick Evaluation</span></a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+<igx-dialog
+  id="confrimation"
+  #deactivateConfirmDialog
+  title="{{ 'Confirmation' | translate }}"
+  leftButtonLabel="{{ 'Cancel' | translate }}"
+  (onLeftButtonSelect)="deactivateConfirmDialog.close()"
+  rightButtonLabel="OK"
+  (onRightButtonSelect)="deActivatePatient()"
+  message="{{ 'sure_to_deactivate_patient' | translate }}"
+>
+</igx-dialog>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Navigator.Worker": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}
