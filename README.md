@@ -29,6 +29,7 @@ The project is organized into the following main directories:
 - `Presentation/`: Contains the main Angular web application.
 - `Services/`: Contains the backend microservices.
 - `Solutions/`: Contains the Visual Studio solution files for the .NET projects.
+- `Deployment/`: Contains Docker Compose files for production deployment.
 
 ## Getting Started
 
@@ -36,7 +37,7 @@ To get started with this project, you will need to have the following installed:
 
 - .NET SDK
 - Node.js and npm
-- Docker
+- Docker and Docker Compose
 - Java Development Kit (JDK)
 - Maven
 
@@ -44,7 +45,7 @@ Once you have the prerequisites installed, you can follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/wasimalam/nambaya.git
    ```
 2. **Build the .NET solution:**
    - Open the `Solutions/Complete/nambaya.sln` file in Visual Studio and build the solution.
@@ -53,6 +54,24 @@ Once you have the prerequisites installed, you can follow these steps:
    cd Presentation/webApp
    npm install
    ```
-4. **Run the application:**
-   - Use the `docker-compose.yml` files in the `Services` and `Presentation` directories to start the application using Docker.
+
+## Deployment
+
+The application can be deployed using the Docker Compose file located in the `Deployment` directory.
+
+### Prerequisites
+
+- Docker and Docker Compose
+- An environment file (`.env`) configured with the necessary variables. See the `docker-compose.yml` file in the `Deployment` directory for the required variables.
+
+### Running the Application
+
+1. Navigate to the `Deployment` directory:
+   ```bash
+   cd Deployment
+   ```
+2. Run the following command to start the application:
+   ```bash
+   docker-compose up -d
+   ```
 
