@@ -1,0 +1,197 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: centralgroup-service-secret
+  namespace: nambaya-cardio
+type: Opaque
+data:
+  ConnectionStringsDefaultConnection: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1Qcm9kX0NlbnRyYWxHcm91cDtVc2VyIElkPW5hbWJheWFkYmFkbWluO1Bhc3N3b3JkPUFCQzEyM3NzaUA7QXBwbGljYXRpb24gTmFtZT1DZW50cmFsR3JvdXAgQXBpOw==
+  Serilog__WriteTo__1__Args__connectionString: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1Qcm9kX0xvZ3M7VXNlciBJZD1uYW1iYXlhZGJhZG1pbjtQYXNzd29yZD1BQkMxMjNzc2lAOyBBcHBsaWNhdGlvbiBOYW1lPUNlbnRyYWxHcm91cCBBcGk7
+  ApiSecretConfigurationSecret: NzYwQjFDOEItNTkyMS00NzNCLUFGNjgtREYwNzkwRkMxRUZE
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: centralgroup-config
+  namespace: nambaya-cardio
+data:
+  appsettings.json: |-
+    {
+      "ConnectionStrings": {
+        "DefaultConnection": ""
+      },
+      "ApiConfiguration": {
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "OidcApiName": "central_group_api",
+        "RequireHttpsMetadata": false,
+        "CorsAllowAnyOrigin": false,
+        "CorsAllowOrigins": ["https://demo.nambaya-medical.de"]
+      },
+      "WebServiceConfiguration": {
+        "PharmacistServiceBaseUrl": "http://pharmacist:5002",
+        "CardiologistServiceBaseUrl": "http://cardiologist:5004",
+        "CentralGroupServiceBaseUrl": "http://centralgroup:5005",
+        "NambayaUserServiceBaseUrl": "http://nambayauser:5007",
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "PatientServiceBaseUrl": "http://patient:5001",
+        "UserManagementServiceBaseUrl": "http://usermanagement:5003",
+        "FileSharingServiceBaseUrl": "http://filesharing:5009"
+      },
+      "ApiSecretConfiguration": {
+        "ApiName": "Central Group API",
+        "Secret": "",
+        "Clientid": "central_group_api_client",
+        "Scope": "user_management_api patient_api cardiologist_api pharmacy_api file_sharing_api_read"
+      },
+       "RabbitMQSettings": {
+        "Host": "rabbitmq",
+        "Username": "",
+        "Password": "",
+        "ConnectionName": "CentralGroup API",
+        "Port": 56072
+      },
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      },
+      "AllowedHosts": "*",
+      "PharmaAssociationEmails": [ "nambayaQA@gmail.com" ],
+      "DoctorAssociationEmails": [ "nambayaQA@gmail.com" ],
+      "Serilog": {
+        "Using": [ "Serilog.Sinks.MSSqlServer" ],
+        "Enrich": [ "FromLogContext" ],
+        "Properties": { "Application": "CentralGroup Api" },
+        "MinimumLevel": "Information",
+        "WriteTo": [
+          {
+            "Name": "Console"
+          },
+          {
+            "Name": "MSSqlServer",
+            "Args": {
+              "connectionString": "",
+              "sinkOptionsSection": {
+                "tableName": "SeriLogs",
+                "schemaName": "dbo",
+                "autoCreateSqlTable": true,
+                "batchPostingLimit": 1000,
+                "period": "0.00:00:30"
+              },
+              "restrictedToMinimumLevel": "Information",
+              "columnOptionsSection": {
+                "disableTriggers": true,
+                "clusteredColumnstoreIndex": false,
+                "primaryKeyColumnName": "Id",
+                "removeStandardColumns": [ "MessageTemplate", "Properties" ],
+                "additionalColumns": [
+                  {
+                    "ColumnName": "ApplicationName",
+                    "PropertyName": "Application",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  },
+                  {
+                    "ColumnName": "CorrelationId",
+                    "PropertyName": "CorrelationId",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  appsettings.Development.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: centralgroup
+    namespace: nambaya-cardio
+spec:
+    replicas: 1
+    revisionHistoryLimit: 5
+    selector:
+        matchLabels:
+            app: centralgroup
+    template:
+        metadata:
+            labels:
+                app: centralgroup
+        spec:
+            containers:
+            - name: centralgroup
+              image: scr.syseleven.de/nambaya-stack-cardio/centralgroup:v23.21
+              imagePullPolicy: "Always"
+              ports:
+                - containerPort: 80
+              env:
+                - name: ASPNETCORE_ENVIRONMENT
+                  value: Production
+                - name: ConnectionStrings__DefaultConnection
+                  valueFrom:
+                    secretKeyRef:
+                      name: centralgroup-service-secret
+                      key: ConnectionStringsDefaultConnection 
+                - name: ApiSecretConfiguration__Secret
+                  valueFrom:
+                    secretKeyRef:
+                      name: centralgroup-service-secret
+                      key: ApiSecretConfigurationSecret
+                - name: RabbitMQSettings__Username
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Username
+                - name: RabbitMQSettings__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Password
+                - name: Serilog__WriteTo__1__Args__connectionString
+                  valueFrom:
+                    secretKeyRef:
+                      name: centralgroup-service-secret
+                      key: Serilog__WriteTo__1__Args__connectionString
+              volumeMounts:
+                - mountPath: /app/appsettings.json
+                  name: config-volume
+                  subPath: appsettings.json
+                  readOnly: true
+                - mountPath: /app/appsettings.Development.json
+                  name: config-volume
+                  subPath: appsettings.Development.json
+                  readOnly: true
+            volumes:
+              - name: config-volume
+                configMap:
+                    name: centralgroup-config
+            imagePullSecrets:
+                - name: syseleven-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: centralgroup
+    namespace: nambaya-cardio
+spec:
+    selector:
+        app: centralgroup
+    ports:
+        - protocol: TCP
+          port: 5005
+          targetPort: 80

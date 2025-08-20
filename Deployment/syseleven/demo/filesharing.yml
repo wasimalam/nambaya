@@ -1,0 +1,204 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: filesharing-service-secret
+  namespace: nambaya-cardio
+type: Opaque
+data:
+  CypherKey: QUJDMTIzc3Np
+  FileServerSettings__UserName: MTYzNThlNDViMTA5NDkzM2E1NGI3ZTgzNjI2NWM1ZTU=
+  FileServerSettings__Password: ZDE4MTI2ZGY4ZmE2NDY5MThjZjFmNDNlNDQ2NGZlYmY=
+  Serilog__WriteTo__1__Args__connectionString: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1Qcm9kX0xvZ3M7VXNlciBJZD1uYW1iYXlhZGJhZG1pbjtQYXNzd29yZD1BQkMxMjNzc2lAOyBBcHBsaWNhdGlvbiBOYW1lPUZpbGVTaGFyaW5nIEFwaTs=
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filesharing-config
+  namespace: nambaya-cardio
+data:
+  appsettings.json: |-
+    {
+      "ApiConfiguration": {
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "OidcApiName": "file_sharing_api",
+        "RequireHttpsMetadata": false,
+        "CorsAllowAnyOrigin": true,
+        "CorsAllowOrigins": []
+      },
+      "FileServerWrapper": {
+        "assembly": "FileSharing.Wrapper.S3.dll"
+      },
+      "FileServerSettings": {
+        "UserName": "",
+        "Password": "",
+        "BaseUrl": "s3.cbk.cloud.syseleven.net",
+        "Bucket": "nambaya-demo"
+      },
+      "WebServiceConfiguration": {
+        "PharmacistServiceBaseUrl": "http://pharmacist:5002",
+        "CardiologistServiceBaseUrl": "http://cardiologist:5004",
+        "CentralGroupServiceBaseUrl": "http://centralgroup:5005",
+        "NambayaUserServiceBaseUrl": "http://nambayauser:5007",
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "PatientServiceBaseUrl": "http://patient:5001",
+        "UserManagementServiceBaseUrl": "http://usermanagement:5003",
+        "FileSharingServiceBaseUrl": "http://filesharing:5009"
+      },
+       "RabbitMQSettings": {
+        "Host": "rabbitmq",
+        "Username": "",
+        "Password": "",
+        "ConnectionName": "FileSharing API",
+        "Port": 56072
+      },
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      },
+      "AllowedHosts": "*",
+      "CypherKey": "",
+      "Serilog": {
+        "Using": [ "Serilog.Sinks.MSSqlServer" ],
+        "Enrich": [ "FromLogContext" ],
+        "Properties": { "Application": "FileSharing Api" },
+        "MinimumLevel": "Information",
+        "WriteTo": [
+          {
+            "Name": "Console"
+          },
+          {
+            "Name": "MSSqlServer",
+            "Args": {
+              "connectionString": "",
+              "sinkOptionsSection": {
+                "tableName": "SeriLogs",
+                "schemaName": "dbo",
+                "autoCreateSqlTable": true,
+                "batchPostingLimit": 1000,
+                "period": "0.00:00:30"
+              },
+              "restrictedToMinimumLevel": "Information",
+              "columnOptionsSection": {
+                "disableTriggers": true,
+                "clusteredColumnstoreIndex": false,
+                "primaryKeyColumnName": "Id",
+                "removeStandardColumns": [ "MessageTemplate", "Properties" ],
+                "additionalColumns": [
+                  {
+                    "ColumnName": "ApplicationName",
+                    "PropertyName": "Application",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  },
+                  {
+                    "ColumnName": "CorrelationId",
+                    "PropertyName": "CorrelationId",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  appsettings.Development.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Trace",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      },
+      "CypherKey": ""
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: filesharing
+    namespace: nambaya-cardio
+spec:
+    replicas: 1
+    revisionHistoryLimit: 5
+    selector:
+        matchLabels:
+            app: filesharing
+    template:
+        metadata:
+            labels:
+                app: filesharing
+        spec:
+            containers:
+            - name: filesharing
+              image: scr.syseleven.de/nambaya-stack-cardio/filesharing:v23.21
+              imagePullPolicy: "Always"
+              ports:
+                - containerPort: 80
+              env:
+                - name: ASPNETCORE_ENVIRONMENT
+                  value: Production
+                - name: CypherKey
+                  valueFrom:
+                    secretKeyRef:
+                      name: filesharing-service-secret
+                      key: CypherKey
+                - name: FileServerSettings__UserName
+                  valueFrom:
+                    secretKeyRef:
+                      name: filesharing-service-secret
+                      key: FileServerSettings__UserName
+                - name: FileServerSettings__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: filesharing-service-secret
+                      key: FileServerSettings__Password
+                - name: RabbitMQSettings__Username
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Username
+                - name: RabbitMQSettings__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Password
+                - name: Serilog__WriteTo__1__Args__connectionString
+                  valueFrom:
+                    secretKeyRef:
+                      name: filesharing-service-secret
+                      key: Serilog__WriteTo__1__Args__connectionString
+              volumeMounts:
+                - mountPath: /app/appsettings.json
+                  name: config-volume
+                  subPath: appsettings.json
+                  readOnly: true
+                - mountPath: /app/appsettings.Development.json
+                  name: config-volume
+                  subPath: appsettings.Development.json
+                  readOnly: true
+            volumes:
+              - name: config-volume
+                configMap:
+                    name: filesharing-config
+            imagePullSecrets:
+                - name: syseleven-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: filesharing
+    namespace: nambaya-cardio
+spec:
+    selector:
+        app: filesharing
+    ports:
+        - protocol: TCP
+          port: 5009
+          targetPort: 80

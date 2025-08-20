@@ -1,0 +1,135 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dbmaintenance-service-secret
+  namespace: nambaya-demo
+type: Opaque
+data:
+  FTPConfiguration__Password: QWdONjBmTzN5Nk5vSmlZUw==
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dbmaintenance-config
+data:
+  appsettings.json: |-
+    {
+      "DBConfiguration": {
+        "Server": "mssql-service,7901",
+        "UserName": "sa",
+        "Password": "",
+        "Databases": "Dev_Cardio,Dev_CentralGroup,Dev_Identity,Dev_Logs,Dev_Patient,Dev_Pharma,Dev_User,Dev_UserManagement",
+        "BackupFolder": "/var/opt/mssql/data/backup",
+        "DailyRetentionAfter": 14,
+        "WeeklyRetentionAfter": 6,
+        "MonthlyRetentionAfter": 12,
+        "NotificationAddress": "ashahid@ssidecisions.com",
+        "ScheduleAtHour": 1,
+        "ScheduleAtMinute": 0,
+        "ScheduleSameDay": true,
+        "WeeklyDay": 1
+      },
+      "FTPConfiguration": {
+        "ServerUrl": "ftp://u251316.your-storagebox.de",
+        "UserName": "u251316",
+        "Password": ""
+      },
+      "RabbitMQSettings": {
+        "Host": "rabbitmq",
+        "VirtualHost": "/",
+        "Quartz": "quartz",
+        "Port": 56072,
+        "ConnectionName": "DBMaintenance",
+        "Username": "",
+        "Password": ""
+      },
+      "Serilog": {
+        "MinimumLevel": {
+          "Default": "Debug",
+          "Override": {
+            "Microsoft": "Warning",
+            "Microsoft.Hosting.Lifetime": "Information",
+            "System": "Warning"
+          }
+        },
+        "Using": [],
+        "Properties": { "Application": "DB Maintainance" },
+        "WriteTo": [
+          {
+            "Name": "Console",
+            "Args": {
+              "outputTemplate": "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}"
+            }
+          },
+          {
+            "Name": "RollingFile",
+            "Args": {
+              "pathFormat": "Logs/{Date}.log"
+            }
+          }
+        ]
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: dbmaintenance
+    namespace: nambaya-demo
+spec:
+    replicas: 1
+    revisionHistoryLimit: 5
+    selector:
+        matchLabels:
+            app: dbmaintenance
+    template:
+        metadata:
+            labels:
+                app: dbmaintenance
+        spec:
+            containers:
+            - name: dbmaintenance
+              image: scr.syseleven.de/nambaya-stack-qtlife/dbmaintenance:v19.6
+              imagePullPolicy: "Always"
+              securityContext:
+                runAsUser: 0
+              env:
+                - name: ASPNETCORE_ENVIRONMENT
+                  value: Production
+                - name: RabbitMQSettings__Username
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Username
+                - name: RabbitMQSettings__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Password
+                - name: DBConfiguration__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: mssql-service-secret
+                      key: MSSQL_SA_PASSWORD
+                - name: FTPConfiguration__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: dbmaintenance-service-secret
+                      key: FTPConfiguration__Password
+              volumeMounts:
+                - mountPath: /app/appsettings.json
+                  name: config-volume
+                  subPath: appsettings.json
+                  readOnly: true
+                - mountPath: /var/opt/mssql
+                  name: mssql-host-volume
+                  subPath: mssql
+            volumes:
+              - name: mssql-host-volume
+                persistentVolumeClaim:
+                   claimName: ba18080-sealedplatform-pvc
+              - name: config-volume
+                configMap:
+                    name: dbmaintenance-config
+            imagePullSecrets:
+              - name: syseleven-registry-secret

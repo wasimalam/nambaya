@@ -1,0 +1,127 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nambaya
+  namespace: nambaya-cardio
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.org/location-snippets: |
+     add_header X-Content-Type-Options "nosniff";
+     add_header Cache-Control "max-age=3600, must-revalidate";
+     add_header Pragma no-cache;
+spec:
+  tls:
+    - hosts:
+        - demo.nambaya-medical.de
+        - identity.demo.nambaya-medical.de
+        - services.demo.nambaya-medical.de
+
+      secretName: demo-nambaya-medical-de-tls
+  rules:   
+    - host: demo.nambaya-medical.de
+      http:
+        paths:
+          - backend:
+              serviceName: presentation
+              servicePort: 8000
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: identity
+  namespace: nambaya-cardio
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+    nginx.org/location-snippets: |
+        add_header X-Content-Type-Options "nosniff";
+        add_header Cache-Control "no-store,no-cache,must-revalidate";
+        add_header Pragma no-cache;
+spec:
+  tls:
+    - hosts:
+        - identity.demo.nambaya-medical.de
+      secretName: demo-nambaya-medical-de-tls
+  rules:
+    - host: identity.demo.nambaya-medical.de
+      http:
+        paths:
+          - backend:
+              serviceName: identity
+              servicePort: 5001
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: services
+  namespace: nambaya-cardio
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+    #nginx.org/rewrites: "serviceName=patient rewrite=/;serviceName=pharmacist rewrite=/;serviceName=cardiologist rewrite=/;serviceName=centralgroup rewrite=/;serviceName=nambayauser rewrite=/;serviceName=logging rewrite=/;"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.org/client-max-body-size: "550m"
+    nginx.ingress.kubernetes.io/proxy-body-size: 550m
+    nginx.org/websocket-services: "patient"
+    nginx.org/location-snippets: |
+        add_header X-Content-Type-Options "nosniff";
+        add_header Cache-Control "no-store,no-cache,must-revalidate";
+        add_header Pragma no-cache;
+spec:
+  tls:
+    - hosts:
+        - services.demo.nambaya-medical.de
+      secretName: demo-nambaya-medical-de-tls
+  rules:   
+    - host: services.demo.nambaya-medical.de
+      http:
+        paths:
+          - path: /patient(/|$)(.*)
+            backend:
+              serviceName: patient
+              servicePort: 5001
+          - path: /pharmacist(/|$)(.*)
+            backend:
+              serviceName: pharmacist
+              servicePort: 5002
+          - path: /usermanagement(/|$)(.*)
+            backend:
+              serviceName: usermanagement
+              servicePort: 5003
+          - path: /cardiologist(/|$)(.*)
+            backend:
+              serviceName: cardiologist
+              servicePort: 5004
+          - path: /centralgroup(/|$)(.*)
+            backend:
+              serviceName: centralgroup
+              servicePort: 5005
+          - path: /nambayauser(/|$)(.*)
+            backend:
+              serviceName: nambayauser
+              servicePort: 5007
+          - path: /logging(/|$)(.*)
+            backend:
+              serviceName: logging
+              servicePort: 5010
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: coredns-extra-configs
+  namespace: kube-system
+data:
+  myCorefile: |-
+    demo.nambaya-medical.de:53 {
+      hosts {
+        192.168.5.18 demo.nambaya-medical.de
+        192.168.5.18 identity.demo.nambaya-medical.de
+        192.168.5.18 services.demo.nambaya-medical.de
+        fallthrough 
+        }
+    }

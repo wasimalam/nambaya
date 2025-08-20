@@ -1,0 +1,246 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: notification-service-secret
+  namespace: nambaya-cardio
+type: Opaque
+data:
+  Serilog__WriteTo__1__Args__connectionString: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1Qcm9kX0xvZ3M7VXNlciBJZD1uYW1iYXlhZGJhZG1pbjtQYXNzd29yZD1BQkMxMjNzc2lAOyBBcHBsaWNhdGlvbiBOYW1lPU5vdGlmaWNhdGlvbiBBcGk7
+  EmailSettings__EmailAddress: bmFtYmF5YUBzc2lkZWNpc2lvbnMuY29t
+  EmailSettings__EmailPassword: U1MhMTIzbmFtMjAyMA==
+  SmsSettings__Token: ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKU1V6STFOaUlzSW1wMGFTSTZJalZqTVRBNE56ZGlZelU1WVdKaFpHSmpOR1EzTldZMk5UazNNakpsTW1ZNU5XVmhZekUyWmpnd1ltSTRNV1l6WlRoallUUXdZelF4WlRWaU5XUm1OR1F5TjJZeU9XRm1aalUzWlRWaE5EUXhJbjAuZXlKaGRXUWlPaUl6SWl3aWFuUnBJam9pTldNeE1EZzNOMkpqTlRsaFltRmtZbU0wWkRjMVpqWTFPVGN5TW1VeVpqazFaV0ZqTVRabU9EQmlZamd4WmpObE9HTmhOREJqTkRGbE5XSTFaR1kwWkRJM1pqSTVZV1ptTlRkbE5XRTBOREVpTENKcFlYUWlPakUxT0RRME5qVXlOamdzSW01aVppSTZNVFU0TkRRMk5USTJPQ3dpWlhod0lqbzBOelF3TVRNNE9EWTRMQ0p6ZFdJaU9pSTJOREE1TlNJc0luTmpiM0JsY3lJNlcxMTkuaEVDejJ3c1FjVGF0aHo5bU9WVFNoQXhEN3k4MXdudnVpRnhXaTZCeHNPU014c3lWSHBEU2UxcnpYY1ZiSzE3SlVsN21tUkZOT2FJSWU5eExfRm9KR0E5eVdvTkhtVHUzRXJCZUdJNU9vSjVVaFNHanZhbTF6RWpLZUQtcGN5SVV1UE1Xak1GSFBfQklGZU16bW5mTWRsWlJIbFJQRnEwMUs0S0RqZ3MzakR2QmdNNWY4OUZTUlRQYVI2WUZLYU9Eb0dDRnVKQVZuR0ZGVUNhUGd4ZEFhRUhILWwxQlNEem5XZ3VaWEhuN1ZCaUs3cTZqQ1hQSFF4OWt3UFdKVFBIWWRMWWE4VHB2R1VaTVdrU084WGdMNjY1N3lkUFNHcHJ0Q1ppZ29xdUNyMS0waWJVYnVNaU1ZS3ZDdVJzRWVIbEp3Zk5Lc0sxNFhJQW56eDFxQk51UElTZkVKaDJiOENSczd0d3hlWXNjOWNQcE1CRUpVaVNQOVhVN3NRaHdRM0RnWTJYTkRVX3QzMzUzN2ZuQnhPOFBVN3VRc2xQcWdTVUJlRXRrWnplZGVtR3NjVDl3MnhVa2ZxeDBncnFvODlvc3R6YjZsUzNDYnphX1JSNUhPQUJfekpWNUNISWFDcHRHQzBhSlRNUVJCeDBDdkptZXlyT2dyR1lnM20xaXNZOGZkQkZMQ2V3cklkWmF1ZUpNQS1acUFNU2RzQVRvaG9pNkd6RmljVElRbVItZi1HN0UtSEpVSWd4b0xJelZxUkp3NnYzY0dRR3BWX3pmeG90NW1kVElFdktUOHE1bWR6ZGFhM1hHVTV0LU9wZndGdGhkSDNNZlJGZWlQcnRxOWdtbElXLTNLb2plams4TXphZlZQRmdnd29XOE5XWVlPZ0FiaERWTWVWeU1PTW8= 
+  ApiSecretConfigurationSecret: QjNBOTRGNUEtOEVCNi00MkM0LUFDODctRUYxNjBGMEI1QjQw
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notification-config
+  namespace: nambaya-cardio
+data:
+  appsettings.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      },
+      "EmailSettings": {
+        "SmtpHost": "smtp.1and1.com",
+        "SmtpPort": "25",
+        "EmailAddress": "",
+        "EmailPassword": ""
+      },
+      "ApiSecretConfiguration": {
+        "ApiName": "Notification API",
+        "Secret": "",
+        "Clientid": "notification_api_client",
+        "Scope": "logging_api"
+      },
+      "WebServiceConfiguration": {
+        "PharmacistServiceBaseUrl": "http://pharmacist:5002",
+        "CardiologistServiceBaseUrl": "http://cardiologist:5004",
+        "CentralGroupServiceBaseUrl": "http://centralgroup:5005",
+        "NambayaUserServiceBaseUrl": "http://nambayauser:5007",
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "PatientServiceBaseUrl": "http://patient:5001",
+        "UserManagementServiceBaseUrl": "http://usermanagement:5003",
+        "FileSharingServiceBaseUrl": "http://filesharing:5009",
+        "LoggingServiceBaseUrl": "http://logging:5010",
+        "PharmacistUIUrl": "https://demo.nambaya-medical.de/pharmacist",
+        "CardiologistUIUrl": "https://demo.nambaya-medical.de/cardiologist",
+        "CentralGroupUIUrl": "https://demo.nambaya-medical.de/center",
+        "NambayaUserUIUrl": "https://demo.nambaya-medical.de/user"
+      },
+      "SmsSettings": {
+        "ClientApiUri": "https://rest.spryngsms.com/v1/messages",
+        "ContentType": "application/json",
+        "Route": "business",
+        "SentBy": "Nambaya",
+        "Token": "",
+        "Encoding": "auto"
+      },
+      "RabbitMQSettings": {
+        "Host": "rabbitmq",
+        "Username": "",
+        "Password": "",
+        "ConnectionName": "Notification API",
+        "Port": 56072
+      },
+      "AllowedHosts": "*",
+      "OverrideEmail": {
+        "center@nambaya.de":"ashahid@ssidecisions.com",
+        "cardio1@nambaya.de":"ashahid@ssidecisions.com",
+        "nambayaqa+3@gmail.com": "mubaidullah@ssidecisions.com",
+        "nambayaqa+2@gmail.com": "mubaidullah@ssidecisions.com",
+        "nambayaqa+1@gmail.com": "mubaidullah@ssidecisions.com",
+        "jsedlaczek+1@ssidecisions.com": "jsedlaczek@ssidecisions.com",
+        "jsedlaczek+2@ssidecisions.com": "jsedlaczek@ssidecisions.com",
+        "jsedlaczek+3@ssidecisions.com": "jsedlaczek@ssidecisions.com",
+        "nikolaus.schumacher+1@nambaya.com": "nikolaus.schumacher@nambaya.com",
+        "nikolaus.schumacher+2@nambaya.com": "nikolaus.schumacher@nambaya.com",
+        "nikolaus.schumacher+3@nambaya.com": "nikolaus.schumacher@nambaya.com",
+        "gerd.grossmann+1@nambaya.com": "gerd.grossmann@nambaya.com",
+        "lutz.graumann+1@nambaya.com": "lutz.graumann@nambaya.com",
+        "lutz.graumann+2@nambaya.com": "lutz.graumann@nambaya.com",
+        "lutz.graumann+3@nambaya.com": "lutz.graumann@nambaya.com",
+        "anna.fischer+centerUser@nambaya.com": "anna.fischer@nambaya.com",
+        "anna.fischer+Pharmacy@nambaya.com": "anna.fischer@nambaya.com",
+        "anna.fischer+cardiologist@nambaya.com": "anna.fischer@nambaya.com",
+        "noah.herman+centerUser@nambaya.com": "noah.herman@nambaya.com",
+        "noah.herman+Pharmacy@nambaya.com": "noah.herman@nambaya.com",
+        "noah.herman+cardiologist@nambaya.com": "noah.herman@nambaya.com",
+        "ludwig.waldburg+centerUser@nambaya.com": "ludwig.waldburg@nambaya.com",
+        "ludwig.waldburg+Pharmacy@nambaya.com": "ludwig.waldburg@nambaya.com",
+        "ludwig.waldburg+cardiologist@nambaya.com": "ludwig.waldburg@nambaya.com",
+        "holger.eckoldt+cardiologist@nambaya.com":"holger.eckoldt@nambaya.com",
+        "holger.eckoldt+pharmacy@nambaya.com":"holger.eckoldt@nambaya.com",
+        "holger.eckoldt+centeruser@nambaya.com":"holger.eckoldt@nambaya.com",
+        "irene.ekkert+cardiologist@aegnord.de":"irene.ekkert@aegnord.de"
+      },
+      "Serilog": {
+        "Using": [ "Serilog.Sinks.MSSqlServer" ],
+        "Enrich": [ "FromLogContext" ],
+        "Properties": { "Application": "Notification Api" },
+        "MinimumLevel": "Information",
+        "WriteTo": [
+          {
+            "Name": "Console"
+          },
+          {
+            "Name": "MSSqlServer",
+            "Args": {
+              "connectionString": "",
+              "sinkOptionsSection": {
+                "tableName": "SeriLogs",
+                "schemaName": "dbo",
+                "autoCreateSqlTable": true,
+                "batchPostingLimit": 1000,
+                "period": "0.00:00:30"
+              },
+              "restrictedToMinimumLevel": "Information",
+              "columnOptionsSection": {
+                "disableTriggers": true,
+                "clusteredColumnstoreIndex": false,
+                "primaryKeyColumnName": "Id",
+                "removeStandardColumns": [ "MessageTemplate", "Properties" ],
+                "additionalColumns": [
+                  {
+                    "ColumnName": "ApplicationName",
+                    "PropertyName": "Application",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  },
+                  {
+                    "ColumnName": "CorrelationId",
+                    "PropertyName": "CorrelationId",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  appsettings.Development.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Trace",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: notification
+    namespace: nambaya-cardio
+spec:
+    replicas: 1
+    revisionHistoryLimit: 5
+    selector:
+        matchLabels:
+            app: notification
+    template:
+        metadata:
+            labels:
+                app: notification
+        spec:
+            containers:
+            - name: notification
+              image: scr.syseleven.de/nambaya-stack-cardio/notification:v23.21
+              imagePullPolicy: "Always"
+              ports:
+                - containerPort: 80
+              env:
+                - name: ASPNETCORE_ENVIRONMENT
+                  value: Production
+                - name: EmailSettings__EmailAddress
+                  valueFrom:
+                    secretKeyRef:
+                      name: notification-service-secret
+                      key: EmailSettings__EmailAddress
+                - name: EmailSettings__EmailPassword
+                  valueFrom:
+                    secretKeyRef:
+                      name: notification-service-secret
+                      key: EmailSettings__EmailPassword
+                - name: SmsSettings__Token
+                  valueFrom:
+                    secretKeyRef:
+                      name: notification-service-secret
+                      key: SmsSettings__Token
+                - name: ApiSecretConfiguration__Secret
+                  valueFrom:
+                    secretKeyRef:
+                      name: notification-service-secret
+                      key: ApiSecretConfigurationSecret
+                - name: RabbitMQSettings__Username
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Username
+                - name: RabbitMQSettings__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Password
+                - name: Serilog__WriteTo__1__Args__connectionString
+                  valueFrom:
+                    secretKeyRef:
+                      name: notification-service-secret
+                      key: Serilog__WriteTo__1__Args__connectionString
+              volumeMounts:
+                - mountPath: /app/appsettings.json
+                  name: config-volume
+                  subPath: appsettings.json
+                  readOnly: true
+                - mountPath: /app/appsettings.Development.json
+                  name: config-volume
+                  subPath: appsettings.Development.json
+                  readOnly: true
+            volumes:
+              - name: config-volume
+                configMap:
+                    name: notification-config
+            imagePullSecrets:
+                - name: syseleven-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: notification
+    namespace: nambaya-cardio
+spec:
+    selector:
+        app: notification
+    ports:
+        - protocol: TCP
+          port: 5014
+          targetPort: 80

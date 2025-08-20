@@ -1,0 +1,17 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: syseleven-ingress-nginx-ingress-controller
+  namespace: syseleven-ingress
+data:
+    #server-snippets: | # No default. Pipe is used for multiple line snippets. Make sure the snippet is not a default value, in order to avoid duplication.
+    #  location ^~ /.well-known/acme-challenge/ {
+    #    #proxy_pass http://default-nambaya-nambaya-medical.de-presentation-8000/.well-known/acme-challenge/;
+    #    alias /var/www/html/.well-known/acme-challenge/;
+    #  }
+    location-snippets: |
+     add_header X-Content-Type-Options "nosniff";
+    ssl-protocols: "TLSv1.2 TLSv1.3"
+    hsts : "true"
+    hsts-max-age: "31536000"
+    hsts-include-subdomains: "true"

@@ -1,0 +1,195 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cardiologist-service-secret
+  namespace: qtlife
+type: Opaque
+data:
+  ConnectionStringsDefaultConnection: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1RVF9DYXJkaW87VXNlciBJZD1uYW1iYXlhZGJhZG1pbjtQYXNzd29yZD1BQkMxMjNzc2lAOyBBcHBsaWNhdGlvbiBOYW1lPUNhcmRpb2xvZ2lzdCBBcGk7
+  Serilog__WriteTo__1__Args__connectionString: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1RVF9Mb2dzO1VzZXIgSWQ9bmFtYmF5YWRiYWRtaW47UGFzc3dvcmQ9QUJDMTIzc3NpQDsgQXBwbGljYXRpb24gTmFtZT1DYXJkaW9sb2dpc3QgQXBpOw==
+  ApiSecretConfigurationSecret: NzYwQjFDOEItNTkyMS00NzNCLUFGNjgtREYwNzkwRkMxRUZE
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cardiologist-config
+  namespace: qtlife
+data:
+  appsettings.json: |-
+    {
+      "ConnectionStrings": {
+        "DefaultConnection": ""
+      },
+      "ApiConfiguration": {
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "OidcApiName": "cardiologist_api",
+        "RequireHttpsMetadata": false,
+        "CorsAllowAnyOrigin": false,
+        "CorsAllowOrigins": ["https://qt-life.nambaya-medical.de"]
+      },
+      "WebServiceConfiguration": {
+        "PharmacistServiceBaseUrl": "http://pharmacist:5002",
+        "CardiologistServiceBaseUrl": "http://cardiologist:5004",
+        "CentralGroupServiceBaseUrl": "http://centralgroup:5005",
+        "NambayaUserServiceBaseUrl": "http://nambayauser:5007",
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "PatientServiceBaseUrl": "http://patient:5001",
+        "UserManagementServiceBaseUrl": "http://usermanagement:5003",
+        "FileSharingServiceBaseUrl": "http://filesharing:5009"
+      },
+      "ApiSecretConfiguration": {
+        "ApiName": "Cardiologist API",
+        "Secret": "",
+        "Clientid": "cardiologist_api_client",
+        "Scope": "user_management_api patient_api file_sharing_api_full"
+      },
+       "RabbitMQSettings": {
+        "Host": "rabbitmq",
+        "Username": "",
+        "Password": "",
+        "ConnectionName": "Cardiologist API",
+        "Port": 56072
+      },
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      },
+      "AllowedHosts": "*",
+      "Serilog": {
+        "Using": [ "Serilog.Sinks.MSSqlServer" ],
+        "Enrich": [ "FromLogContext" ],
+        "Properties": { "Application": "Cardiologist Api" },
+        "MinimumLevel": "Information",
+        "WriteTo": [
+          {
+            "Name": "Console"
+          },
+          {
+            "Name": "MSSqlServer",
+            "Args": {
+              "connectionString": "",
+              "sinkOptionsSection": {
+                "tableName": "SeriLogs",
+                "schemaName": "dbo",
+                "autoCreateSqlTable": true,
+                "batchPostingLimit": 1000,
+                "period": "0.00:00:30"
+              },
+              "restrictedToMinimumLevel": "Information",
+              "columnOptionsSection": {
+                "disableTriggers": true,
+                "clusteredColumnstoreIndex": false,
+                "primaryKeyColumnName": "Id",
+                "removeStandardColumns": [ "MessageTemplate", "Properties" ],
+                "additionalColumns": [
+                  {
+                    "ColumnName": "ApplicationName",
+                    "PropertyName": "Application",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  },
+                  {
+                    "ColumnName": "CorrelationId",
+                    "PropertyName": "CorrelationId",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  appsettings.Development.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Trace",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: cardiologist
+    namespace: qtlife
+spec:
+    replicas: 1
+    revisionHistoryLimit: 5
+    selector:
+        matchLabels:
+            app: cardiologist
+    template:
+        metadata:
+            labels:
+                app: cardiologist
+        spec:
+            containers:
+            - name: cardiologist
+              image: scr.syseleven.de/nambaya-stack-qtlife/cardiologist:v19.7
+              imagePullPolicy: "Always"
+              ports:
+                - containerPort: 80
+              env:
+                - name: ASPNETCORE_ENVIRONMENT
+                  value: Production
+                - name: ConnectionStrings__DefaultConnection
+                  valueFrom:
+                    secretKeyRef:
+                      name: cardiologist-service-secret
+                      key: ConnectionStringsDefaultConnection
+                - name: ApiSecretConfiguration__Secret
+                  valueFrom:
+                    secretKeyRef:
+                      name: cardiologist-service-secret
+                      key: ApiSecretConfigurationSecret
+                - name: RabbitMQSettings__Username
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Username
+                - name: RabbitMQSettings__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Password
+                - name: Serilog__WriteTo__1__Args__connectionString
+                  valueFrom:
+                    secretKeyRef:
+                      name: cardiologist-service-secret
+                      key: Serilog__WriteTo__1__Args__connectionString
+              volumeMounts:
+                - mountPath: /app/appsettings.json
+                  name: config-volume
+                  subPath: appsettings.json
+                  readOnly: true
+                - mountPath: /app/appsettings.Development.json
+                  name: config-volume
+                  subPath: appsettings.Development.json
+                  readOnly: true
+            volumes:
+              - name: config-volume
+                configMap:
+                    name: cardiologist-config
+            imagePullSecrets:
+                - name: syseleven-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: cardiologist
+    namespace: qtlife
+spec:
+    selector:
+        app: cardiologist
+    ports:
+        - protocol: TCP
+          port: 5004
+          targetPort: 80

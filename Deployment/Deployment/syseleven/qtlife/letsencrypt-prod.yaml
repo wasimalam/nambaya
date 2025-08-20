@@ -1,0 +1,61 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: qt-life.nambaya-medical.de-cert
+  namespace: qtlife
+spec:
+  secretName: qt-life-nambaya-medical-de-tls
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  commonName: qt-life.nambaya-medical.de
+  dnsNames:
+  - qt-life.nambaya-medical.de
+  - identity.qt-life.nambaya-medical.de
+  - services.qt-life.nambaya-medical.de
+  issuerRef:
+    name: letsencrypt-prod
+    # We can reference ClusterIssuers by changing the kind here.
+    # The default value is Issuer (i.e. a locally namespaced Issuer)
+    kind: Issuer
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: letsencrypt-staging
+  namespace: qtlife
+spec:
+  acme:
+    # The ACME server URL
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    # Email address used for ACME registration
+    email: ashahid@ssidecisions.com
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    # Enable the HTTP-01 challenge provider
+    solvers:
+    - selector: {}
+      http01:
+        ingress:
+          class: nginx
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: letsencrypt-prod
+  namespace: qtlife
+spec:
+  acme:
+    # The ACME server URL
+    server: https://acme-v02.api.letsencrypt.org/directory
+    # Email address used for ACME registration
+    email: ashahid@ssidecisions.com
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    # Enable the HTTP-01 challenge provider
+    solvers:
+    - selector: {}
+      http01:
+        ingress:
+          class: nginx

@@ -1,0 +1,17 @@
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"velero.io/v1","kind":"BackupStorageLocation","metadata":{"annotations":{},"name":"default-dbl","namespace":"velero"},"spec":{"config":{"region":"dbl","s3ForcePathStyle":"true","s3Url":"https://s3.dbl.cloud.syseleven.net"},"objectStorage":{"bucket":"metakube-cluster-backup-k6fnj6vv97"},"provider":"aws"}}
+  name: default-dbl
+  namespace: velero
+  selfLink: /apis/velero.io/v1/namespaces/velero/backupstoragelocations/default
+spec:
+  config:
+    region: dbl
+    s3ForcePathStyle: "true"
+    s3Url: https://s3.dbl.cloud.syseleven.net
+  objectStorage:
+    bucket: metakube-cluster-backup-k6fnj6vv97
+  provider: aws

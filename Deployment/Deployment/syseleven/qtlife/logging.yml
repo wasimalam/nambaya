@@ -1,0 +1,132 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: logging-service-secret
+  namespace: qtlife
+type: Opaque
+data:
+  ConnectionStringsDefaultConnection: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1RVF9Mb2dzO1VzZXIgSWQ9bmFtYmF5YWRiYWRtaW47UGFzc3dvcmQ9QUJDMTIzc3NpQDtBcHBsaWNhdGlvbiBOYW1lPUxvZ2dpbmcgQXBpOw==
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logging-config
+  namespace: qtlife
+data:
+  appsettings.json: |-
+    {
+      "ConnectionStrings": {
+        "DefaultConnection": ""
+      },
+      "ApiConfiguration": {
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "OidcApiName": "logging_api",
+        "RequireHttpsMetadata": false,
+        "CorsAllowAnyOrigin": false,
+        "CorsAllowOrigins": ["https://qt-life.nambaya-medical.de"]
+      },
+      "WebServiceConfiguration": {
+        "PharmacistServiceBaseUrl": "http://pharmacist:5002",
+        "CardiologistServiceBaseUrl": "http://cardiologist:5004",
+        "CentralGroupServiceBaseUrl": "http://centralgroup:5005",
+        "NambayaUserServiceBaseUrl": "http://nambayauser:5007",
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "PatientServiceBaseUrl": "http://patient:5001",
+        "UserManagementServiceBaseUrl": "http://usermanagement:5003",
+        "FileSharingServiceBaseUrl": "http://filesharing:5009"
+      },
+      "RabbitMQSettings": {
+        "Host": "rabbitmq",
+        "Username": "",
+        "Password": "",
+        "ConnectionName": "Logging API",
+        "Port": 56072
+      },
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      },
+      "AllowedHosts": "*"
+    }
+  appsettings.Development.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: logging
+    namespace: qtlife
+spec:
+    replicas: 1
+    revisionHistoryLimit: 5
+    selector:
+        matchLabels:
+            app: logging
+    template:
+        metadata:
+            labels:
+                app: logging
+        spec:
+            containers:
+            - name: logging
+              image: scr.syseleven.de/nambaya-stack-qtlife/logging:v19.7
+              imagePullPolicy: "Always"
+              ports:
+                - containerPort: 80
+              env:
+                - name: ASPNETCORE_ENVIRONMENT
+                  value: Production
+                - name: ConnectionStrings__DefaultConnection
+                  valueFrom:
+                    secretKeyRef:
+                      name: logging-service-secret
+                      key: ConnectionStringsDefaultConnection 
+                - name: RabbitMQSettings__Username
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Username
+                - name: RabbitMQSettings__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Password
+              volumeMounts:
+                - mountPath: /app/appsettings.json
+                  name: config-volume
+                  subPath: appsettings.json
+                  readOnly: true
+                - mountPath: /app/appsettings.Development.json
+                  name: config-volume
+                  subPath: appsettings.Development.json
+                  readOnly: true
+            volumes:
+              - name: config-volume
+                configMap:
+                    name: logging-config
+            imagePullSecrets:
+                - name: syseleven-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: logging
+    namespace: qtlife
+spec:
+    selector:
+        app: logging
+    ports:
+        - protocol: TCP
+          port: 5010
+          targetPort: 80

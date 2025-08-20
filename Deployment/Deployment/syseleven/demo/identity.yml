@@ -1,0 +1,238 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: identity-service-secret
+  namespace: nambaya-cardio
+type: Opaque
+data:
+  ConnectionStrings__DefaultConnection: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1Qcm9kX0lkZW50aXR5O1VzZXIgSWQ9bmFtYmF5YWRiYWRtaW47UGFzc3dvcmQ9QUJDMTIzc3NpQDsgQXBwbGljYXRpb24gTmFtZT1JZGVudGl0eSBBcGk7
+  Serilog__WriteTo__1__Args__connectionString: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1Qcm9kX0xvZ3M7VXNlciBJZD1uYW1iYXlhZGJhZG1pbjtQYXNzd29yZD1BQkMxMjNzc2lAOyBBcHBsaWNhdGlvbiBOYW1lPUlkZW50aXR5IEFwaTs=
+  ApiSecretConfiguration__Secret: QzgzRjJFMTAtNTQ1QS00QjI4LUJBQTktNjc0MDBEOTEzN0Qy
+  certificate.pfx: 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
+  CertificatePassword: QUJDMTIzc3Np
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: identity-config
+  namespace: nambaya-cardio
+data:
+  appsettings.json: |-
+    {
+      "ConnectionStrings": {
+        "DefaultConnection": ""
+      },
+      "enablehttps": true,
+      "WebServiceConfiguration": {
+        "PharmacistServiceBaseUrl": "http://pharmacist:5002",
+        "CardiologistServiceBaseUrl": "http://cardiologist:5004",
+        "CentralGroupServiceBaseUrl": "http://centralgroup:5005",
+        "NambayaUserServiceBaseUrl": "http://nambayauser:5007",
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "PatientServiceBaseUrl": "http://patient:5001",
+        "UserManagementServiceBaseUrl": "http://usermanagement:5003",
+        "FileSharingServiceBaseUrl": "http://filesharing:5009"
+      },
+      "ApiSecretConfiguration": {
+        "ApiName": "Identity Server",
+        "Secret": "",
+        "Clientid": "identity_server_client",
+        "Scope": "user_management_api central_group_api pharmacy_api nambaya_user_api cardiologist_api"
+      },
+      "Logging": {
+        "LogLevel": {
+          "Default": "Trace",
+          "Microsoft": "Trace",
+          "Microsoft.Hosting.Lifetime": "Trace"
+        }
+      },
+       "RabbitMQSettings": {
+        "Host": "rabbitmq",
+        "Username": "",
+        "Password": "",
+        "ConnectionName": "Identity API",
+        "Port": 56072
+      },
+      "AuthorityKeys": {
+        "jwtkey": "jwtsecret",
+        "authenticationkey": "authenticationsecretkey",
+        "tokentimeout": "120",
+        "rptokentimeout": "120",
+        "passwordtokentimeout": "300",
+        "testotp": "12345678",
+        "otpmessage": "Nambaya OTP is ##OTPCODE##"
+      },
+      "AllowedHosts": "*",
+      "Issuer":"https://identity.demo.nambaya-medical.de",
+      "CertificatePassword" :  "",
+      "Serilog": {
+        "Using": [
+          "Serilog.Sinks.MSSqlServer" //,"Serilog.Sinks.RabbitMQ"
+        ],
+        "Enrich": [ "FromLogContext" ],
+        "Properties": { "Application": "Identity Api" },
+        "MinimumLevel": {
+          "Default": "Debug",
+          "Override": {
+            "Microsoft": "Debug",
+            "Microsoft.EntityFrameworkCore.Database.Command": "Warning",
+            "Microsoft.AspNetCore.Authentication": "Debug"
+          }
+        },
+        "WriteTo": [
+          {
+            "Name": "Console"
+          },
+          {
+            "Name": "MSSqlServer",
+            "Args": {
+              "connectionString": "",
+              "sinkOptionsSection": {
+                "tableName": "SeriLogs",
+                "schemaName": "dbo",
+                "autoCreateSqlTable": true,
+                "batchPostingLimit": 1000,
+                "period": "0.00:00:30"
+              },
+              "restrictedToMinimumLevel": "Information",
+              "columnOptionsSection": {
+                "disableTriggers": true,
+                "clusteredColumnstoreIndex": false,
+                "primaryKeyColumnName": "Id",
+                "removeStandardColumns": [ "MessageTemplate", "Properties" ],
+                "additionalColumns": [
+                  {
+                    "ColumnName": "ApplicationName",
+                    "PropertyName": "Application",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  },
+                  {
+                    "ColumnName": "CorrelationId",
+                    "PropertyName": "CorrelationId",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  }
+                ]
+              }
+            }
+          }         
+        ]
+      }
+    }
+
+  appsettings.Development.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Trace",
+          "Microsoft": "Trace",
+          "Microsoft.Hosting.Lifetime": "Trace"
+        }
+      }
+    }
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: identity
+    namespace: nambaya-cardio
+spec:
+    selector:
+        app: identity
+    ports:
+    - name: "5001"
+      port: 5001
+      targetPort: 80
+    #- name: "5000"
+    #  port: 5000
+    #  targetPort: 443
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: identity
+    namespace: nambaya-cardio
+spec:
+    replicas: 1
+    revisionHistoryLimit: 5
+    selector:
+        matchLabels:
+            app: identity
+    template:
+        metadata:
+            labels:
+                app: identity
+        spec:
+            containers:
+            - name: identity
+              image: scr.syseleven.de/nambaya-stack-cardio/identity:v23.21
+              imagePullPolicy: "Always"
+              ports:
+                - containerPort: 80
+                - containerPort: 443
+              env:
+                - name: ASPNETCORE_ENVIRONMENT
+                  value: Development
+                - name: ASPNETCORE_URLS
+                  value: http://+:80
+                - name: ASPNETCORE_Kestrel__Certificates__Default__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: identity-service-secret
+                      key: CertificatePassword
+                - name: ASPNETCORE_Kestrel__Certificates__Default__Path
+                  value: /app/certificate.pfx
+                - name: ConnectionStrings__DefaultConnection
+                  valueFrom:
+                    secretKeyRef:
+                      name: identity-service-secret
+                      key: ConnectionStrings__DefaultConnection
+                - name: ApiSecretConfiguration__Secret
+                  valueFrom:
+                    secretKeyRef:
+                      name: identity-service-secret
+                      key: ApiSecretConfiguration__Secret
+                    
+                - name: CertificatePassword
+                  valueFrom:
+                    secretKeyRef:
+                      name: identity-service-secret
+                      key: CertificatePassword
+                - name: RabbitMQSettings__Username
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Username
+                - name: RabbitMQSettings__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Password
+                - name: Serilog__WriteTo__1__Args__connectionString
+                  valueFrom:
+                    secretKeyRef:
+                      name: identity-service-secret
+                      key: Serilog__WriteTo__1__Args__connectionString
+              volumeMounts:
+                - mountPath: /app/appsettings.json
+                  name: config-volume
+                  subPath: appsettings.json
+                  readOnly: true
+                - mountPath: /app/appsettings.Development.json
+                  name: config-volume
+                  subPath: appsettings.Development.json
+                  readOnly: true
+                - mountPath: /app/certificate.pfx
+                  name: secret-volume
+                  subPath: certificate.pfx
+                  readOnly: true
+            volumes:
+              - name: config-volume
+                configMap:
+                    name: identity-config
+              - name: secret-volume
+                secret:
+                    secretName: identity-service-secret
+            imagePullSecrets:
+                - name: syseleven-registry-secret

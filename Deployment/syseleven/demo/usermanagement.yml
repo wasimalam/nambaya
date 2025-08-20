@@ -1,0 +1,193 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: usermanagement-service-secret
+  namespace: nambaya-cardio
+type: Opaque
+data:
+  ConnectionStringsDefaultConnection: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1Qcm9kX1VzZXJNYW5hZ2VtZW50O1VzZXIgSWQ9bmFtYmF5YWRiYWRtaW47UGFzc3dvcmQ9QUJDMTIzc3NpQDtBcHBsaWNhdGlvbiBOYW1lPVVzZXJNYW5hZ2VtZW50IEFwaTs=
+  Serilog__WriteTo__1__Args__connectionString: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1Qcm9kX0xvZ3M7VXNlciBJZD1uYW1iYXlhZGJhZG1pbjtQYXNzd29yZD1BQkMxMjNzc2lAOyBBcHBsaWNhdGlvbiBOYW1lPVVzZXJNYW5hZ2VtZW50IEFQSTs=
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: usermanagement-config
+  namespace: nambaya-cardio
+data:
+  appsettings.json: |-
+    {
+      "ConnectionStrings": {
+        "DefaultConnection": ""
+      },
+      "WelcomeMessageCronExpression": "*/5 * * * *",
+      "WebServiceConfiguration": {
+        "PharmacistServiceBaseUrl": "http://pharmacist:5002",
+        "CardiologistServiceBaseUrl": "http://cardiologist:5004",
+        "CentralGroupServiceBaseUrl": "http://centralgroup:5005",
+        "NambayaUserServiceBaseUrl": "http://nambayauser:5007",
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "PatientServiceBaseUrl": "http://patient:5001",
+        "UserManagementServiceBaseUrl": "http://usermanagement:5003",
+        "FileSharingServiceBaseUrl": "http://filesharing:5009"
+      },
+      "ApiConfiguration": {
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "OidcApiName": "user_management_api",
+        "RequireHttpsMetadata": false,
+        "CorsAllowAnyOrigin": false,
+        "CorsAllowOrigins": ["https://demo.nambaya-medical.de"]
+      },
+      "RabbitMQSettings": {
+        "Host": "rabbitmq",
+        "Username": "",
+        "Password": "",
+        "ConnectionName": "UserManagement API",
+        "Port": 56072
+      },
+      "UserLoginPolicy": {
+        "MaxLoginAttempts": 3,
+        "RequiredLength": 15,
+        "RequireNonAlphanumeric": false,
+        "RequireDigit": true,
+        "RequireLowercase": false,
+        "RequireUppercase": true
+      },
+      "Logging": {
+        "LogLevel": {
+          "Default": "Trace",
+          "Microsoft": "Trace",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      },
+      "AllowedHosts": "*",
+      "Serilog": {
+        "Using": [ "Serilog.Sinks.MSSqlServer" ],
+        "Enrich": [ "FromLogContext" ],
+        "Properties": { "Application": "UserManagement API" },
+        "MinimumLevel": "Information",
+        "WriteTo": [
+          {
+            "Name": "Console"
+          },
+          {
+            "Name": "MSSqlServer",
+            "Args": {
+              "connectionString": "",
+              "sinkOptionsSection": {
+                "tableName": "SeriLogs",
+                "schemaName": "dbo",
+                "autoCreateSqlTable": true,
+                "batchPostingLimit": 1000,
+                "period": "0.00:00:30"
+              },
+              "restrictedToMinimumLevel": "Information",
+              "columnOptionsSection": {
+                "disableTriggers": true,
+                "clusteredColumnstoreIndex": false,
+                "primaryKeyColumnName": "Id",
+                "removeStandardColumns": [ "MessageTemplate", "Properties" ],
+                "additionalColumns": [
+                  {
+                    "ColumnName": "ApplicationName",
+                    "PropertyName": "Application",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  },
+                  {
+                    "ColumnName": "CorrelationId",
+                    "PropertyName": "CorrelationId",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+
+  appsettings.Development.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Trace",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: usermanagement
+    namespace: nambaya-cardio
+spec:
+    replicas: 1
+    revisionHistoryLimit: 5
+    selector:
+        matchLabels:
+            app: usermanagement
+    template:
+        metadata:
+            labels:
+                app: usermanagement
+        spec:
+            containers:
+            - name: usermanagement
+              image: scr.syseleven.de/nambaya-stack-cardio/usermanagement:v23.21
+              imagePullPolicy: "Always"
+              ports:
+                - containerPort: 80
+              env:
+                - name: ASPNETCORE_ENVIRONMENT
+                  value: Production
+                - name: ConnectionStrings__DefaultConnection
+                  valueFrom:
+                    secretKeyRef:
+                      name: usermanagement-service-secret
+                      key: ConnectionStringsDefaultConnection
+                - name: RabbitMQSettings__Username
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Username
+                - name: RabbitMQSettings__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Password
+                - name: Serilog__WriteTo__1__Args__connectionString
+                  valueFrom:
+                    secretKeyRef:
+                      name: usermanagement-service-secret
+                      key: Serilog__WriteTo__1__Args__connectionString
+              volumeMounts:
+                - mountPath: /app/appsettings.json
+                  name: config-volume
+                  subPath: appsettings.json
+                  readOnly: true
+                - mountPath: /app/appsettings.Development.json
+                  name: config-volume
+                  subPath: appsettings.Development.json
+                  readOnly: true
+            volumes:
+              - name: config-volume
+                configMap:
+                    name: usermanagement-config
+            imagePullSecrets:
+                - name: syseleven-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: usermanagement
+    namespace: nambaya-cardio
+spec:
+    selector:
+        app: usermanagement
+    ports:
+        - protocol: TCP
+          port: 5003
+          targetPort: 80

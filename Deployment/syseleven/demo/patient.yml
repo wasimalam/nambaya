@@ -1,0 +1,215 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: patient-service-secret
+  namespace: nambaya-cardio
+type: Opaque
+data:
+  ConnectionStrings__DefaultConnection: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1Qcm9kX1BhdGllbnQ7VXNlciBJZD1uYW1iYXlhZGJhZG1pbjtQYXNzd29yZD1BQkMxMjNzc2lAOyBBcHBsaWNhdGlvbiBOYW1lPVBhdGllbnQgQXBpO0NvbHVtbiBFbmNyeXB0aW9uIFNldHRpbmc9ZW5hYmxlZDs=
+  Serilog__WriteTo__1__Args__connectionString: c2VydmVyPW1zc3FsLXNlcnZpY2UsNzkwMTtEYXRhYmFzZT1Qcm9kX0xvZ3M7VXNlciBJZD1uYW1iYXlhZGJhZG1pbjtQYXNzd29yZD1BQkMxMjNzc2lAOyBBcHBsaWNhdGlvbiBOYW1lPVBhdGllbnQgQXBpOw==
+  ApiSecretConfiguration__Secret: RUNDODgwQzUtRTNCOS00RUFCLTg1OTUtMTQ3OTU3QkFERjQ4
+  DBCustomEncryption__StoreProvider: TkFNQkFZQV9DVVNUT01fS0VZX1NUT1JFX1BST1ZJREVS
+  DBCustomEncryption__MasterKey: NTlCRDlFQzE0QTM5NDkxODkwMzIxNjM5M0I3MEQ1QTk=
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: patient-config
+  namespace: nambaya-cardio
+data:
+  appsettings.json: |-
+    {
+      "ConnectionStrings": {
+        "DefaultConnection": ""
+      },
+      "ApiConfiguration": {
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "OidcApiName": "patient_api",
+        "RequireHttpsMetadata": false,
+        "CorsAllowAnyOrigin": false,
+        "CorsAllowOrigins": ["https://demo.nambaya-medical.de"]
+      },
+      "WebServiceConfiguration": {
+        "PharmacistServiceBaseUrl": "http://service.qtlife.com:5002",
+        "CardiologistServiceBaseUrl": "http://service.qtlife.com:5004",
+        "CentralGroupServiceBaseUrl": "http://service.qtlife.com:5005",
+        "NambayaUserServiceBaseUrl": "http://service.qtlife.com:5007",
+        "IdentityServerBaseUrl": "http://identity:5001",
+        "PatientServiceBaseUrl": "http://patient:5001",
+        "UserManagementServiceBaseUrl": "http://usermanagement:5003",
+        "FileSharingServiceBaseUrl": "http://filesharing:5009"
+      },
+      "ApiSecretConfiguration": {
+        "ApiName": "Patient API",
+        "Secret": "",
+        "Clientid": "patient_api_client",
+        "Scope": "file_sharing_api_full file_sharing_api_read"
+      },
+       "RabbitMQSettings": {
+        "Host": "rabbitmq",
+        "Username": "",
+        "Password": "",
+        "ConnectionName": "Patient API",
+        "Port": 56072
+      },
+      "Logging": {
+        "LogLevel": {
+          "Default": "Trace",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      },
+      "AllowedHosts": "*",
+      "UpdateEDFDateTime": true,
+      "DeviceReminderAfterSecs": 172800,
+      "TotalCasesGoal" : "3000",
+      "DBCustomEncryption": {
+        "StoreProvider": "",
+        "MasterKey": ""
+      },
+      "Serilog": {
+        "Using": [ "Serilog.Sinks.MSSqlServer" ],
+        "Enrich": [ "FromLogContext" ],
+        "Properties": { "Application": "Patient Api" },
+        "MinimumLevel": "Information",
+        "WriteTo": [
+          {
+            "Name": "Console"
+          },
+          {
+            "Name": "MSSqlServer",
+            "Args": {
+              "connectionString": "",
+              "sinkOptionsSection": {
+                "tableName": "SeriLogs",
+                "schemaName": "dbo",
+                "autoCreateSqlTable": true,
+                "batchPostingLimit": 1000,
+                "period": "0.00:00:30"
+              },
+              "restrictedToMinimumLevel": "Information",
+              "columnOptionsSection": {
+                "disableTriggers": true,
+                "clusteredColumnstoreIndex": false,
+                "primaryKeyColumnName": "Id",
+                "removeStandardColumns": [ "MessageTemplate", "Properties" ],
+                "additionalColumns": [
+                  {
+                    "ColumnName": "ApplicationName",
+                    "PropertyName": "Application",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  },
+                  {
+                    "ColumnName": "CorrelationId",
+                    "PropertyName": "CorrelationId",
+                    "DataType": "varchar",
+                    "DataLength": 50
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+
+  appsettings.Development.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Trace",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: patient
+    namespace: nambaya-cardio
+spec:
+    replicas: 1
+    revisionHistoryLimit: 5
+    selector:
+        matchLabels:
+            app: patient
+    template:
+        metadata:
+            labels:
+                app: patient
+        spec:
+            containers:
+            - name: patient
+              image: scr.syseleven.de/nambaya-stack-cardio/patient:v23.21
+              imagePullPolicy: "Always"
+              ports:
+                - containerPort: 80
+              env:
+                - name: ASPNETCORE_ENVIRONMENT
+                  value: Production
+                - name: ConnectionStrings__DefaultConnection
+                  valueFrom:
+                    secretKeyRef:
+                      name: patient-service-secret
+                      key: ConnectionStrings__DefaultConnection
+                - name: ApiSecretConfiguration__Secret
+                  valueFrom:
+                    secretKeyRef:
+                      name: patient-service-secret
+                      key: ApiSecretConfiguration__Secret
+                - name: RabbitMQSettings__Username
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Username
+                - name: RabbitMQSettings__Password
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-service-secret
+                      key: RabbitMQSettings__Password
+                - name: Serilog__WriteTo__1__Args__connectionString
+                  valueFrom:
+                    secretKeyRef:
+                      name: patient-service-secret
+                      key: Serilog__WriteTo__1__Args__connectionString
+                - name: DBCustomEncryption__StoreProvider
+                  valueFrom:
+                    secretKeyRef:
+                      name: patient-service-secret
+                      key: DBCustomEncryption__StoreProvider
+                - name: DBCustomEncryption__MasterKey
+                  valueFrom:
+                    secretKeyRef:
+                      name: patient-service-secret
+                      key: DBCustomEncryption__MasterKey
+              volumeMounts:
+                - mountPath: /app/appsettings.json
+                  name: config-volume
+                  subPath: appsettings.json
+                  readOnly: true
+                - mountPath: /app/appsettings.Development.json
+                  name: config-volume
+                  subPath: appsettings.Development.json
+                  readOnly: true
+            volumes:
+              - name: config-volume
+                configMap:
+                    name: patient-config
+            imagePullSecrets:
+                - name: syseleven-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: patient
+    namespace: nambaya-cardio
+spec:
+    selector:
+        app: patient
+    ports:
+        - protocol: TCP
+          port: 5001
+          targetPort: 80
